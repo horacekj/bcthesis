@@ -59,6 +59,75 @@ na rovnou trať.
 
 \subsection{Statické úsekové detektory}
 
-Podobn
+Podobný přístup, jako u statických bodových detektorů, nabízejí statické úsekové
+detektory. Rozdíl oproti senzorům popsaným v předchozí kapitole je v tom, že
+tyto senzory neměří projetí vozidla daným bodem, ale přítomnost vozidla na daném
+úseku tratě.
+
+Typickým zástupce této technologie je proudový detektor obsazení, konkrétně
+například BD20 [https://ncedcc.zendesk.com/hc/en-us/articles/201254549-BD20-Block-Detector].
+
+Tyto technologie jsou hojně využívané na modelových kolejištích k detekci
+volnosti daného úseku a tudíž k umožnění bezkolizního pohybu vozidla po trati.
+Obdobné systémy se využívají na skutečné železnici, avšak tam jsou známy pod
+názvem \textit{kolejové obvody} [TODO].
+
+Konkrétní způsob měření přehledně popisují například tvůrci SW JMRI
+[http://jmri.sourceforge.net/help/en/html/tools/speedometer/NCE-Speedometer.shtml].
+Kalibrační kolej je rozdělena na několik částí (optimálně 3 části), kalibrační
+SW pak postupně projíždí těmito částmi a počítá čas, za který vozidlo projede
+konkrétní část. U této části má od uživatele zadanou její délku, z čehož pak
+vypočte rychlost vozidla.
+
+Výhody a nevýhody tohoto způsobu měření jsou víceméně stejné s výhodami a
+nevýhodami statických bodových detektorů. Malou výhodou úsekových detektorů by
+mohlo být, že kolejiště často bývají vybavena úsekovými detektory pro účely
+zapezpečovacího zařízení, takže není nutný nákup a instalace dalších senzorů.
+
+\subsection{Podvalníkové detektory}
+
+Zajímavým způsobem měření rychlosti prezentovaným v [https://www.bachrus.com/speedometer.php]
+je možnost měřit rychlosti hnacího vozidla bez toho, aby se hnací vozidlo
+skutečně pohybovalo po trati.
+
+Tuto metodu si lze představit podobně, jako měření rychlostí aut v autoservisu.
+Lokomotiva je položena na válce, které se pod ní mohou volně pohybovat. Lokomotiva
+svým motorem roztáčí válce, jejichž rychlost je následně měřena.
+
+Zajímavou výhodou této technologie je použitelnost prakticky pro jakékoliv
+modelové měřítko, nezávislost na pozici vozidla na trati a v neposlední řadě
+zmizení nutnosti pořizovat kalibrační okruh. Celý proces kalibrace tak může
+probíhat na velice malém prostoru.
+
+Je rozhodně nutné uznat, že toto řešení je svým důvtipem minimálně oceněníhodné,
+avšak pro potřeby této práce skrývá jednu zásadní nevýhodu. Totiž nemožnost
+dokalibrovávat vozidlo za reálného provozu bez nutnosti uvolnění vozidla
+z reálného provozu na trati.
+
+Stojí za to také poznamenat, že řešení, které by umožňovalo měřit rychlost vozidla
+na kolejišti by s sebou neslo tu výhodu, že je lze použít k měření celkové
+ujeté vzdálenosti hnacího vozidla za delší čas, což je údaj využitelný například
+k výpočtu míry opotřebení vozidla.
+
+\subsection{Kalibrační SW}
+
+Druhou, zcela zásadní části této práce, je mimo tvorby senzoru rychlosti hnacího
+vozidla také vytvoření programu, který zvládne celý proces kalibrace automaticky.
+V tomto hledisku autor bohužel nemůže nabídnout srovnání s existujícími řešeními,
+protože takové řešení prakticky neexistují. Je to z toho důvodu, že většina
+dostupných SW pro řízení modelového kolejiště staví na jiném principu, než na
+kterém staví řídicí SW hJOP [TODO], kvůli kterému je automatická kalibrace
+řešena.
+
+Většina obslužných programů totiž počítá s tím, že hnací vozidla na kolejišti
+jsou různá a nesnaží se je jednotě kalibrovat. Místo toho si tyto SW před prvním
+použitím lokomotivy nechají zadat její parametry nebo si je změří jednou
+z technologií popsanými výše a u lokomotivy si tuto \textit{kalibrační tabulku}
+udržují. Tyto programy tak kompenzují rozdílné vlastnosti vozidel přímo povelováním
+různých vozidel různými rychlostmi.
+
+Kocepce sw hJOP je však jiná. Bylo rozhodnutím autora, že je vhodnější mít
+zkralibrovaná vozidla na úrovni dekodérů, než si v SW ukládat pro každé hnací
+vozidlo speciální \textit{kalibrační tabulku}.
 
 \end{document}
