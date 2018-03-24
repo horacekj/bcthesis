@@ -8,11 +8,22 @@
 \textwidth 16cm \textheight 24.6cm
 \topmargin -1.3cm 
 \oddsidemargin 0cm
+
+\usepackage[ backend=biber
+           , style=numeric
+           , sortlocale=en_US
+           , bibencoding=UTF8
+           , maxcitenames=3
+           , maxbibnames=100
+]{biblatex}
+\addbibresource{bibliography.bib}
+
 \begin{document}
 \pagestyle{empty}
 \noindent
 
 % Zatím kašlu na sázení v celé šabloně, nejdřív text, pak šablona.
+
 
 \section{Přehledová kapitola}
 
@@ -33,10 +44,10 @@ vzdálenosti senzorů a času, po který se hnací vozidlo pohybovalo mezi senzo
 Měření vychází z předpokladu, že se hnací vozidlo pohybuje konstantní
 rychlostí (podobně, jako řada dalších rozebíraných metod měření), tento
 předpoklad je však zejména díky kontrole nad ovládáním vozidla a díky BEMF
-[TODO] možné bez problému splnit.
+možné bez problému splnit.
 
 Konkrétní instancí tohoto způsobu řešení na například Model Railroad Speedometer
-Accutrack II [http://www.sprog.us.com/speedo.html].
+Accutrack II \cite{accutrackII}.
 
 Nespornými výhodami tohoto přístupu jsou jednoduchost a absence pohyblivých
 prvků, která vede k delší životnosti a dlouhodobé spolehlivosti měřiče. Bohužel,
@@ -65,15 +76,15 @@ tyto senzory neměří projetí vozidla daným bodem, ale přítomnost vozidla n
 úseku tratě.
 
 Typickým zástupce této technologie je proudový detektor obsazení, konkrétně
-například BD20 [https://ncedcc.zendesk.com/hc/en-us/articles/201254549-BD20-Block-Detector].
+například BD20 \cite{bd20}.
 
 Tyto technologie jsou hojně využívané na modelových kolejištích k detekci
 volnosti daného úseku a tudíž k umožnění bezkolizního pohybu vozidla po trati.
 Obdobné systémy se využívají na skutečné železnici, avšak tam jsou známy pod
-názvem \textit{kolejové obvody} [TODO].
+názvem \textit{kolejové obvody}.
 
 Konkrétní způsob měření přehledně popisují například tvůrci SW JMRI
-[http://jmri.sourceforge.net/help/en/html/tools/speedometer/NCE-Speedometer.shtml].
+\cite{jmri:speedometer}.
 Kalibrační kolej je rozdělena na několik částí (optimálně 3 části), kalibrační
 SW pak postupně projíždí těmito částmi a počítá čas, za který vozidlo projede
 konkrétní část. U této části má od uživatele zadanou její délku, z čehož pak
@@ -86,7 +97,7 @@ zapezpečovacího zařízení, takže není nutný nákup a instalace dalších 
 
 \subsection{Podvalníkové detektory}
 
-Zajímavým způsobem měření rychlosti prezentovaným v [https://www.bachrus.com/speedometer.php]
+Zajímavým způsobem měření rychlosti prezentovaným v \cite{bachrus}
 je možnost měřit rychlosti hnacího vozidla bez toho, aby se hnací vozidlo
 skutečně pohybovalo po trati.
 
@@ -116,7 +127,7 @@ vozidla také vytvoření programu, který zvládne celý proces kalibrace autom
 V tomto hledisku autor bohužel nemůže nabídnout srovnání s existujícími řešeními,
 protože takové řešení prakticky neexistují. Je to z toho důvodu, že většina
 dostupných SW pro řízení modelového kolejiště staví na jiném principu, než na
-kterém staví řídicí SW hJOP [TODO], kvůli kterému je automatická kalibrace
+kterém staví řídicí SW hJOP \cite{hjop:web}, kvůli kterému je automatická kalibrace
 řešena.
 
 Většina obslužných programů totiž počítá s tím, že hnací vozidla na kolejišti
@@ -134,5 +145,10 @@ vozidlo speciální \textit{kalibrační tabulku}.
 
 \textit{Ve skutečné bakalářce tady bude ještě přehled různých senzorů, ale
 kvůli rozsahu do předmětu VB000 sem už další text neuvádím.}
+
+\section*{Bibliografie}
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\markboth{}{} % avoid headers from last chapter in bibliography
+\printbibliography[heading=none]
 
 \end{document}

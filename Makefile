@@ -3,7 +3,7 @@ TARGET = overview
 
 all: $(TARGET).pdf
 
-$(TARGET).pdf: $(TARGET).tex
+$(TARGET).pdf: $(TARGET).tex bibliography.bib
 	pdflatex $^
 
 clean:
@@ -12,3 +12,5 @@ clean:
 pdfclean: clean
 	rm -rf $(TARGET).pdf
 
+%.bbl : bibliography.bib %.bcf
+	-biber $(@:.bbl=)
