@@ -16,4 +16,49 @@
 
 \section{Přehledová kapitola}
 
+V této kapitole budou představeny existující řešení problému měření rychlosti
+modelového hnacího vozidla doplněné o komentáře vhodnosti jednotlivých řešení
+pro problém řešený touto prací. Dále budou představeny dostupné technologie
+senzorů, které jsou pro problém měření rychlosti vhodné.
+
+\subsection{Statické bodové detektory}
+
+Jednou z nejjednodušších technologií pro detekci rychlosti pohybujícího se
+objektu jsou, zjednodušeně řečeno, 2 senzory detekující průchod daným bodem
+a stopky. V naší aplikaci na modelovém kolejišti si lze představit 2
+(např. optické) senzory umístěné v určité vzdálenosti od sebe, skutečnou
+rychlost pohybujícího se objektu lze pak vypočíst jednoduchým podělením
+vzdálenosti senzorů a času, po který se hnací vozidlo pohybovalo mezi senzory.
+
+Měření vychází z předpokladu, že se hnací vozidlo pohybuje konstantní
+rychlostí (podobně, jako řada dalších rozebíraných metod měření), tento
+předpoklad je však zejména díky kontrole nad ovládáním vozidla a díky BEMF
+[TODO] možné bez problému splnit.
+
+Konkrétní instancí tohoto způsobu řešení na například Model Railroad Speedometer
+Accutrack II [http://www.sprog.us.com/speedo.html].
+
+Nespornými výhodami tohoto přístupu jsou jednoduchost a absence pohyblivých
+prvků, která vede k delší životnosti a dlouhodobé spolehlivosti měřiče. Bohužel,
+zásadní nevýhodou tohoto řešení je nutnost měřit rychlost pouze ne vybraném
+úseku tratě. V požadavcích na řešení vyvíjené v této práci sice bylo specifikováno,
+že kalibrace bude probíhat na uzavřeném okruhu, avšak představme si, že pro
+jedno změření rychlosti by bylo třeba buď projet celý okruh, nebo se za senzorem
+zastavit a obrátit směr. Pomineme-li fakt, že motory často dávají při stejné
+střídě napájecího signálu mírně rozdílné otáčky v závislosti na směru, ve
+kterém se pohybují, je i tak čas nutný na celou kalibraci nesrovnatelně vyšší
+než u senzoru, který je schopen odečítat rychlost průběžně, nezávisle na
+poloze vozidla.
+
+Uvědomme si ale na závěr, že jedna z klíčových nevýhod tohoto senzoru je v
+určitém slova smyslu i jeho výhodou. Totiž fakt, že měření probíhá jen na pevně
+definovaném úseku koleje s sebou nese tu výhodu, že vozidlo měříme vždy ve
+stejných podmínkách. Nemusíme tedy například řešit, jestli vozidlo zrovna jede
+v oblouku a je zpomalováno odstředivými silami, protože senzor prostě umístíme
+na rovnou trať.
+
+\subsection{Statické úsekové detektory}
+
+Podobn
+
 \end{document}
