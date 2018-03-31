@@ -1,16 +1,23 @@
-# Change content of this variable to match filename
-TARGET = overview
+OUTPUTS=thesis.pdf
+BIB=bibliography.bib
+PDFLATEX=pdflatex --shell-escape
+AUXFILES=*.aux *.log *.out *.toc *.lot *.lof *.bcf *.blg *.run.xml \
+         *.bbl *.idx *.ind *.ilg *.markdown.*
 
-all: $(TARGET).pdf
+.PHONY: all clean wipe
 
-$(TARGET).pdf: $(TARGET).tex bibliography.bib
-	pdflatex $^
+all: $(OUTPUTS) clean
+
+%.pdf: %.tex $(BIB)
+	$(PDFLATEX) $< # The initial typesetting.
+	biber $(basename $<).bcf
+	$(PDFLATEX) $< # Update the index after the bibliography insertion.
+	# texindy -I latex -C utf8 -L english $(basename $<).idx
+	$(PDFLATEX) $< # The final typesetting, now also with index.
+	$(PDFLATEX) $<
 
 clean:
-	rm -rf $(TARGET).aux $(TARGET).log $(TARGET).out
+	rm -f $(AUXFILES)
 
-pdfclean: clean
-	rm -rf $(TARGET).pdf
-
-%.bbl : bibliography.bib %.bcf
-	-biber $(@:.bbl=)
+wipe:
+	rm -f $(OUTPUTS)
