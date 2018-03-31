@@ -1,38 +1,9 @@
-\documentclass[12pt,a4paper]{article}
-\usepackage[unicode,colorlinks=true]{hyperref}
-\usepackage[czech]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{graphicx}
-\textwidth 16cm \textheight 24.6cm
-\topmargin -1.3cm 
-\oddsidemargin 0cm
-
-\usepackage[ backend=biber
-           , style=numeric
-           , sortlocale=en_US
-           , bibencoding=UTF8
-           , maxcitenames=3
-           , maxbibnames=100
-]{biblatex}
-\addbibresource{bibliography.bib}
-
-\begin{document}
-
-\pagenumbering{arabic}
-
-% Zatím kašlu na sázení v celé šabloně, nejdřív text, pak šablona.
-\textit{Automatická kalibrace modelového hnacího vozidla}, Jan Horáček, 445326
-
-\section{Přehledová kapitola}
-
 V~této kapitole budou stručně představena existující řešení problému měření
 rychlosti modelového hnacího vozidla doplněné o~komentáře vhodnosti
 jednotlivých řešení pro problém řešený touto prací. Dále budou představeny
 dostupné technologie senzorů, které jsou pro problém měření rychlosti vhodné.
 
-\subsection{Statické bodové detektory}
+\section{Statické bodové detektory}
 
 Jednou z~nejjednodušších technologií pro detekci rychlosti pohybujícího se
 objektu jsou 2 senzory detekující průchod bodem
@@ -69,7 +40,7 @@ stejných podmínkách. Nemusíme tedy například řešit, jestli vozidlo zrovn
 v~oblouku a je zpomalováno odstředivou silou, protože senzor prostě umístíme
 na rovnou trať.
 
-\subsection{Statické úsekové detektory}
+\section{Statické úsekové detektory}
 
 Podobný přístup, jako u~statických bodových detektorů, nabízejí statické
 úsekové detektory. Rozdíl oproti senzorům popsaným v~předchozí kapitole je
@@ -96,7 +67,7 @@ nevýhodami statických bodových detektorů. Malou výhodou úsekových detekto
 fakt, že kolejiště často bývají vybavena úsekovými detektory pro účely
 zapezpečovacího zařízení, takže není nutný nákup a instalace dalších senzorů.
 
-\subsection{Podvalníkové detektory}
+\section{Podvalníkové detektory}
 
 Zajímavým způsobem měření rychlosti prezentovaným v~\cite{bachrus}
 je možnost měřit rychlost hnacího vozidla bez toho, aby se hnací vozidlo
@@ -121,7 +92,7 @@ vozidla na kolejišti by s~sebou neslo tu výhodu, že jej lze použít k~měře
 celkové ujeté vzdálenosti hnacího vozidla za delší dobu, což je údaj využitelný
 například k~výpočtu míry opotřebení lokomotivy.
 
-\subsection{Kalibrační SW}
+\section{Kalibrační SW}
 
 Druhou, zcela zásadní části této práce, je mimo tvorby senzoru pro měření
 rychlosti hnacího vozidla také vytvoření programu, který zvládne celý proces
@@ -142,12 +113,7 @@ Koncepce SW hJOP je však jiná. Bylo rozhodnutím autora, že je vhodnější m
 zkralibrovaná vozidla na úrovni dekodérů, než si v~SW ukládat pro každé hnací
 vozidlo speciální \textit{kalibrační tabulku}.
 
-\subsection{TODO}
+\section{TODO}
 
 \textit{Ve skutečné bakalářce tady bude ještě přehled různých senzorů, ale
 kvůli rozsahu do předmětu VB000 sem už další text neuvádím.}
-
-\section*{Bibliografie}
-\printbibliography[heading=none]
-
-\end{document}
