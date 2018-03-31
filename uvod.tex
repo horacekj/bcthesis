@@ -79,6 +79,59 @@ k dispozici ovladač pro řízení rychlosti jízdy vozidla v ručním režimu. 
 této práce považuje za velice užitečné, aby platilo, že otočení trimru ovladače
 o daný úhel způsobí u dvou různých vozidel stejnou rychlost.
 
-\subsection{Současné řešení problému kalibrace}
+Třetím důvodem ke kalibraci vozidel je umožnění přípřeží a postrků -- tj.
+situace, kdy v jednom vlaku jede více lokomotiv. Tyto lokomotivy se musí
+pohybovat stejně rychle, jinak hrozí (např. v obloucích) vykolejení vlaku.
 
+\subsection{Současné řešení problému synchronizace rychlostí}
+
+Současné řídicí programy problém kalibrace typicky řeší tak, že si u každého
+hnacího vozidla ukládají tabulku \texit{jízdní stupeň : skutečná rychlost}.
+Když tyto programy chtějí, aby 2 lokomotivy jely stejnou rychlostí, provedou
+vyhledání příslušných jízdních stupňů a do centrály (v obecném případě)
+odešlou 2 různé jízdní stupně.
+
+Provozu lokomotivy na kolejišti tak předchází buď
+
+\begin{itemize}
+	\item ruční zadání této tabulky, nebo
+	\item automatické změření rychlosti lokomotivy.
+\end{itemize}
+
+Je však nutné podotknout, že toto řešení neuspokojuje naše požadavky pro
+ruční řízení jízdy hnacího vozidla, protože tabulka rychlostí je uložena
+pouze v řídícím SW, s kterým nejsou současné ovladače typicky propojené, takže
+o tabulce vůbec netuší.
+
+\subsection{Řešení problému synchronizace rychlostí v SW hJOP}
+
+Alternativním řešením problému synchronizace rychlostí je způsob, který
+v současné době využívá SW hJOP. Tato práce cílí právě na tento alternativní
+způsob řešení kalibrace. jeho výhoda je totiž v tom, že řeší snchronizaci
+rychlostí i pro ruční ovladače.
+
+V každém lokomotivním dekodéru je možno pro každý z 28 jízdních stupňů nastavit
+konkrétní výkon motoru. SW hJOP staví na předpokladu, že uživatel provede
+před provozem hnacího vozidla tzv. kalibraci, tj. přiřazení výkonu motoru
+rychlostnímu stupni každého vozidla tak, aby bylo splněno, že konkrétní
+jízdní stupeň odpovídá u všech vozidel konkrétní skutečné rychlosti.
+
+Příklad: u všech lokomotiv platí, že jízdní stupeň $15$ odpovídá reálné rychlosti
+$40 km/h$.
+
+Dalšími výhodami tohoto řešení je
+
+\begin{enumerate}
+	\item odpadnutí nutnosti udržovat si u každého vozidla v SW kalibrační
+	tabulku
+	\item a instantní přenos tabulky mezi kolejišti, když je přenesena
+	lokomotiva. To proto, že tabulka je jednoduše fyzicky uložená v lokomotivě a
+	tudíž logicky cestuje s ní.
+\end{enumerate}
+
+Nevýhodou tohoto přístupu je, že je nutné provést netriviální proces kalibrace.
+S současné době tento proces zahrnuje ježdění s lokomotivou, měření její
+rychlosti a ručním nastavováním kalibrační tabulky.
+
+Cílem této práce je tento proces automatizovat.
 
