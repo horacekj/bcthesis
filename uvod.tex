@@ -11,4 +11,40 @@ reálného problému v oblasti automatizace, konkrétně řízení dopravy na mo
 kolejišti. Jakkoliv se může zdát, že toto téma se nachází velice blízko
 hardwaru, primárním cílem této práce je navrhnout kvalitní softwarové řešení.
 
-\section{Kontext }
+Pro přesnou formulací problému automatické kalibrace železničního vozidla je
+nutné pochopit kontext této práce, o kterém pojednává následující odstavec.
+
+\section{Kontext}
+
+Modelové kolejiště je model reálné železniční tratě, tyicky zmenšený v některém
+ze standardních měřítek, např. v měříku \uv{TT} 1:120. Vedle typického \uv{hobby}
+využití kolejiště je dobré mít na paměti, že takováto kolejiště často slouží
+třeba jako dopravní trenažéry pro výuku zabezpečovacího zařízení železnice,
+či dalších aspektů využívaných na skutenčé železnici. Nejen v těchto případech
+vzniká potřeba kolejiště ovládat nějakým \textit{zabezpečovacím zařízením].
+Typickým zástupcem současného zabezpečovacího zařízení je
+\textit{elektronické stavědlo} spolu s grafickou nadstavbou \textit{JOP}.
+
+Tento systém je využíván také v \textit{Klubu modelářů železnic Brno I}, ke
+kterému má autor práce blízko. V něm je nasazen systém řízení zvaný
+\texit{hJOP}, který je klonem skutečného zabezpečovacího zařízení upraveného
+pro potřeby řízení modelu. Jeho primárním cílem ve výše zmíněném klubu je
+kontrolovat jízdu vlaku a omezením lidského faktoru předejít možným škodám.
+
+\section{Řízení kolejiště}
+
+K řízení modelového kolejiště je v současné době napříč země využívána celá
+řada dostupných SW. Typickými příklady jsou například JMRI \cite{},
+TrainController \cite{}, RailCo \cite{} nebo česky SW modelJOP \cite{}.
+
+Tyto programy komunikují s hardwarovými prvky v kolejišti. V dnešní době je
+nejdůležitějším z těchto prvků digitální centrála DCC. Digitální centrála je
+obecný pojem, konkrétními instancemi od jednotlivých výrobců jsou pak např.
+Z21 \cite{}, NanoX \cite{} nebo třeba Intellibox \cite{}. Digitální centrála
+typicky komunikuje s počítačem pomocí \textit{RS232 over USB}. Jejím hlavním
+úkolem je vytvářet \textit{digitální signál DCC}, který posílá do kolejí.
+
+Lokomotiva stojící na kolejích tento signál dekóduje pomocí speciální součástky,
+tzv. \textit{dekodéru} a podle přijatých dat poveluje periferie lokomotivy, jako
+jsou třeba motor, světla, nebo zvuk vydávaný vestavěným reproduktorem. Signál
+v kolejích je zároveň využíván jako výkonový (např. pro napájení motoru).
