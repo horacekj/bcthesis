@@ -1,137 +1,138 @@
-V následujících několika stranách rozebere autor možnosti řešení problému
+V~následujících několika stranách rozebere autor možnosti řešení problému
 automatické kalibrace modelového žlezničního hnacího vozidla, ukáže, proč
-jsou současná řešení pro problém formulovaný v této páci nevhodná a nakonec
-navrhne (1) hardware, (2) firmware a (3) software, který se pokusí problém
-řešit. Autor demonstruje výstupy této práce v praxi a ukáže její reálný
+jsou současná řešení pro problém řešený v~této páci nevhodná a nakonec
+navrhne (1) hardware, (2) firmware a (3) software, kterým se pokusí problém
+řešit. Autor demonstruje výstupy této práce v~praxi a ukáže její reálný
 přínos.
 
 Tato práce se tématicky pohybuje na pomezí práce typu \textit{proof of concept}
 a práce \textit{aplikační}. Jejím primárním cílem je vytvořit reálné řešení
-reálného problému v oblasti automatizace, konkrétně řízení dopravy na modelovém
-kolejišti. Jakkoliv se může zdát, že toto téma se nachází velice blízko
-hardwaru, primárním cílem této práce je navrhnout kvalitní softwarové řešení.
+reálného problému v~oblasti automatizace, konkrétně v~oblasti řízení dopravy na
+modelovém kolejišti. Jakkoliv se může zdát, že toto téma se nachází velice
+blízko hardwaru, primárním cílem této práce je navrhnout kvalitní softwarové
+řešení.
 
 Pro přesnou formulací problému automatické kalibrace železničního vozidla je
-nutné pochopit kontext této práce, o kterém pojednává následující odstavec.
+nutné pochopit kontext této práce, o kterém pojednává následující kapitola.
 
-\section{Kontext}
+\section{Modelová kolejiště}
 
-Modelové kolejiště je model reálné železniční tratě, tyicky zmenšený v některém
-ze standardních měřítek, např. v měříku \uv{TT} 1:120. Vedle typického \uv{hobby}
-využití kolejiště je dobré mít na paměti, že takováto kolejiště často slouží
-třeba jako dopravní trenažéry pro výuku zabezpečovacího zařízení železnice,
-či dalších aspektů využívaných na skutenčé železnici. Nejen v těchto případech
-vzniká potřeba kolejiště ovládat nějakým \textit{zabezpečovacím zařízením}.
-Typickým zástupcem současného zabezpečovacího zařízení je
-\textit{elektronické stavědlo} spolu s grafickou nadstavbou \textit{JOP}.
+Modelové kolejiště je model reálné železniční tratě, typicky zmenšený
+v~některém ze standardních měřítek, např. v~měřítku \uv{TT} (1:120). Vedle
+typického \uv{hobby} využití kolejiště často slouží jako dopravní trenažéry pro
+výuku zabezpečovacího zařízení železnice, či dalších aspektů využívaných na
+skutečné železnici. Nejen v~těchto případech vzniká potřeba kolejiště ovládat
+\textit{zabezpečovacím zařízením}. Typickým zástupcem současného
+zabezpečovacího zařízení na skuteční železnici je \textit{elektronické
+stavědlo} spolu s~grafickou nadstavbou \textit{JOP}, která umožňuje řízení
+přes počítač.
 
-Tento systém je využíván také v \textit{Klubu modelářů železnic Brno I}, ke
-kterému má autor práce blízko. V něm je nasazen systém řízení zvaný
-\textit{hJOP}, který je klonem skutečného zabezpečovacího zařízení upraveného
-pro potřeby řízení modelu. Jeho primárním cílem ve výše zmíněném klubu je
-kontrolovat jízdu vlaku a omezením lidského faktoru předejít možným škodám.
+Obdobný systém je využíván také v~\textit{Klubu modelářů železnic Brno I},
+který je základní motivací k~vypracování této práce. V~tomto klubu je nasazen
+systém řízení zvaný \textit{hJOP}, který je klonem JOP upraveným pro potřeby
+řízení modelu. Jeho primárním cílem je povelovat jízdu vlaku a omezením
+lidského faktoru předejít možným kolizím.
 
-\section{Řízení kolejiště}
+\section{Současné trendy v~řízení kolejiště}
 
-K řízení modelového kolejiště je v současné době napříč země využívána celá
-řada dostupných SW. Typickými příklady jsou například JMRI \cite{},
-TrainController \cite{}, RailCo \cite{} nebo česky SW modelJOP \cite{}.
+K~řízení modelového kolejiště je v~současné době napříč země využívána celá
+řada dostupných SW. Typickými příklady jsou například \textit{JMRI} \cite{},
+\textit{TrainController} \cite{}, \textit{RailCo} \cite{} nebo česky SW
+\textit{modelJOP} \cite{}.
 
-Tyto programy komunikují s hardwarovými prvky v kolejišti. V dnešní době je
-nejdůležitějším z těchto prvků digitální centrála DCC. Digitální centrála je
+Výše zmíněné aplikace komunikují s~hardwarovými prvky kolejiště.
+Nejdůležitějším z~těchto prvků je digitální centrála DCC. Digitální centrála je
 obecný pojem, konkrétními instancemi od jednotlivých výrobců jsou pak např.
-Z21 \cite{}, NanoX \cite{} nebo třeba Intellibox \cite{}. Digitální centrála
-typicky komunikuje s počítačem pomocí \textit{RS232 over USB}. Jejím hlavním
-úkolem je vytvářet \textit{digitální signál DCC}, který posílá do kolejí.
+\textit{Z21} \cite{}, \textit{NanoX} \cite{} nebo třeba \textit{Intellibox}
+\cite{}. Centrála typicky komunikuje s~počítačem pomocí \textit{RS232 over
+USB}. Jejím hlavním úkolem je vytvářet \textit{digitální signál DCC}, který
+moduluje do kolejí.
 
-Lokomotiva stojící na kolejích tento signál dekóduje pomocí speciální součástky,
-tzv. \textit{dekodéru} a podle přijatých dat poveluje periferie lokomotivy, jako
-jsou třeba motor, světla, nebo zvuk vydávaný vestavěným reproduktorem. Signál
-v kolejích je zároveň využíván jako výkonový (např. pro napájení motoru).
-Dekodér není žádná složitá součástka, v podstatě obsahuje jednoduchý
-mikrokontrolér a několik výkonových prvků. Jeho typická velikost je v řádu
-malých jednotek $cm^2$, takže je skutečně malý.
+Lokomotiva stojící na kolejích tento signál dekóduje pomocí speciální
+součástky, tzv. \textit{dekodéru} a podle přijatých dat poveluje periferie
+lokomotivy: motor, světla, nebo třeba zvuk vydávaný vestavěným reproduktorem.
+Signál v~kolejích je zároveň využíván jako výkonový (např. pro napájení
+motoru). Dekodér v~podstatě obsahuje jen jednoduchý mikrokontrolér a několik
+výkonových prvků. Jeho typická velikost je v~řádu malých jednotek $cm^2$, takže
+je skutečně malý.
 
 Každý dekodér má svoji adresu v rozsahu $1-9999$. Počítač pak může vydat příkaz
 pro řízení lokomotivy, např. \textit{\uv{Lokomotivo s adresou 562, jeď směrem
-vpřed rychlostí 15}}.
+vpřed rychlostí 15!}}
 
-\section{Kalibrace vozidel}
+\section{Synchronizace rychlosti vozidel}
 
-\subsection{Nutnost kalibrace}
+Rychlost lokomotivy typický bývá přirozené číslo v~rozsahu $0-28$. Tato hodnota
+se označuje jako tzv. \textit{jízdní stupeň}.
 
-Rozsah rychlostí lokomotivy typický bývá v rozsahu $0-28$. Tato hodnota se
-označuje jako tzv. \textit{jízdní stupeň}.
+Protože každá lokomotiva obsahuje jiné mechanické prvky (převody, motor),
+odpovídá stejnému jízdnímu stupni u~dvou různých hnacích vozidel různá
+rychlost. Ukazuje se, že při řízení kolejiště je nutné spárovat jízdní stupeň
+s~reálnou rychlostí vozidla. Je to především proto, abychom dosáhli modelové
+věrnosti a vozidlo se po přepočtu pohybovalo \textit{modelovou rychlostí}. Je
+také nutné dbát na provozní parametry kolejiště, které umožňují průjezd
+některými části kolejiště jen omezenou rychlostí. Při překročení této rychlosti
+by pak mohlo dojít k~vykolejení, což je samozřejmě nežádoucí.
 
-Protože každá lokomotiva má jiné převody a jiný motor, odpovídá stejnému
-jízdnímu stupni u dvou různých hnacích vozidel různá skutečná rychlost těchto
-hnacích vozidel. Ukazuje se, že při řízení kolejiště je nutné spárovat
-konkrétní jízdní stupeň s reálnou rychlostí konkrétního vozidla. Je to
-především proto, abychom dosáhli modelové věrnosti a vozidlo se po přepočtu
-pohybovalo \textit{modelovou rychlostí}. Je také nutné dbát na provozní
-parametry kolejiště, které jednoduše umožňují průjezd některými části kolejiště
-jen omezenou rychlosti. Při překročení této rychlosti by pak mohlo dojít k
-vykolejení, což je nežádoucí.
+Dalším důvodem pro spárování rychlosti lokomotivy s~jízdním stupněm je
+vytvoření předvídatelného prostředí pro obsluhu. Obsluha má typicky k~dispozici
+ovladač pro řízení rychlosti jízdy vozidla v~ručním režimu. Autor této práce
+považuje za velice užitečné, aby platilo, že otočení trimru ovladače o~daný
+úhel způsobí u~všech vozidel stejnou rychlost.
 
-Další, neméně důležitým důvodem pro spárování skutečné rychlosti s jízdním
-stupněm je vytvoření předvídatelného prostředí pro obsluhu. Obsluha má typicky
-k dispozici ovladač pro řízení rychlosti jízdy vozidla v ručním režimu. Autor
-této práce považuje za velice užitečné, aby platilo, že otočení trimru ovladače
-o daný úhel způsobí u dvou různých vozidel stejnou rychlost.
+Třetím důvodem k synchronizaci rychlostí vozidel je umožnění přípřeží a postrků
+-- tj.  situací, kdy v~jednom vlaku jede více lokomotiv. Tyto lokomotivy se
+musí pohybovat stejnou rychlostí, jinak hrozí vykolejení vlaku.
 
-Třetím důvodem ke kalibraci vozidel je umožnění přípřeží a postrků -- tj.
-situace, kdy v jednom vlaku jede více lokomotiv. Tyto lokomotivy se musí
-pohybovat stejně rychle, jinak hrozí (např. v obloucích) vykolejení vlaku.
+\subsection{Současné řešení problému}
 
-\subsection{Současné řešení problému synchronizace rychlostí}
-
-Současné řídicí programy problém kalibrace typicky řeší tak, že si u každého
-hnacího vozidla ukládají tabulku \texit{jízdní stupeň : skutečná rychlost}.
-Když tyto programy chtějí, aby 2 lokomotivy jely stejnou rychlostí, provedou
-vyhledání příslušných jízdních stupňů a do centrály (v obecném případě)
-odešlou 2 různé jízdní stupně.
+Současné řídicí programy problém synchronizace rychlostí typicky řeší tak, že
+si u~každého hnacího vozidla ukládají tabulku \textit{jízdní stupeň: skutečná
+rychlost}. Když tyto programy chtějí, aby 2 lokomotivy jely stejnou rychlostí,
+provedou vyhledání příslušných jízdních stupňů a do centrály (v~obecném
+případě) odešlou 2 různé jízdní stupně.
 
 Provozu lokomotivy na kolejišti tak předchází buď
 
 \begin{itemize}
 	\item ruční zadání této tabulky, nebo
-	\item automatické změření rychlosti lokomotivy.
+	\item automatické měření rychlosti lokomotivy.
 \end{itemize}
 
 Je však nutné podotknout, že toto řešení neuspokojuje naše požadavky pro
 ruční řízení jízdy hnacího vozidla, protože tabulka rychlostí je uložena
-pouze v řídícím SW, s kterým nejsou současné ovladače typicky propojené, takže
-o tabulce vůbec netuší.
+pouze v~řídícím SW, s~kterým nejsou ovladače typicky propojeny, takže o~tabulce
+vůbec netuší.
 
-\subsection{Řešení problému synchronizace rychlostí v SW hJOP}
+\subsection{Řešení problému v~hJOP}
 
 Alternativním řešením problému synchronizace rychlostí je způsob, který
-v současné době využívá SW hJOP. Tato práce cílí právě na tento alternativní
-způsob řešení kalibrace. jeho výhoda je totiž v tom, že řeší snchronizaci
-rychlostí i pro ruční ovladače.
+v~současné době využívá SW hJOP. Tato práce cílí právě na tento alternativní
+způsob řešení kalibrace. jeho výhoda je totiž v~tom, že řeší synchronizaci
+rychlostí i~pro ruční ovladače.
 
-V každém lokomotivním dekodéru je možno pro každý z 28 jízdních stupňů nastavit
-konkrétní výkon motoru. SW hJOP staví na předpokladu, že uživatel provede
-před provozem hnacího vozidla tzv. kalibraci, tj. přiřazení výkonu motoru
-rychlostnímu stupni každého vozidla tak, aby bylo splněno, že konkrétní
-jízdní stupeň odpovídá u všech vozidel konkrétní skutečné rychlosti.
+V~každém lokomotivním dekodéru je možno pro každý z~28 jízdních stupňů nastavit
+konkrétní výkon motoru. SW hJOP staví na předpokladu, že uživatel provede před
+provozem hnacího vozidla tzv. kalibraci, tj. přiřazení výkonu motoru
+rychlostnímu stupni každého vozidla tak, aby bylo splněno, že konkrétní jízdní
+stupeň odpovídá u~všech vozidel konkrétní rychlosti.
 
-Příklad: u všech lokomotiv platí, že jízdní stupeň $15$ odpovídá reálné rychlosti
-$40 km/h$.
+Příklad: u~všech lokomotiv platí, že jízdní stupeň $15$ odpovídá reálné
+rychlosti $40\ km/h$.
 
-Dalšími výhodami tohoto řešení je
+Dalšími výhodami tohoto řešení jsou:
 
 \begin{enumerate}
-	\item odpadnutí nutnosti udržovat si u každého vozidla v SW kalibrační
+	\item odpadnutí nutnosti udržovat si u~každého vozidla v~SW kalibrační
 	tabulku
 	\item a instantní přenos tabulky mezi kolejišti, když je přenesena
-	lokomotiva. To proto, že tabulka je jednoduše fyzicky uložená v lokomotivě a
+	lokomotiva. To proto, že tabulka je jednoduše fyzicky uložená v~lokomotivě a
 	tudíž logicky cestuje s ní.
 \end{enumerate}
 
 Nevýhodou tohoto přístupu je, že je nutné provést netriviální proces kalibrace.
-S současné době tento proces zahrnuje ježdění s lokomotivou, měření její
-rychlosti a ručním nastavováním kalibrační tabulky.
+V~současné době tento proces zahrnuje ježdění s~lokomotivou na měřícím okruhu,
+měření její rychlosti a ruční nastavování kalibrační tabulky.
 
 Cílem této práce je tento proces automatizovat.
 
@@ -140,6 +141,6 @@ Cílem této práce je tento proces automatizovat.
 Cílem této práce je automatizovat proces kalibrace lokomotivy.
 
 Nejprve je nutné navrhnout metodu pro měření rychlosti hnacího vozidla. Jakmile
-bude zabezpečen přenos dat o rychlosti hnacího vozidla do řídícího PC, je
-nutné navrhnout SW, který na nákladě změřené rychlosti provede natavení
-kalibrační tabulky hnacího vozidla.
+bude zabezpečen přenos dat o~rychlosti hnacího vozidla do řídícího PC, je nutné
+navrhnout SW, který na nákladě změřené rychlosti provede natavení kalibrační
+tabulky hnacího vozidla.
