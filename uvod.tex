@@ -21,13 +21,13 @@ ze standardních měřítek, např. v měříku \uv{TT} 1:120. Vedle typického 
 využití kolejiště je dobré mít na paměti, že takováto kolejiště často slouží
 třeba jako dopravní trenažéry pro výuku zabezpečovacího zařízení železnice,
 či dalších aspektů využívaných na skutenčé železnici. Nejen v těchto případech
-vzniká potřeba kolejiště ovládat nějakým \textit{zabezpečovacím zařízením].
+vzniká potřeba kolejiště ovládat nějakým \textit{zabezpečovacím zařízením}.
 Typickým zástupcem současného zabezpečovacího zařízení je
 \textit{elektronické stavědlo} spolu s grafickou nadstavbou \textit{JOP}.
 
 Tento systém je využíván také v \textit{Klubu modelářů železnic Brno I}, ke
 kterému má autor práce blízko. V něm je nasazen systém řízení zvaný
-\texit{hJOP}, který je klonem skutečného zabezpečovacího zařízení upraveného
+\textit{hJOP}, který je klonem skutečného zabezpečovacího zařízení upraveného
 pro potřeby řízení modelu. Jeho primárním cílem ve výše zmíněném klubu je
 kontrolovat jízdu vlaku a omezením lidského faktoru předejít možným škodám.
 
@@ -48,3 +48,37 @@ Lokomotiva stojící na kolejích tento signál dekóduje pomocí speciální so
 tzv. \textit{dekodéru} a podle přijatých dat poveluje periferie lokomotivy, jako
 jsou třeba motor, světla, nebo zvuk vydávaný vestavěným reproduktorem. Signál
 v kolejích je zároveň využíván jako výkonový (např. pro napájení motoru).
+Dekodér není žádná složitá součástka, v podstatě obsahuje jednoduchý
+mikrokontrolér a několik výkonových prvků. Jeho typická velikost je v řádu
+malých jednotek $cm^2$, takže je skutečně malý.
+
+Každý dekodér má svoji adresu v rozsahu $1-9999$. Počítač pak může vydat příkaz
+pro řízení lokomotivy, např. \textit{\uv{Lokomotivo s adresou 562, jeď směrem
+vpřed rychlostí 15}}.
+
+\section{Kalibrace vozidel}
+
+\subsection{Nutnost kalibrace}
+
+Rozsah rychlostí lokomotivy typický bývá v rozsahu $0-28$. Tato hodnota se
+označuje jako tzv. \textit{jízdní stupeň}.
+
+Protože každá lokomotiva má jiné převody a jiný motor, odpovídá stejnému
+jízdnímu stupni u dvou různých hnacích vozidel různá skutečná rychlost těchto
+hnacích vozidel. Ukazuje se, že při řízení kolejiště je nutné spárovat
+konkrétní jízdní stupeň s reálnou rychlostí konkrétního vozidla. Je to
+především proto, abychom dosáhli modelové věrnosti a vozidlo se po přepočtu
+pohybovalo \textit{modelovou rychlostí}. Je také nutné dbát na provozní
+parametry kolejiště, které jednoduše umožňují průjezd některými části kolejiště
+jen omezenou rychlosti. Při překročení této rychlosti by pak mohlo dojít k
+vykolejení, což je nežádoucí.
+
+Další, neméně důležitým důvodem pro spárování skutečné rychlosti s jízdním
+stupněm je vytvoření předvídatelného prostředí pro obsluhu. Obsluha má typicky
+k dispozici ovladač pro řízení rychlosti jízdy vozidla v ručním režimu. Autor
+této práce považuje za velice užitečné, aby platilo, že otočení trimru ovladače
+o daný úhel způsobí u dvou různých vozidel stejnou rychlost.
+
+\subsection{Současné řešení problému kalibrace}
+
+
