@@ -1,4 +1,4 @@
-V~následujících několika stranách rozebere autor možnosti řešení problému
+V~následujících několika stranách autor rozebere možnosti řešení problému
 automatické kalibrace modelového žlezničního hnacího vozidla, ukáže, proč
 jsou současná řešení pro problém řešený v~této páci nevhodná a nakonec
 navrhne (1) hardware, (2) firmware a (3) software, kterým se pokusí problém
@@ -20,36 +20,37 @@ nutné pochopit kontext této práce, o kterém pojednává následující kapit
 Modelové kolejiště je model reálné železniční tratě, typicky zmenšený
 v~některém ze standardních měřítek, např. v~měřítku \uv{TT} (1:120). Vedle
 typického \uv{hobby} využití kolejiště často slouží jako dopravní trenažéry pro
-výuku zabezpečovacího zařízení železnice, či dalších aspektů využívaných na
+výuku zabezpečovacích zařízení železnice, či dalších aspektů využívaných na
 skutečné železnici. Nejen v~těchto případech vzniká potřeba kolejiště ovládat
 \textit{zabezpečovacím zařízením}. Typickým zástupcem současného
 zabezpečovacího zařízení na skuteční železnici je \textit{elektronické
 stavědlo} spolu s~grafickou nadstavbou \textit{JOP}, která umožňuje řízení
-přes počítač.
+stavědla přes počítač.
 
 Obdobný systém je využíván také v~\textit{Klubu modelářů železnic Brno I},
 který je základní motivací k~vypracování této práce. V~tomto klubu je nasazen
-systém řízení zvaný \textit{hJOP}, který je klonem JOP upraveným pro potřeby
-řízení modelu. Jeho primárním cílem je povelovat jízdu vlaku a omezením
-lidského faktoru předejít možným kolizím.
+systém řízení kolejišť zvaný \textit{hJOP} \cite{hjop:web}, který je klonem JOP
+upraveným pro potřeby řízení modelu. Jeho primárním cílem je povelovat jízdu
+vlaku a omezením lidského faktoru předejít možným kolizím.
 
 \section{Současné trendy v~řízení kolejiště}
 
-K~řízení modelového kolejiště je v~současné době napříč země využívána celá
-řada dostupných SW. Typickými příklady jsou například \textit{JMRI} \cite{},
-\textit{TrainController} \cite{}, \textit{RailCo} \cite{} nebo česky SW
-\textit{modelJOP} \cite{}.
+K~řízení modelových kolejišť je v~současné době napříč zeměmi využívána celá
+řada dostupných SW. Typickými příklady jsou například \textit{JMRI}
+\cite{jmri:web}, \textit{TrainController} \cite{trancontroller:web},
+\textit{RailCo} \cite{railco:web} nebo český SW \textit{modelJOP}
+\cite{modeljop:web}.
 
 Výše zmíněné aplikace komunikují s~hardwarovými prvky kolejiště.
 Nejdůležitějším z~těchto prvků je digitální centrála DCC. Digitální centrála je
 obecný pojem, konkrétními instancemi od jednotlivých výrobců jsou pak např.
-\textit{Z21} \cite{}, \textit{NanoX} \cite{} nebo třeba \textit{Intellibox}
-\cite{}. Centrála typicky komunikuje s~počítačem pomocí \textit{RS232 over
-USB}. Jejím hlavním úkolem je vytvářet \textit{digitální signál DCC}, který
-moduluje do kolejí.
+\textit{Z21} \cite{z21:web}, \textit{NanoX} \cite{nanox:web} nebo třeba
+\textit{Intellibox} \cite{intellibox:web}. Centrála typicky komunikuje
+s~počítačem pomocí sběrnice \textit{RS232 over USB}. Jejím hlavním úkolem je
+vytvářet \textit{digitální signál DCC}, který moduluje do kolejí.
 
 Lokomotiva stojící na kolejích tento signál dekóduje pomocí speciální
-součástky, tzv. \textit{dekodéru} a podle přijatých dat poveluje periferie
+součástky -- tzv. \textit{dekodéru} -- a podle přijatých dat poveluje periferie
 lokomotivy: motor, světla, nebo třeba zvuk vydávaný vestavěným reproduktorem.
 Signál v~kolejích je zároveň využíván jako výkonový (např. pro napájení
 motoru). Dekodér v~podstatě obsahuje jen jednoduchý mikrokontrolér a několik
@@ -57,7 +58,7 @@ výkonových prvků. Jeho typická velikost je v~řádu malých jednotek $cm^2$,
 je skutečně malý.
 
 Každý dekodér má svoji adresu v rozsahu $1-9999$. Počítač pak může vydat příkaz
-pro řízení lokomotivy, např. \textit{\uv{Lokomotivo s adresou 562, jeď směrem
+pro řízení lokomotivy, např.: \textit{\uv{lokomotivo s~adresou 562, jeď směrem
 vpřed rychlostí 15!}}
 
 \section{Synchronizace rychlosti vozidel}
@@ -67,7 +68,7 @@ se označuje jako tzv. \textit{jízdní stupeň}.
 
 Protože každá lokomotiva obsahuje jiné mechanické prvky (převody, motor),
 odpovídá stejnému jízdnímu stupni u~dvou různých hnacích vozidel různá
-rychlost. Ukazuje se, že při řízení kolejiště je nutné spárovat jízdní stupeň
+rychlost. Ukazuje se, že při řízení kolejiště je vhodné spárovat jízdní stupeň
 s~reálnou rychlostí vozidla. Je to především proto, abychom dosáhli modelové
 věrnosti a vozidlo se po přepočtu pohybovalo \textit{modelovou rychlostí}. Je
 také nutné dbát na provozní parametry kolejiště, které umožňují průjezd
@@ -108,14 +109,14 @@ vůbec netuší.
 
 Alternativním řešením problému synchronizace rychlostí je způsob, který
 v~současné době využívá SW hJOP. Tato práce cílí právě na tento alternativní
-způsob řešení kalibrace. jeho výhoda je totiž v~tom, že řeší synchronizaci
+způsob řešení kalibrace. Jeho výhoda je v~tom, že řeší synchronizaci
 rychlostí i~pro ruční ovladače.
 
 V~každém lokomotivním dekodéru je možno pro každý z~28 jízdních stupňů nastavit
 konkrétní výkon motoru. SW hJOP staví na předpokladu, že uživatel provede před
-provozem hnacího vozidla tzv. kalibraci, tj. přiřazení výkonu motoru
-rychlostnímu stupni každého vozidla tak, aby bylo splněno, že konkrétní jízdní
-stupeň odpovídá u~všech vozidel konkrétní rychlosti.
+provozem hnacího vozidla tzv. \textit{kalibraci}, tj. přiřazení výkonu motoru
+každému rychlostnímu stupni každého vozidla tak, aby bylo splněno, že konkrétní
+jízdní stupeň odpovídá u~všech vozidel konkrétní rychlosti.
 
 Příklad: u~všech lokomotiv platí, že jízdní stupeň $15$ odpovídá reálné
 rychlosti $40\ km/h$.
@@ -142,5 +143,5 @@ Cílem této práce je automatizovat proces kalibrace lokomotivy.
 
 Nejprve je nutné navrhnout metodu pro měření rychlosti hnacího vozidla. Jakmile
 bude zabezpečen přenos dat o~rychlosti hnacího vozidla do řídícího PC, je nutné
-navrhnout SW, který na nákladě změřené rychlosti provede natavení kalibrační
+navrhnout SW, který na nákladě změřené rychlosti provede nastavení kalibrační
 tabulky hnacího vozidla.
