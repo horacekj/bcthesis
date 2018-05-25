@@ -1,10 +1,40 @@
-Tuto kapitolu prosím nehodnotit, obsahuje pouze nástřely bodů.
+Pro návrh vhodného řešení procesu automatické kalibrace je nutné si ujasnit
+požadavky kladené na toto řešení. Základní požadavky seřazené od
+nejdůležitějšího jsou:
 
 \begin{enumerate}
-	\item Snadné použití pro koncového uživatele, snadná instalace (BT).
-	\item Bezdrátovost.
-	\item Nezávsilost na měřítku (do určité míry)-
-	\item Automatika.
-	\item Rychlost.
-	\item Dokalibrovávání za skutečného provozu.
+	\item snadné použití pro koncového uživatele, snadná instalace,
+	\item možnost použít řešení pro libovolné modelové měřítko,
+	\item maximalizace automatizace a minimalizace nutné spolupráce s~uživatelem,
+	\item urychlení procesu kalibrace,
+	\item možnost provést dokalibrování za skutečného provozu,
+	\item slušné verzování projektu, přehledný a čistý kód, využití otevřených
+	technologií.
 \end{enumerate}
+
+První bod vyplývá z~faktu, že proces kalibrace bude spouštěn běžnou obsluhou
+kolejiště, která často nemá kapacity na to, aby se seznamovala s~novými
+technologiemi. Proto bude kladen důraz na očekávatelné chování grafického
+rozhraní a jednoduchost práce se samotným měřícím hardwarem. Řešení bude také
+navrženo tak, aby využívalo běžně dostupné technologie, se kterými jsou
+uživatelé zvyklí pracovat.
+
+Protože v~Klubu odkazovaném výše je provozováno více modelových měřítek, autor
+se vynasnaží navrhnout řešení tak, aby bylo nezávislé na měřítku.
+
+Za okomentování pak určitě stojí bod (5). Po zakoupení nového vozidla se
+typicky provádí jeho kalibrace, vozidlo je následně začleněno do provozu, kde
+i~několik let jezdí. Fyzikální realita světa je bohužel neúprosná v~tom směru,
+že ve vozidle dochází k~mechanickému opotřebení prvků, zaběhnutí pohyblivých
+částí po určité době provozu a ke změně mechanických parametrů vozidla
+v~závislosti na teplotě. Tyto skutečnosti vedou k~tomu, že kalibrace vozidla
+je po určité době provozu narušena. Vychýlení typicky není zásadní, ale často
+znatelné.
+
+Proto by bylo vhodné navrhnout kalibrační hardware tak, aby šel použít
+i~v~ostrém provozu na kolejišti. Vozidlo, které by mělo narušenou kalibraci,
+by bylo dispečerem označeno a ovládací SW by se postaral o~to, aby byla
+kalibrace obnovena. Tato práce si rozhodně neklade za cíl automatické
+dokalibrovávání implementovat, protože pro tento úkol bude nutná netriviální
+součinnost s~řídícím SW kolejiště. Bylo by ale nanejvýš vhodné, aby na tento
+proces bylo hardwarové řešení připraveno.
