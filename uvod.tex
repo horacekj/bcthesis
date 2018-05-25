@@ -1,9 +1,21 @@
-V~následujících několika stranách autor rozebere možnosti řešení problému
-automatické kalibrace modelového železničního hnacího vozidla, ukáže, proč
-jsou současná řešení pro problém řešený v~této práci nevhodná a nakonec
-navrhne (1) hardware, (2) firmware a (3) software, kterými uvedený problém
-řeší. Autor demonstruje výstupy této práce v~praxi a ukáže její reálný
-přínos.
+Současná modelová kolejiště již dávno nejsou jen hračkou malých dětí
+a jejich rodičů. Jsou to plnohodnotné modely, na kterých se dispečeři reálné
+železnice učí řídit dopravu, či které slouží jako výukové prostředky pro
+obory automatizace. Kolejiště bývají vybavena robustní a spolehlivou
+zabezpečovací technikou podobnou té, která se v~současnosti používá na reálné
+železnici.
+
+Se zvyšujícími se nároky na bezpečnost provozu vzniká nutnost procesy řízení
+kolejiště automatizovat, eliminovat lidský faktor a řízení kolejiště obecně
+zrychlit. Cílem této práce ja pomocí automatizace procesu kalibrace modelového
+železničního vozidla přispět právě ke zvýšení bezpečnosti a spolehlivosti
+provozu.
+
+Autor rozebere možnosti řešení problému automatické kalibrace modelového
+železničního hnacího vozidla, ukáže, proč jsou současná řešení pro problém
+řešený v~této práci nevhodná a nakonec navrhne (1) hardware, (2) firmware a (3)
+software, kterými uvedený problém řeší. Autor demonstruje výstupy této práce
+v~praxi a ukáže její reálný přínos.
 
 Tato práce se tematicky pohybuje na pomezí práce typu \textit{proof of concept}
 a práce \textit{aplikační}. Jejím primárním cílem je vytvořit reálné řešení
@@ -37,9 +49,8 @@ možným kolizím.
 
 K~řízení modelových kolejišť je v~současné době napříč zeměmi využívána celá
 řada dostupných SW. Typickými příklady jsou například \textit{JMRI}
-\cite{jmri:web}, \textit{TrainController} \cite{trancontroller:web},
-\textit{RailCo} \cite{railco:web} nebo český SW \textit{modelJOP}
-\cite{modeljop:web}.
+\cite{jmri:web}, \textit{TrainController} \cite{traincontroller:web}
+nebo český SW \textit{modelJOP} \cite{modeljop:web}.
 
 Výše zmíněné aplikace komunikují s~hardwarovými prvky kolejiště.
 Nejdůležitějším z~těchto prvků je digitální centrála DCC. Digitální centrála je
@@ -63,8 +74,8 @@ vpřed rychlostí 15!}}
 
 \section{Synchronizace rychlosti vozidel}
 
-Rychlost lokomotivy typicky bývá přirozené číslo v~rozsahu $0-28$. Tato hodnota
-se označuje jako tzv. \textit{jízdní stupeň}.
+Rychlost lokomotivy typicky bývá přirozené číslo v~rozsahu $0$--$28$. Tato
+hodnota se označuje jako tzv. \textit{jízdní stupeň}.
 
 Protože každá lokomotiva obsahuje jiné mechanické prvky (převody, motor),
 odpovídá stejnému jízdnímu stupni u~dvou různých hnacích vozidel různá
