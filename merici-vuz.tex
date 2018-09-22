@@ -1,0 +1,39 @@
+Tato kapitola popisuje celkovou koncepci vlastního senzoru pro měření
+rychlosti hnacího vozidla -- tzv. měřicího vozu. Tato kapitola popisuje
+a zdůvodňuje rozhodnutí, která autor při konstrukci senzoru zvolil.
+
+V~kontextu této kapitoly si autor dovoluje stručně připomenout Požadavky
+na řešení (TODO: link chapter 2).
+
+\section{Umístění senzoru}
+
+Uvědomme si nejprve, kam je a není možno senzor umístit. Určitě platí, že
+senzor není možné umístit do lokomotivy. Lokomotiva je totiž komerční produkt,
+který umožňuje úpravy elektroniky uvnitř nejvýše na úrovní výměny digitálního
+dekodéru DCC. Lokomotiva obvykle bývá vybavena deskou plošných spojů, která
+připojuje jednotlivé součásti lokomotivy (motor, koleje, dekodér, osvětlení,
+...). Tato deska je specifická pro konkrétní model a dodává ji výrobce hnacího
+vozidla. Není tedy prakticky možné do elektroniky lokomotivy nějak zasáhnout.
+
+Další možností je doplnit senzor do lokomotivy bez úpravy její elektroniky.
+To s sebou ale nese pořád tu nevýhodu, že je třeba mechanicky zasahovat do
+(poměrně drahé) lokomotivy.
+
+Další možností je umístit senzor mimo hnací vozidlo. Tento senzor může být
+umístěn na kolejiště staticky (podobně jako v \link{senzor}) nebo může
+být součástí vagónu připojeného za lokomotivou. Statický senzor se jeví jako
+nevyhovující zejména proto, že neumožňuje provádění dokalibrace za skutečného
+provozu.
+
+Nejvhodnějším řešením se tedy jeví vyrobit vůz, který se připojí ke kalibrované
+lokomotivě jako běžný vagón. Součástí tohoto vozu bude senzor pro měření
+rychlosti. Vůz pak bude možné připojit bez narušení provozu i~za vlak na
+produkčním kolejišti.
+
+S uvážením výše uvedených argumentů se autor rozhodl vydat cestou
+\textit{měřicího vozu}.
+
+\section{Dostupné technologie senzorů}
+
+
+
