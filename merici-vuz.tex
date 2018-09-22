@@ -20,7 +20,7 @@ To s sebou ale nese pořád tu nevýhodu, že je třeba mechanicky zasahovat do
 (poměrně drahé) lokomotivy.
 
 Další možností je umístit senzor mimo hnací vozidlo. Tento senzor může být
-umístěn na kolejiště staticky (podobně jako v \link{senzor}) nebo může
+umístěn na kolejiště staticky (podobně jako v \ref{senzor}) nebo může
 být součástí vagónu připojeného za lokomotivou. Statický senzor se jeví jako
 nevyhovující zejména proto, že neumožňuje provádění dokalibrace za skutečného
 provozu.
@@ -33,7 +33,42 @@ produkčním kolejišti.
 S uvážením výše uvedených argumentů se autor rozhodl vydat cestou
 \textit{měřicího vozu}.
 
-\section{Dostupné technologie senzorů}
+\section{Senzor}
+
+Hlavní součásti měřicího vozu je nesporně rychlostní senzor. Zvolená
+technologie senzoru má vliv na formát a přesnost měření, dále má vliv na
+mechanicko-elektrické vlastnosti měřicího vozu, jeho cenu, snadnost výroby,
+opakovatelnost výroby s výhledem na několik let a v neposlední řadě poruchovost
+a servisovatelnost měřicího vozu.
+
+Autor uvážil několik dostupných technologií senzorů.
+
+\subsection{Magnetický senzor}
+
+První možnou technologií senzoru jsou tzv. \textit{magnetické poziční senzory}.
+Tyto senzoru fungují na bázi halových sond. Umí měřit úhel natočení objektu
+vzhledem k senzoru. Jejich primárním účelem je měřit natočení nejrůznějších
+ramen, či prvků ovládaných např. servomotory, opakovaným měřením natočení lze
+ale dosáhnout velice přesného měření rychlosti. Princip těchto senzorů
+dobře ilustruje obrázek \ref{fig-magnetic-sensor}.
+
+TODO obrázek.
+
+Výhodou tohoto měření je velice vysoká přesnost (řádově 10 bitů na jednu otáčku
+-- TODO je to pravda?). Bohužel, při pohledu na obrázek
+\ref{fig-magnetic-sensor} je velice těžko představitelné, jak umístit senzor na
+nápravu vagónu. Senzor by musel být umístěn z boku vozu, což by výrazně
+snižovalo jeho stabilitu.
+
+Existují ale i senzory, které se montují přímo na osu rotujícího předmětu
+(TODO: link). Takové by pro náš účel byly nejvhodnější. Smutným faktem ale je,
+že tyto senzory vyžadují magnet o~tak velké velikosti, že jsou pro modelovou
+železnici nepoužitelné.
+
+\subsection{Optický senzor}
 
 
 
+---
+
+TODO: shrnout vlatnosti, které měly vliv na konstrukci
