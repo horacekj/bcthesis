@@ -67,7 +67,44 @@ Existují ale i senzory, které se montují přímo na osu rotujícího předmě
 
 \subsection{Optický senzor}
 
+Druhou uvažovanou technologií senzoru je optický senzor, který je každému
+důvěrně známý z optických myší. Tento senzor pracuje na principu snímání obrazu
+podložky CCD čipem a porovnávání dvou obrazů pořízených v krátkém časovém
+intervalu. Ze dvou obrazů je pak určen rozdíl polohy myši.
+\footnote{Zajímavostí je, že celá logika porovnávání dvou obrazů je
+v~takovýchto senzorech implementována hardwarově.}
 
+Toto řešení vypadá velice slibně, jeho obrovskou výhodou je absence jakýchkoliv
+mechanických částí. Stačí namířit senzor na pražce a prostě měřit jak se vůz
+pohybuje. Pražce jsou navíc velice dobře kontrastní vůči štěrku, který je mezi
+nimi, porovnávání obrazů by tak mohlo být velice přesné (srovnejte s~pohybem
+optické myši po takřka uniformním povrchu stolu nebo podložky pod myš).
+
+Pro kalibrační vůz byl vybrán konkrétní senzor ADNS-3050. Kritériem výběru
+bylo to, že (1) senzor má výstup sériovou linkou a že (2) senzor zvládá měřit
+vysoké rychlosti (vagón se typicky pohybuje o~něco rychleji než myš).
+
+Autor nakoupil senzory, osadil je na desku plošných spojů a začal testovat
+přesnost měření pomocí jednoduchého zapojení s vývojovým kitem Arduino. Velikou
+výzvou bylo sehnat čočku, která autorovi umožní zaměřit pražce a zároveň
+ponechat senzor na ploše vagónu. Díky spolupráci s Ústavem přístrojové techniky
+AV ČR se však povedlo dostatečně malou čočku úspěšně sehnat.
+
+První měření ukázala, že pro dobrou funkci senzoru je třeba poměrně kontrastní
+snímaná plocha a poměrně intenzivní červené světlo (na to je CCD čip v~senzoru
+nejcitlivější \footnote{Proto si optická myš přisvětluje červeným světlem.})
+Navíc se ukázalo, že hloubka ostrosti senzoru je nejvýše $1\ mm$, což reálně
+znemožňovalo měřit rychlosti na kolejích, které nejsou zasypány štěrkem, ale
+pouze připevněny k~podložce.
+
+Po několika měsících pokusů o zprovoznění měření optickým senzorem autor naznal,
+že s tímto typem senzoru nebude schopen garantovat přesně a spolehlivé měření.
+Padlo tedy rozhodnutí tuto technologii opustit. Autor by rád zdůraznil, že
+jednou z hlavních motivací pro opuštění této technologie byla přílišná
+komplexnost toho, co se děje v senzoru, a neschopnost ovlivňování a debugování
+těchto procesů.
+
+TODO: images, link ADNS sensor
 
 ---
 
