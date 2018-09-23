@@ -210,12 +210,10 @@ Výhodou baterie je navíc to, že není nutné vůz nijak upravovat (instalovat
 sběrací kontakty) a vůz je za plné funkčnosti zařízení bez problému sejmout
 z~kolejí a například tak vyzkoušet funkčnost senzoru.
 
+Technologií baterií byla zvolena LiPol.
+
 Skutečnou výzvou se tak stalo vyrobit elektroniku tak, aby její spotřeba
 byla vskutku malá (viz další kapitolu).
-
-\section{Mechanika}
-
-TODO
 
 \section{Platforma}
 
@@ -287,6 +285,36 @@ zařízení kolem cca $30\ mA$. Tato spotřeba byla uznána jako přijatelná.
 
 Pro konstrukci měřicího vozu byla tedy vybrána platforma ATmega s Bluetooth
 modulem HC-05.
+
+\section{Mechanika}
+
+Vůz se bude po mechanické skládat z několika základních částí.
+
+\begin{enumerate}
+\item Perforované kolo připevněné na nápravě.
+\item Optozávora připevněná k senzoru.
+\item Baterie.
+\item Deska plošných spojů s hlavní elektronikou.
+\item Komunikační modul HC-05.
+\end{enumerate}
+
+Jako vůz byl použit běžně dostupný vůz měřítka TT typu Nd\ref{vuz-nd}. Na
+jedné straně bylo extrahováno spřáhlo a místo něj byla k nápravě umístěna
+optozávora. Optozávora je na vlastní miniaturní DPS, k vozu je DPS mechanicky
+připevněna lepidlem. Vůz Nd je otevřený vůz, autor si (minimálně v prototypu)
+neklade cíl měřicí elektroniku modelově maskovat. Na plošině vozu je umístěna
+baterie, na ní je řídicí elektronika a na ní je komunikační modul. Celou
+situaci přehledně zobrazuje nákres \ref{vuz-nakres}
+
+TODO: vuz-nakres
+
+Rozměr plošiny vozu je $20\times80\ mm$. což umožnilo instalaci LiPol baterie
+o kapacitě $500 mAh$ (napětí $3.7\ V$). Teoretická výdrž vozu je tedy cca $x$
+hodin. Je však nutno poznamenat, že toto číslo je skutečně pouze teoretické,
+spotřeba zařízení se výrazně liší ve spárovaném a nespárovaném stavu, navíc
+níže zjistíme, že baterii nevybíjíme až na její hranice. Předestřeme však již
+nyní naměřenou hodnotu, tj. že spárovaný vůz vydržel reálně komunikovat
+$y$ hodin. To je velice uspokojivé číslo.
 
 \section{Elektronika}
 
