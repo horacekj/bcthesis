@@ -207,15 +207,49 @@ cílové platformě, měl by autor úplně vyhráno. Vyrobil by dokonalou
 multiplatformní aplikaci.
 
 Po nasazení profilu SPP se však ukázalo, že spotřeba ESP-32 je cca $80\ mA$,
-což jej dělá -- v kontextu napájení z baterie -- nepoužitelným. Autor ještě
-chvíli zvažoval, jak tento problém řešit pomocí sbírání či zvětšení baterie,
-všechna navrhovaná řešení však byla příliš komplikovaná nebo nefungovala
-dobře. Po několika týdnech testování tak bylo ESP-32 zavrhnuto.
+což jej dělá -- v kontextu napájení z baterie -- nepoužitelným. Bylo zvažováno
+využít profilu specifikace \textit{BLE (Bluetooth Low Energy)}, BLE však nemá
+profil pro sériovou linku, takže by autor musel vytvořit profil vlastní. To
+by znamenalo nutnost dodat specifikaci profilu do klientského zařízení (počítač)
+a místo abstrakce sériovou linkou přistupovat přímo k zařízení Bluetooth.
+Toto řešení bylo zamítnuto pro příliš velkou pracnost a ztrátu elegance.
 
-\subsection{ATmega}
+Autor ještě chvíli zvažoval, jak tento problém řešit pomocí sbírání či zvětšení
+baterie, všechna navrhovaná řešení však byla příliš komplikovaná nebo
+nefungovala dobře. Po několika týdnech testování tak bylo ESP-32 zavrhnuto.
 
+\subsection{ATmega + HC-05}
 
+Autorovou druhou volbou byla jemu dobře známá rodina procesorů s architekturou
+AVR názvu ATmega\ref{atmega}. Procesory rodiny ATmega jsou univerzální
+nízkopříkonové procesory, které jsou základem například vývojové desky Arduino
+\ref{arduino}. Volba na tuto rodinu procesorů padla také z toho důvodu, že
+s jejím programováním měl autor předchozí zkušenosti.
+
+Procesory ATmega v sobě ale bohužel nezahrnují modul pro bezdrátovou komunikaci.
+Autor se tedy rozhodl využít externí Bluetooth modul propojený s procesorem.
+Při výběru modulu padla jasná volba na běžně dostupný BT modul názvu HC-05.
+Výhodou tohoto modulu je jeho vysoká dostupnost a nízká cena, nevýhodou je to,
+že modul je -- lidově řečeno -- \uv{čínský}. To znamená, že k němu není až
+tak dobrá dokumentace a v Česku je to s jeho dostupností horší. Každopádně
+co se týče světové dostupnosti, je na tom modul velice dobře. Autor zvažoval
+ještě další moduly (HC-06, HC-07), tyto moduly by však pro účel této práce
+nepřinesly žádnou zásadní výhodu.
+
+Autor experimentálně změřit, že spotřeba nespárovaného HC-05 modulu je
+$TODO\ mA$, spotřeba spárovaného modulu je $TODO\ mA$. To jsou oproti ESP-32
+výrazně příjemnější čísla. Autorovi se navíc podařilo zajistit spolehlivou
+funkci senzoru již při proudu $10\ mA$, což je polovina proudu, na který
+je senzor dimenzován\ref{gp1s23-datasheet}. S přihlédnutím ke spotřebě procesoru
+a drobných součástí jako LE diod by se měla pohybovat celková spotřeba celého
+zařízení kolem cca $30\ mA$. Tato spotřeba byla uznána jako přijatelná.
+
+Pro konstrukci měřicího vozu byla tedy vybrána platforma ATmega s Bluetooth
+modulem HC-05.
 
 ---
 
-TODO: shrnout vlatnosti, které měly vliv na konstrukci
+TODO:
+ * shrnout vlatnosti, které měly vliv na konstrukci
+ * naměřit přesné spotřeby a odhady výdrže
+ * podmínky na výdrž
