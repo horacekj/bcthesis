@@ -318,7 +318,56 @@ $y$ hodin. To je velice uspokojivé číslo.
 
 \section{Elektronika}
 
-TODO
+Základní požadavky na elektroniku měřicího vozu jsou:
+
+\begin{enumerate}
+\item Umět rychle a přesně vyhodnocovat data z optického seznoru.
+\item Umět komunikovat s modulem HC-05.
+\item Umožnit uživateli zařízení zapnout a vypnout.
+\item Umět měřit napětí na baterce.
+\item Umět automaticky vypnout zařízení v případě vybití baterie.
+\item Zobrazovat stav vozu LE diodami.
+\item Umožnit nabíjet baterii.
+\end{enumerate}
+
+Všechny požadavky na elektroniku jsou víceméně intuitivní, jen u posledního
+doplňme, že jeho motivací je to, aby uživatel nemusel odpojovat baterii od
+elektroniky a nabíjet jí externě. Tím se výrazně sníží riziko omylného
+přepólování, nesprávného zacházení s baterií ze strany uživatele a mechanického
+poškození vozu vlivem časté manipulace s kabely a konektory.
+
+Schéma desky plošných spojů je k nahlédnutí v příloze \ref{wsm-scheme}. Nyní
+krátce popišme jednotlivé prvky schématu a jak přispívají k naplnění požadavků.
+
+Největší součástkou na desce je procesor ATmega328p. Tento konkrétní typ byl
+vybrán, protože je poměrně moderní a je dnes montován do vývojových desek
+Arduino, tudíž je jeho cena díky vysokému počtu produkovaných kusů malá.
+Tento procesor se stará o všechnu logiku na desce. Signál z optozávory je
+připojen na pin ICP, který je speciálně určen k tomu, aby přesně a rychle měřil
+periodu vstupního signálu. Procesor dále měří napětí na baterce, které je ale
+nejprve nutné srazit napěťovým děličem. Při vývoji hardwaru byla v jednu chvíli
+překážkou přesnost napěťové reference, nakonec ale byla zvolena jako napěťová
+reference přímo napájecí napětí procesoru, které by mělo kolísat nejvýše $\pm 2\ \%$
+\ref{ldo-datasheet}.
+
+Součástí schématu je dále nabíjecí obvod \textit{MCP73831}, který byl vybrán
+zejména pro jeho velice malé rozměry.
+
+Na tímto obvodem je ochrana proti přepólování (tranzistor \textit{T1A}) a dále
+zapínací a vypínací obvod celé elektroniky. Tento obvod je inspirován projektem
+RB3201\ref{rb3201} od kolegů z Robotiky Brno\ref{roboticsbrno}.
+
+Napětí pro procesor je vytvářeno obvodem LDO\footnote{Low-dropout regulator}
+(obvod \textit{IC3}), procesor pracuje na napětí $3.3\ V$. Tato konstrukce
+s sebou nese zásadní omezení pro čerpání baterky: napětí na baterce nikdy nesmí
+klesnout pod $3.5\ V$. Tato hodnota zahrnuje i korekce vypočítané z nepřesnosti
+výstupu LDO, jedná se tedy o \textit{napětí, které měří procesor}. Jakmile
+procesor na baterce změří méně než $3.5\ V$, musí se odpojit. Jinak hrozí
+pokles referenčního napětí na AD převodníku, který měří napětí na baterce.
+
+DPS dále obsahuje konektory pro periferie, testovací konektory, testovací
+plošky a LE diody. Autor věří, že tyto komponenty nepotřebují žádný další
+komentář.
 
 ---
 
