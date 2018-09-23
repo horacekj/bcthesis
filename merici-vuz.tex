@@ -65,9 +65,22 @@ Existují ale i senzory, které se montují přímo na osu rotujícího předmě
 že tyto senzory vyžadují magnet o~tak velké velikosti, že jsou pro modelovou
 železnici nepoužitelné.
 
+\subsection{Magnetický senzor \uv{cykloměřič}}
+
+Technologie tzv. \uv{cykloměřiče} byla historicky první metodou jak měřit
+rychlost modelové lokomotivy. Tento senzor jsem dokonce viděl v praxi, je
+založený na stejné principu, jako počítač rychlosti na cyklistickém kole.
+Na osu nápravu je připevněn magnet, ve voze je pak Hallova sonda. Magnet udělá
+na jednu otáčku jeden zákmit na Hallově sondě, počítač pak počítá počty zákmitů.
+
+Tato možnost je poměrně jednoduchá na instalaci, množství mechanických prvků
+je poměrně malé, na druhou stranu ale poskytuje poměrně malou přesnost --
+zejména při nižších rychlostech. Tato technologie senzoru se tedy pro potřeby
+této práce také nejeví jako nejvhodnější.
+
 \subsection{Optický senzor}
 
-Druhou uvažovanou technologií senzoru je optický senzor, který je každému
+Třetí uvažovanou technologií senzoru je optický senzor, který je každému
 důvěrně známý z optických myší. Tento senzor pracuje na principu snímání obrazu
 podložky CCD čipem a porovnávání dvou obrazů pořízených v krátkém časovém
 intervalu. Ze dvou obrazů je pak určen rozdíl polohy myši.
@@ -95,7 +108,10 @@ snímaná plocha a poměrně intenzivní červené světlo (na to je CCD čip v~
 nejcitlivější \footnote{Proto si optická myš přisvětluje červeným světlem.})
 Navíc se ukázalo, že hloubka ostrosti senzoru je nejvýše $1\ mm$, což reálně
 znemožňovalo měřit rychlosti na kolejích, které nejsou zasypány štěrkem, ale
-pouze připevněny k~podložce.
+pouze připevněny k~podložce. Složitý optický senzor tak degradoval na zařízení,
+jehož funkci by v podstatě šlo zařídit pomocí jedné LED diody a jednoho
+fototranzistoru \footnote{Stačí jednoduše měřit intenzitu odraženého světla a
+zkoumat, jestli je senzor zrovna na pražci nebo mezi pražci.}.
 
 Po několika měsících pokusů o zprovoznění měření optickým senzorem autor naznal,
 že s tímto typem senzoru nebude schopen garantovat přesně a spolehlivé měření.
@@ -105,6 +121,37 @@ komplexnost toho, co se děje v senzoru, a neschopnost ovlivňování a debugov�
 těchto procesů.
 
 TODO: images, link ADNS sensor
+
+\subsection{Optozávora}
+
+Třetí uvažovaná technologie senzorů je inspirována návrhem od kolegy modeláře
+Petra Trávníka. Základem této technologie je paprskové kolo \ref{wheel} upevněné
+na nápravě měřicího vozu. Paprskové kolo se otáčí spolu s nápravou, k vozu je
+pak připevněna optozávora, která snímá průchod jednotlivých paprsků. Klíčovým
+faktorem pro použitelnost této technologie jsou zejména technické možnosti
+výroby dostatečného množství paprsků při zajištění rovnoměrnosti rozestupu
+paprsků a malé velikosti kola. Průměr kola by totiž neměl přesáhnout $6\ mm$
+(měřítko TT, 1:120).
+
+Ze všech uvažovaných technologií autor nakonec zvolil právě technologii
+paprskového kola a optozávory.
+
+Nejvhodnější technologií pro výrobu takového kola je zřejmě leptání, protože
+ale autor nemá k této technologii přístup, rozhodl je místo jednotlivých
+paprsků kolo vyrobit pouze dírkované. Jako vhodný kompromis bylo stanoveno
+8 dírek na kolo, přičemž chyba v~umístění jedné dírky byla výrobou stanovena na
+nejvýše $0.05\ mm$ (TODO: ověřit). To jsou poměrně dobré výsledky.
+
+Výkres kola je zobrazen na obrázku \ref{wheel}.
+
+TODO: figure
+
+Nemalým problémem pak bylo sehnat dostatečně malou optozávoru. Běžné optozávory
+dostupné v~českých obchodech dosahují rozměrů cca $15\times6\times10\ mm$. To je pro
+účely vozu v~měřítku 1:120 zcela nepřijatelné. Po průzkumu možných alternativ
+byl nakonec vybrán senzor GP1S23 (TODO link), který byl dříve hojně montován
+d disketových mechanik. Dnes je senzor běžně dostupný například na modulu
+k~Arduinu pod označením KY-010 (TODO link).
 
 ---
 
