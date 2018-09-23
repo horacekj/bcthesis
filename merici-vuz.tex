@@ -174,6 +174,47 @@ S tímto vědomím přicházejí v úvahu 2 technologie.
 
 \section{Napájení}
 
+Jedním z klíčových faktorů, který určoval výslednou podobu měřicího vozu, bylo
+napájení. Pro napájení elektroniky jsou 3 možnosti.
+
+\begin{enumerate}
+\item Napájení z kolejí.
+\item Napájení z baterie.
+\item Kombinace předchozích dvou (místo baterie lze případně použít kondenzátory).
+\end{enumerate}
+
+Výhody a nevýhody jsou poměrně jasné: baterie má omezenou výdrž, napájení
+z kolejí je jistota. Na tomto místě je ale třeba zmínit, že napětí v kolejích
+sice je (téměř) trvale přítomné, ale zajistit jeho spolehlivé sbírání je
+skutečně výzva. Sbírání je typicky realizováno plíšky s kontakty na kola.
+Na základě odhadnuté spotřeby měřicího vozu (viz níže) byla vytvořena modelová
+zátěž a indikace, jak dobře je sbírání schopno tuto zátěž \uv{uživit}.
+
+Naměřená data bohužel byla naprosto tristní. Sbírání bylo realizováno skrze
+hrotová ložiska, protože při použití sbíracích kontaktů přiložených přímo na
+kolečko vzniká riziko, že tření mezi kontaktem a kolem bude tak vysoké, že kolo
+bude na kolejnici prokluzovat. A to je v kontextu faktu, že na tomto kole
+probíhá měření rychlosti, naprosto nemyslitelné. Zátěž byla živena cca $50 \%$
+času a to i veškerou snahou o přídavné kondenzátory a případnou přídavnou zátěž
+pro zlepšení kontaktu.
+
+Na základě těchto měření i autorových předchozích zkušeností se sbíráním
+do přípojných vozů se autor rozhodl, že tudy cesta nevede. Chvíli byla zvažována
+řešení zahrnující baterie i sbírání, ale tato řešení se ukázala jako příliš
+komplikovaná.
+
+Poslední alternativou tedy zůstala baterie. Velkou výzvou při použití baterie
+je vměstnat baterii do malého prostoru vozu a zároveň udržet co nejdelší výdrž.
+Minimální doba kalibrace na jedno nabití byla autorem stanovena na 3 hodiny.
+Výhodou baterie je navíc to, že není nutné vůz nijak upravovat (instalovat
+sběrací kontakty) a vůz je za plné funkčnosti zařízení bez problému sejmout
+z~kolejí a například tak vyzkoušet funkčnost senzoru.
+
+Skutečnou výzvou se tak stalo vyrobit elektroniku tak, aby její spotřeba
+byla vskutku malá (viz další kapitolu).
+
+\section{Mechanika}
+
 TODO
 
 \section{Platforma}
@@ -246,6 +287,10 @@ zařízení kolem cca $30\ mA$. Tato spotřeba byla uznána jako přijatelná.
 
 Pro konstrukci měřicího vozu byla tedy vybrána platforma ATmega s Bluetooth
 modulem HC-05.
+
+\section{Elektronika}
+
+TODO
 
 ---
 
