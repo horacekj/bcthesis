@@ -372,9 +372,107 @@ komentář.
 Kompletní materiály k elektronice jsou k dispozici pod licencí CC BY-SA 4.0 na
 serveru GitHub\ref{wsm-pcb}.
 
+\section{Princip měření}
+
+První pohled na měření rychlosti vozidla by mohl vycházet z analogie
+s tachometrem na kole: stačí měřit kolik pulzů za sekundu se na senzoru vytvoří
+a podle toho počítat rychlost. Ukazuje se však, že tato metoda měření dosahuje
+zejména při malých rychlostech nedostatečné přesnosti.
+
+Mnohem přesnějším způsobem měření je měřit periodu mezi jednotlivými pulzy ze
+senzoru. Zde vyvstává otázka, jestli bude procesor schopný měřit i rychlosti
+okolo modelových rychlostí cca $120\ km/h$.
+
+Uvažme tedy modelovou rychlost vozidla $v_m = 120\ km/h \doteq 33.3\ m/s$.
+Protože se jedná o rychlost v modelu, pro získání reálné rychlosti $v$ je třeba
+uvážit modelové měřítko $c$ (např. $c = 1:120$, $c = 1:87$).
+
+$$v = v_m \cdot c$$
+
+Aplikováním základních vztahů platících pro rovnoměrný pohyb po kružnici snadno
+dostáváme vztah
+
+$$v = \omega r = 2 \pi f r.$$
+
+Oba předchozí vtahy už stačí jen dát do rovnosti, vyjádřit výslednou frekvenci
+a tuto frekvenci vynásobit počtem děr na kole. Získáme tak nejvyšší frekvenci,
+kterou by měl vůz být schopen z přehledem měřit.
+
+Po dosazení nejhorších hodnot (měřítko $1:87$, průměr kola $8\ mm$, rychlost
+$120\ km/h$) dostáváme frekvenci přibližně $220 Hz$. To je ve srovnání
+s kmitočtem krystalu procesoru $f_{CLK} = 3.6864\ MHz$ zanedbatelná frekvence,
+kterou bude možné s přehledem měřit velice přesně.
+
+Naměřená hodnota bude zaznamenávána do paměti procesoru a jednou za pevný
+interval odeslána do počítače. Tento interval byl zvolen na $100\ ms$.
+
+Spolu s aktuální rychlostí je vhodné měřit také ujetou vzdálenost. A protože
+výpočet vzdálenosti z rychlosti až v počítači by mohl být vzhledem k vzorkování
+rychlosti po $100\ ms$ intervalech nepřesný, je vhodné výpočet ujeté dráhy
+implementovat přímo do měřicího vozu. Další měřenou hodnotou je tedy čítač
+pulzů senzoru. Hodnota čítače je 32-bitové číslo, které je do počítače zasíláno
+jednou za $500\ ms$. Příslušné přepočty na hodnoty v lidsky čitelných
+jednotkách jsou pak jak v případě rychlosti tak v případě ujeté vzdálenosti
+ponechány až na počítači, neb ten má spoustu výpočetních prostředků a
+nepotřebuje realizovat časově citlivé operace. Navíc odpadá problém
+s přenášením hodnot parametrů (průměr kola, měřítko) do měřicího vozu a
+komunikace tak může být pouze jednosměrná.
+
+Pro komunikaci s počítačem byl navrhnut vlastní binární protokol inspirovaný
+protokolem XpressNET\ref{xpressnet}. Jedná se o jednoduchý protokol, který
+v prvním bytu zprávy určí délku zprávy, poslední byte zprávy je pak její
+kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace o:
+
+\begin{enumerate}
+\item aktuální rychlosti,
+\item ujeté vzdálenosti a
+\item napětí na baterce.
+\end{enumerate}
+
+Detailní specifikace protokolu je k dispozici online\ref{wsm-protocol}.
+
 \section{Firmware}
 
-TODO
+Na poli Embedded System mezi programovacími jazyky dominují zejména jazyky
+C a C++ a to především díky přímočarému provázání příkazů jazyka přímo s
+výpočetními prostředky a periferiemi mikrokontroléru. Z relativní jednoduchosti
+úkonů, které bude procesor řešit, plyne také poměrně malá velikosti jeho
+programu. Spolu s faktem, že s programováním procesorů rodiny AVR
+v~programovacím jazyce C má autor práce zkušenosti, tento argument rozhodl pro
+programovací jazyk C.
+
+Firmware procesoru je -- podobně jako elektronika -- koncipován jako opensource
+projekt. Je dostupný\ref{wsm-fw} pod licencí \textit{Apache License v2.0}.
+
+Pro kompilaci je využit standardní kompilátor `avr-gcc`, pro nahrávání
+firmwaru do procesoru je využit opět standardní program `avrdude`. Deska
+plošných spojů je osazena programovacím konektorem, procesor je tedy možné
+programovat až v desce. To umožňuje snazší výrobu desek a především výrazně
+usnadňuje vývoj vozu (firmware je možno kdykoliv aktualizovat).
+
+Základní činnost procesoru lze shrnout do několika bodů.
+
+\begin{enumerate}
+\item Procesor pomocí přerušení a využití speciálního pinu \textit{ICP}
+měří periodu mezi jednotlivými pulzy na tomto pinu.
+
+\textit{ICP} je speciální mód časovače 1. V tomto režimu časovač čítá a při
+vzestupné hraně na pinu ICP velice rychle (hardwarově, bez generace přerušení)
+zkopíruje hodnotu časovače do registru procesoru. Poté je vyvoláno přerušení,
+ve kterém je obsloužena naměřená hodnota. Konkrétně je od této hodnoty odečten
+čas předchozího pulzu a tím pádem je určena perioda vstupního signálu. Perioda
+je uložena k budoucímu odeslání do počítače.
+
+\textit{Více o dalším zpracování dat naleznete v sekci \ref{namerena-data}.}
+
+\item V primární \texttt{while} smyčce programu se nacházejí časově nekritické
+operace (primární smyčka totiž může být kdykoliv přerušena přerušením). Ve
+smyčce se každých $100\ ms$ odesílá aktuální rychlost do počítače, dále se každých
+$500\ ms$ odesílá informace o ujeté vzdálenosti a každých $5\ s$ se měří napětí
+na baterce.
+
+\item Zbytek programu jsou pomocné funkce.
+\end{enumerate}
 
 ---
 
