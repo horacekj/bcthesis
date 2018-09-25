@@ -11,16 +11,16 @@ jaký programovací jazyk a případně framework zvolit. Zde měl autor poměrn
 jasný požadavek na programovací jazyk: jazyk musí mít poměrně silný typový
 systém tak, aby spousta kontrol proběhla již během překladu. Důvodem pro tento
 argument je fakt, že autor vyrábí aplikaci, které je tzv. \textit{kritická}.
-V kontextu této práce to znamená, že vlivem chyby v aplikaci může dojít
-k nemalým materiálním škodám na kalibrovaném modelu (ceny vybraných
+V~kontextu této práce to znamená, že vlivem chyby v~aplikaci může dojít
+k~nemalým materiálním škodám na kalibrovaném modelu (ceny vybraných
 malosériových modelů se pohybují až v~desítkách tisíc Kč).
 
 Dalším přirozeným požadavkem bylo, aby programovací jazyk měl rozumnou podporu
 pro komunikaci se sériovým portem, neboť toto rozhraní bude použito pro
-komunikaci s měřicím vozem a digitální centrálou DCC.
+komunikaci s~měřicím vozem a digitální centrálou DCC.
 
 Dalším kritériem při výběru programovacího jazyka byla jeho předchozí znalost
-autorem práce. Zejména u kritických aplikací je totiž nanejvýš důležité, aby
+autorem práce. Zejména u~kritických aplikací je totiž nanejvýš důležité, aby
 programátor vědět, co dělá, když píše kód.
 
 Při rozmýšlení nad technologií aplikace bylo rozhodnuto, že program by měl
@@ -28,31 +28,31 @@ mít grafické uživatelské rozhraní, neboť je nanejvýš vhodné zobrazovat 
 aktuální průběh kalibrace a neboť jsou běžní uživatelé na GUI aplikace zvyklí.
 
 Zásadní je pak otázka typu aplikace. Autor uvažovat aplikace desktopové,
-mobilní, webové, dokonce i embedded! U embedded aplikací je nevýhoda, že
-obsluha s aplikací typicky nemůže příliš interagovat, u mobilních aplikací
-je v kontextu této práce omezující zejména zobrazovací plocha zařízení, na
+mobilní, webové, dokonce i embedded! U~embedded aplikací je nevýhoda, že
+obsluha s~aplikací typicky nemůže příliš interagovat, u~mobilních aplikací
+je v~kontextu této práce omezující zejména zobrazovací plocha zařízení, na
 kterou se jednoduše nevejde tolik dat, kolik by aplikace chtěla zobrazovat.
 Navíc vývoj pro jiné zařízení, než na kterém kód píšete, vždy přináší nějakou
 režii navíc.
 
 Výhodou webové aplikace by byla snadná přenositelnost na jiné počítače,
-aplikace by dokonce mohla být přístupná i z mobilního zařízení. Bohužel, proti
-tomuto formátu aplikace hovoří fakt, že autor práce nemá s webovými aplikacemi
-dostatečné zkušenosti a už vůbec si netroufá v nich psát kritický kód.
-Oproti desktopovým aplikacím jsou interaktivní webové aplikace navíc o něco
-složitější (zejména co se týče předávání signálů z GUI).
+aplikace by dokonce mohla být přístupná i z~mobilního zařízení. Bohužel, proti
+tomuto formátu aplikace hovoří fakt, že autor práce nemá s~webovými aplikacemi
+dostatečné zkušenosti a už vůbec si netroufá v~nich psát kritický kód.
+Oproti desktopovým aplikacím jsou interaktivní webové aplikace navíc o~něco
+složitější (zejména co se týče předávání signálů z~GUI).
 
-Další možností pak byly desktopové aplikace. Vzhledem k požadavkům uvedeným
-výše a k faktu, že se jedná už o trochu rozsáhlejší projekt, jako nejvhodnější
-se autorovi jevil jazyk \texttt{C++} s použitím frameworku \texttt{Qt}.
+Další možností pak byly desktopové aplikace. Vzhledem k~požadavkům uvedeným
+výše a k~faktu, že se jedná už o~trochu rozsáhlejší projekt, jako nejvhodnější
+se autorovi jevil jazyk \texttt{C++} s~použitím frameworku \texttt{Qt}.
 Argumentem pro tento framework byly dobré osobní reference, které na
 \texttt{Qt} autor práce dostal os kolegů. Ukázalo se také, že Qt poskytují
 nejde výbornou multiplatformní podporu pro GUI, ale také stejnou
 multiplatformní podporu pro sériový port. Bylo tedy rozhodnuto, že výsledná
-aplikace bude psána v programovacím jazyce \texttt{C++} (konkrétně
+aplikace bude psána v~programovacím jazyce \texttt{C++} (konkrétně
 \texttt{C++14}) za použití frameworku \texttt{Qt} a bude multiplatformní
 (minimálně mezi OS \texttt{Window} a \texttt{Linux}). Důvodem pro
-multiplatformnost je především autorova záliba v Linuxu a touha udělat aplikaci
+multiplatformnost je především autorova záliba v~Linuxu a touha udělat aplikaci
 dostupnou i pro běžné smrtelníky.
 
 \section{WSM Speed Reader}
@@ -65,7 +65,7 @@ dat. Aplikace se skládá z~jednoho okna a je především typu
 
 TODO figure: wsm-speed-reader-gui
 
-Aplikace se připojuje k sériovému portu, ze zadaných parametrů vypočítává
+Aplikace se připojuje k~sériovému portu, ze zadaných parametrů vypočítává
 rychlost a ujetou vzdálenost vozidla a tyto údaje zobrazuje. Umožňuje ukládání
 vyčtených dat do souboru (především pro vývoj) a ukládání nastavení aplikace
 do konfiguračního souboru. Aplikace je volně dostupná pod licencí Apache
