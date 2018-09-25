@@ -1,10 +1,12 @@
 Pro potřeby této práce byly vytvořeny 2 aplikace. První aplikace zobrazuje je
 demonstrační aplikaci k měřicímu vozu, tato aplikace pouze zobrazuje naměřená
-data. Drhá aplikace je o mnoho komplexnější a řeší přímo problém automatické
+data. Druhá aplikace je o mnoho komplexnější a řeší přímo problém automatické
 kalibrace.
 
-Zásadní otázkou, kterou je třeba zodpovědět před progmraováním aplikace, je
-jaký programovací jazyk a případně gramework zvolit. Zde měl autor poměrně
+\section{Volba nástrojů}
+
+Zásadní otázkou, kterou je třeba zodpovědět před programováním aplikace, je
+jaký programovací jazyk a případně framework zvolit. Zde měl autor poměrně
 jasný požadavek na programovací jazyk: jazyk musí mít poměrně silný typový
 systém tak, aby spousta kontrol proběhla již během překladu. Důvodem pro tento
 argument je fakt, že autor vyrábí aplikaci, které je tzv. \textit{kritická}.
@@ -27,9 +29,9 @@ aktuální průběh kalibrace a neboť jsou běžní uživatelé na GUI aplikace
 Zásadní je pak otázka typu aplikace. Autor uvažovat aplikace desktopové,
 mobilní, webové, dokonce i embedded! U embedded aplikací je nevýhoda, že
 obsluha s aplikací typicky nemůže příliš interagovat, u mobilních aplikací
-je v kontexu této práce omezující zejména zobrazovací plocha zařízení, na
+je v kontextu této práce omezující zejména zobrazovací plocha zařízení, na
 kterou se jednoduše nevejde tolik dat, kolik by aplikace chtěla zobrazovat.
-Navíc vývoj pro jiné zařízení, než na kterém kód píšete, vždy pináší nějakou
+Navíc vývoj pro jiné zařízení, než na kterém kód píšete, vždy přináší nějakou
 režii navíc.
 
 Výhodou webové aplikace by byla snadná přenositelnost na jiné počítače,
@@ -37,16 +39,34 @@ aplikace by dokonce mohla být přístupná i z mobilního zařízení. Bohužel
 tomuto formátu aplikace hovoří fakt, že autor práce nemá s webovými aplikacemi
 dostatečné zkušenosti a už vůbec si netroufá v nich psát kritický kód.
 Oproti desktopovým aplikacím jsou interaktivní webové aplikace navíc o něco
-složetější (zejména co se týče předávání signálů z GUI).
+složitější (zejména co se týče předávání signálů z GUI).
 
 Další možností pak byly desktopové aplikace. Vzhledem k požadavkům uvedeným
-výše a k faktu, že se jedná už o trochu rozsáhlější projekt, jako nejvhodnější
+výše a k faktu, že se jedná už o trochu rozsáhlejší projekt, jako nejvhodnější
 se autorovi jevil jazyk \texttt{C++} s použitím frameworku \texttt{Qt}.
 Argumentem pro tento framework byly dobré osobní reference, které na
 \texttt{Qt} autor práce dostal os kolegů. Ukázalo se také, že Qt poskytují
 nejde výbornou multiplatformní podporu pro GUI, ale také stejnou
 multiplatformní podporu pro sériový port. Bylo tedy rozhodnuto, že výsledná
-aplikace bude psána v programovacím jazyce \texttt{C++} za použití frameworku
-\texttt{Qt} a bude multiplatformní (minimálně mezi OS \texttt{Window} a
-\texttt{Linux}). Důvodem pro multiplatformnost je především autorova záliba
-v Linuxu a touha udělat aplikaci dostupnou i pro běžné smrtelníky.
+aplikace bude psána v programovacím jazyce \texttt{C++} (konkrétně
+\texttt{C++14}) za použití frameworku \texttt{Qt} a bude multiplatformní
+(minimálně mezi OS \texttt{Window} a \texttt{Linux}). Důvodem pro
+multiplatformnost je především autorova záliba v Linuxu a touha udělat aplikaci
+dostupnou i pro běžné smrtelníky.
+
+\section{WSM Speed Reader}
+
+První aplikací je \textit{WSM Speed Reader} -- jednoduchý zobrazovač vyčtených
+dat. Aplikace se skládá z~jednoho okna a je především typu
+\textit{proof-of-concept}. GUI aplikace je zachyceno na obrázku
+\ref{wsm-speed-reader-gui}.
+
+TODO figure: wsm-speed-reader-gui
+
+Aplikace se připojuje k sériovému portu, ze zadaných parametrů vypočítává
+rychlost a ujetou vzdálenost vozidla a tyto údaje zobrazuje. Umožňuje ukládání
+vyčtených dat do souboru (především pro vývoj) a ukládání nastavení aplikace
+do konfiguračního souboru. Aplikace je volně dostupná pod licencí Apache
+License v2.0\ref{wsm-speed-reader}.
+
+\section{Automatic Calibration}
