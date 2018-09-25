@@ -6,6 +6,7 @@ V~kontextu této kapitoly si autor dovoluje stručně připomenout Požadavky
 na řešení (TODO: link chapter 2).
 
 \section{Umístění senzoru}
+\label{sec:wsm-senzor-umisteni}
 
 Uvědomme si nejprve, kam je a není možno senzor umístit. Určitě platí, že
 senzor není možné umístit do lokomotivy. Lokomotiva je totiž komerční produkt,
@@ -34,6 +35,7 @@ S uvážením výše uvedených argumentů se autor rozhodl vydat cestou
 \textit{měřicího vozu}.
 
 \section{Senzor}
+\label{sec:wsm-senzor}
 
 Hlavní součásti měřicího vozu je nesporně rychlostní senzor. Zvolená
 technologie senzoru má vliv na formát a přesnost měření, dále má vliv na
@@ -44,6 +46,7 @@ a servisovatelnost měřicího vozu.
 Autor uvážil několik dostupných technologií senzorů.
 
 \subsection{Magnetický senzor}
+\label{subsec:wsm-senzor-mag}
 
 První možnou technologií senzoru jsou tzv. \textit{magnetické poziční senzory}.
 Tyto senzoru fungují na bázi halových sond. Umí měřit úhel natočení objektu
@@ -66,6 +69,7 @@ Existují ale i senzory, které se montují přímo na osu rotujícího předmě
 železnici nepoužitelné.
 
 \subsection{Magnetický senzor \uv{cykloměřič}}
+\label{subsec:wsm-senzor-cyclo}
 
 Technologie tzv. \uv{cykloměřiče} byla historicky první metodou jak měřit
 rychlost modelové lokomotivy. Tento senzor jsem dokonce viděl v praxi, je
@@ -79,6 +83,7 @@ zejména při nižších rychlostech. Tato technologie senzoru se tedy pro potř
 této práce také nejeví jako nejvhodnější.
 
 \subsection{Optický senzor}
+\label{subsec:wsm-senzor-opto}
 
 Třetí uvažovanou technologií senzoru je optický senzor, který je každému
 důvěrně známý z optických myší. Tento senzor pracuje na principu snímání obrazu
@@ -123,6 +128,7 @@ těchto procesů.
 TODO: images, link ADNS sensor
 
 \subsection{Optozávora}
+\label{subsec:wsm-senzor-optozavora}
 
 Třetí uvažovaná technologie senzorů je inspirována návrhem od kolegy modeláře
 Petra Trávníka. Základem této technologie je paprskové kolo \ref{wheel} upevněné
@@ -154,6 +160,7 @@ byl dříve hojně montován d disketových mechanik. Dnes je senzor běžně do
 například na modulu k~Arduinu pod označením KY-010 (TODO link).
 
 \section{Přenos dat do PC}
+\label{sec:wsm-prenos-pc}
 
 Dle požadavků na měřicí technologii\ref{pozadavky} je nutné zajistit bezdrátový
 přenos dat ze senzoru. Primární technologií na straně příjemce je pro tento
@@ -173,6 +180,7 @@ S tímto vědomím přicházejí v úvahu 2 technologie.
 \end{enumerate}
 
 \section{Napájení}
+\label{sec:wsm-napajeni}
 
 Jedním z klíčových faktorů, který určoval výslednou podobu měřicího vozu, bylo
 napájení. Pro napájení elektroniky jsou 3 možnosti.
@@ -216,11 +224,13 @@ Skutečnou výzvou se tak stalo vyrobit elektroniku tak, aby její spotřeba
 byla vskutku malá (viz další kapitolu).
 
 \section{Platforma}
+\label{sec:wsm-platforma}
 
 Na základě požadavků vyplynuvších z předchozích kapitol (senzor, přenos dat)
 je nutné vybrat hardware, který bude umístěn do měřicího vozu.
 
 \subsection{ESP-32}
+\label{subsec:wsm-esp32}
 
 Prvním autorovým pokusem byl procesor ESP-32\ref{esp-32}, jehož největší
 výhodou je vestavěný Bluetooth a WiFi. Jedná se o poměrně výkonný procesor,
@@ -258,6 +268,7 @@ baterie, všechna navrhovaná řešení však byla příliš komplikovaná nebo
 nefungovala dobře. Po několika týdnech testování tak bylo ESP-32 zavrhnuto.
 
 \subsection{ATmega + HC-05}
+\label{subsec:wsm-atmega}
 
 Autorovou druhou volbou byla jemu dobře známá rodina procesorů s architekturou
 AVR názvu ATmega\ref{atmega}. Procesory rodiny ATmega jsou univerzální
@@ -287,6 +298,7 @@ Pro konstrukci měřicího vozu byla tedy vybrána platforma ATmega s Bluetooth
 modulem HC-05.
 
 \section{Mechanika}
+\label{sec:wsm-mech}
 
 Vůz se bude po mechanické skládat z několika základních částí.
 
@@ -317,6 +329,7 @@ nyní naměřenou hodnotu, tj. že spárovaný vůz vydržel reálně komunikova
 $y$ hodin. To je velice uspokojivé číslo.
 
 \section{Elektronika}
+\label{sec:wsm-ele}
 
 Základní požadavky na elektroniku měřicího vozu jsou:
 
@@ -373,6 +386,7 @@ Kompletní materiály k elektronice jsou k dispozici pod licencí CC BY-SA 4.0 n
 serveru GitHub\ref{wsm-pcb}.
 
 \section{Princip měření}
+\label{sec:wsm-mer-princip}
 
 První pohled na měření rychlosti vozidla by mohl vycházet z analogie
 s tachometrem na kole: stačí měřit kolik pulzů za sekundu se na senzoru vytvoří
@@ -432,6 +446,7 @@ kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace
 Detailní specifikace protokolu je k dispozici online\ref{wsm-protocol}.
 
 \section{Firmware}
+\label{sec:wsm-fw}
 
 Na poli Embedded System mezi programovacími jazyky dominují zejména jazyky
 C a C++ a to především díky přímočarému provázání příkazů jazyka přímo s
@@ -474,6 +489,7 @@ na baterce.
 \end{enumerate}
 
 \section{Naměřená data}
+\label{sec:wsm-data}
 
 Měřicí vůz se podařilo vyrobit dle návrhu popsaného výše, bylo tedy na čase
 přejít k prvním měřením.
@@ -592,6 +608,7 @@ proběhlo, autor ale znovu podotýká, že měření frekvence oscilace je za hr
 možností měřicího vozu.
 
 \subsection{Kompenzace chyb}
+\label{subsec:wsm-kompenzace}
 
 Z naměřených dat každopádně vyplývá, že v signálu se vyskytuje určitá
 periodická chyba, kterou by bylo vhodné kompenzovat. Za tímto účelem vznikl
