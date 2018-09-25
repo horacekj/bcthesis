@@ -443,6 +443,13 @@ kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace
 \item napětí na baterce.
 \end{enumerate}
 
+Zajímavým aspektem protokolu je fakt, že používá kódování \textit{7B8B} a
+nejvýznamnější bit nechává vždy nastavený na $1$. Důvodem této obskurní
+komplikace je fakt, že modul HC-05 interpretuje některé hodnoty bytů jako
+ASCII znaky a tyto znaky odmítne přenést (např. \texttt{0x04} \textit{End
+of transmission}). Proto byla použita pouze polovina rozsahu jednoho
+bytu, která neobsahuje kontrolní znaky, konkrétně interval $128$--$255$.
+
 Detailní specifikace protokolu je k~dispozici online\ref{wsm-protocol}.
 
 \section{Firmware}
