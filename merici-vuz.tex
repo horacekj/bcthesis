@@ -591,6 +591,28 @@ Jako drobnou poznámku autor uvádí, že z jím naměřených dat nejspíš (!)
 proběhlo, autor ale znovu podotýká, že měření frekvence oscilace je za hranou
 možností měřicího vozu.
 
+\subsection{Kompenzace chyb}
+
+Z naměřených dat každopádně vyplývá, že v signálu se vyskytuje určitá
+periodická chyba, kterou by bylo vhodné kompenzovat. Za tímto účelem vznikl
+návrh průměrovací metody \textit{kluzné okno}. Tato metoda je implementována
+v produkční verzi kalibračního vozu, princip její činnosti je následující:
+
+\begin{enumerate}
+\item Měř počty ticků a jejich periodu ve $100ms$ oknech.
+\item Každých $100\ ms$ přepni na nové okno.
+\item Data do počítače průměruj z posledních $10$ oken, tedy celkem z $1 s$.
+\end{enumerate}
+
+Tato metoda je poměrně známá, zajímavou věcí na implementaci v měřicím vozu
+jsou výše uvedené konstanty. $100\ ms$ proto, aby data v počítači byla viděl
+v rozumně \textit{reálném čase} a naopak příliš nezahlcovala komunikační kanál,
+$1\ s$ proto, že se jedná o latenci, kterou je uživatel ještě schopen tolerovat,
+navíc za tento čas obvykle nastane alespoň jedna perioda signálu (viz naměřená
+data v grafech).
+
+O přesné přepínání oken se v procesoru stará časovač 0.
+
 \end{enumerate}
 
 ---
