@@ -475,6 +475,124 @@ na baterce.
 
 \section{Naměřená data}
 
+Měřicí vůz se podařilo vyrobit dle návrhu popsaného výše, bylo tedy na čase
+přejít k prvním měřením.
+
+Měření rychlosti se ukázalo býti funkčním, vůz pravidelně posílal naměřená
+data, rychlost se pohybovala v odhadovaných intervalech. V naměřených datech
+byla ale viděl poměrně silná oscilace rychlosti, jejíž perioda byla řádově
+vyšší desetiny sekundy. Tato oscilace vykazovala amplitudu až modelových
+$5\ km/h$, což je pro účely kalibrace zcela nevyhovující.
+
+Autor tedy přistoupil ke zkoumání příčin této oscilace a snaze o jejich
+odstranění. Autor upravil firmware v procesoru tak, aby zasílal do počítače
+každou naměřenou hodnotu a v počítači tak šla vyhodnocovat surová data.
+
+Při jemnějším pohledu na pohybující se model si lze všimnout, že vůz ve spřáhlu
+s lokomotivou poměrně intenzivně pruží. To je určeno jak mechanickou konstrukcí
+spřáhla, tak tím, že vůz i lokomotiva obsahují kinematiku\footnote{\url{TODO}}.
+Autor tedy přistoupil k nahrazení spřáhla za spřáhlo pevné. Tento krok pomohl
+ke snížení amplitudy oscilace, avšak oscilace rychlosti byla nadále přítomná.
+
+Ukázalo se tedy, že pro efektivní proces kalibrace bude nutné na kalibrované
+lokomotivě vždy vyměnit spřáhlo. Toto zjištění je velice nepříjemné, neboť
+jakákoliv nadbytečná manipulace s kalibrovaným modelem zvyšuje šanci jeho
+poškození, pragmaticky vzato však autor usuzuje, že se jedná o přijatelné
+riziko. Dnešní lokomotivy jsou na výměnu spřáhla dobře uzpůsobené, spřáhla
+typicky bývají v šachtách a tak výměna spřáhla nepřináší velká rizika.
+
+Další zvažovanou možností bylo vůz tlačit přímo \uv{nárazník na nárazník},
+ukázalo se však, že pro pevné spojení s lokomotivou by bylo třeba vůz zatížit
+řádově o vyšší desítky gramů, což je zejména při omezených prostorech ve vozu
+nereálné. Další možností je přidat soupravu se zátěží ještě před vůz a tlačit
+tak celý vlak, tuto možnost však autor vyhodnotil jako nepraktickou (je třeba
+mít k dispozici další vozy, kalibrační vůz se tedy stává nekompaktní).
+
+Naměřená data však stále vykazovala oscilaci v řádu $5 \%$, konkrétně perioda
+vykazovala chybu například $2000 \pm 100$ (pro modelových $20\ km/h$) ticků
+časovače 0. Chyba se navíc měnila s naměřenou rychlostí a to tak, že při
+vyšších intervalech (menší rychlost) byla chyba větší než při kratších
+intervalech (větší rychlost).
+
+TODO graf speed-analog
+
+Graf \ref{speed-analog} zachycuje průběh periody v čase. Každý celek podobných
+rychlostí zachycuje rychlost vozidla při jednom napětí na jeho motoru. Rychlost
+je měřena na vozidlu z motorem připojeným přímo ke koleji (tzv. varianta
+\textit{analog}, bez dekodéru), aby se eliminoval případný vliv dekodéru.
+Čas na ose $x$ je čas příjmu signálu do počítače, vůči reálnému času zachycení
+signálu procesorem se tento čas může mírně lišit, avšak tento rozdíl by měl
+být skutečně nepatrný.
+
+Krom pravidelné oscilace rychlosti je na grafu občas patrný také globální
+\uv{obloukový} trend při některých rychlostech. Tento jen autor vysvětluje tím,
+že v průběhu měření této rychlosti vozidlo zrovna najíždělo do oblouku, takže
+se jeho rychlost díky odstředivé síle zmenšila. Tento jev je pro proces
+kalibrace parazitický, autor se jeho vlivu obával už při prvních teoretických
+návrzích vozu. Pokud se ukáže, že tento jen má výrazný vliv na přesnost
+kalibrace, přistoupí autor k selekci měřicích úseků na kalibračním okruhu.
+Stručně řečeno se bude měřit rychlost jen ve vybraných úsecích (typicky rovných
+úsecích), údaj o poloze vozidla bude založen na vyčítání ujeté vzdálenosti
+vozidla, viz \ref{chapter:merici-metoda}.
+
+Pro oscilaci rychlosti autor vytvořil několik hypotéz.
+
+\begin{enumerate}
+\item Oscilace je způsobena nepřesností měření.
+
+Oscilace naměřených intervalů je v řádu stovek ticků časovače procesoru, je tedy
+zřejmé, že se nemůže jednat o chybu měření v procesoru. Dalším zdrojem chyb
+může být mechanická nepřesnost v poloze děr v perforovaném kole, či chyba v
+umístění kola (natočené kolo).
+
+Pokud je tato hypotéza pravdivá, chyba v datech by se u měřicího vozu měla
+projevit, ať u je zdrojem pohybu vozu cokoliv. Autor tedy přistoupil k tomu,
+že do vozu prostě \uv{šťouchnul} a sledoval jeho rychlost během zpomalování.
+Tuto rychlost zobrazuje graf \ref{speed-zduch}.
+
+TODO: graf speed-zduch
+
+Všimněte si, že rozsah na ode $y$ je velice podobný rozsahu u grafu
+\ref{speed-analog}, přesto není oscilace na tomto grafu patrná.
+
+Osilace tedy není způsobena chybou v konstrukci měřicího vozu.
+
+\item Oscilace je způsobena BEMF regulátorem v dekodéru
+
+Jak bylo zmíněno v kapitole \ref{chapter:bemf}, každý dekodér v sobě má PID
+regulátor, který zajišťuje udržování rychlosti hnacího vozidla při rozdílném
+počtu zavěšených vozů, resp. při rozdílné zátěži. Jako každý PID regulátor,
+i tento regulátor nemusí být dobře nastaven, výrobce dekodéru ostatně často
+vůbec netuší, do jakého modelu bude jeho dekodér osazen.
+
+Tuto hypotézu však vyvrací fakt, že oscilace se projevuje i když měříme rychlost
+vozidla bez dekodéru -- v tzv. režimu analog, kdy připojujeme napětí v kolejích
+přímo na motor.
+
+\item Oscilace je způsobena charakteristikou motoru a mechanickými vlastnostmi
+modelu
+
+Zde se pouštíme už na poměrně tenký led. Z grafu \ref{graph:presny} je patrné,
+že měření frekvence oscilace je za hranou možností našeho měřicího vozu. Počet
+děr v perforovaném kolu je na přesné měření frekvence totiž příliš malý.
+
+TODO graph:presny
+
+Poslední autorovou hypotézou tedy zůstává to, že oscilace, kterou vidíme grafu,
+je přímým důsledkem postupné aktivace pólů motoru, střídy signálu do motoru,
+případně důsledkem nedokonalých převodů lokomotivy.
+
+Fakt, že amplituda oscilace je při nižších rychlostech vyšší lze vysvětlit tím,
+že vozidlo má při nižších rychlostech menší setrvačnost a tudíž se pulzní
+charakter regulace více projevuje.
+
+Jako drobnou poznámku autor uvádí, že z jím naměřených dat nejspíš (!) plyne,
+že perioda oscilace se liší u různých vozidel. Měření na různých vozidlech
+proběhlo, autor ale znovu podotýká, že měření frekvence oscilace je za hranou
+možností měřicího vozu.
+
+\end{enumerate}
+
 ---
 
 TODO:
