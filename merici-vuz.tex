@@ -3,7 +3,7 @@ rychlosti hnacího vozidla -- tzv. měřicího vozu. Tato kapitola popisuje
 a zdůvodňuje rozhodnutí, která autor při konstrukci senzoru zvolil.
 
 V~kontextu této kapitoly si autor dovoluje stručně připomenout Požadavky
-na řešení (TODO: link chapter 2).
+na řešení (kapitola \ref{chap:pozadavky}).
 
 \section{Umístění senzoru}
 \label{sec:wsm-senzor-umisteni}
@@ -21,7 +21,7 @@ To s sebou ale nese pořád tu nevýhodu, že je třeba mechanicky zasahovat do
 (poměrně drahé) lokomotivy.
 
 Další možností je umístit senzor mimo hnací vozidlo. Tento senzor může být
-umístěn na kolejiště staticky (podobně jako v \ref{senzor}) nebo může
+umístěn na kolejiště staticky (podobně jako v \ref{sec:det-static}) nebo může
 být součástí vagónu připojeného za lokomotivou. Statický senzor se jeví jako
 nevyhovující zejména proto, že neumožňuje provádění dokalibrace za skutečného
 provozu.
@@ -162,15 +162,15 @@ například na modulu k~Arduinu pod označením KY-010 (TODO link).
 \section{Přenos dat do PC}
 \label{sec:wsm-prenos-pc}
 
-Dle požadavků na měřicí technologii\ref{pozadavky} je nutné zajistit bezdrátový
-přenos dat ze senzoru. Primární technologií na straně příjemce je pro tento
-projekt počítač, pokud se však podaří vybrat takovou technologii, aby data
-mohla být přenášena například i na mobilní telefon či tablet, bude pro pro
-měřicí vůz jen výhodou. Autor se proto rozhodl vyhnout se proprietárním řešením
-pro bezdrátový přenos dat a cílit na technologie, které jsou běžně dostupné,
-ideálně přímo zabudované v dnešních počítačích. Dalším argumentem pro toto
-rozhodnutí je to, že nutnost pořizovat (natož stavět!) přijímač by zvyšoval
-jak finanční tak výrobní náročnost celého projektu.
+Dle požadavků na měřicí technologii (viz kapitolu \ref{chap:pozadavky}) je
+nutné zajistit bezdrátový přenos dat ze senzoru. Primární technologií na straně
+příjemce je pro tento projekt počítač, pokud se však podaří vybrat takovou
+technologii, aby data mohla být přenášena například i na mobilní telefon či
+tablet, bude pro pro měřicí vůz jen výhodou. Autor se proto rozhodl vyhnout se
+proprietárním řešením pro bezdrátový přenos dat a cílit na technologie, které
+jsou běžně dostupné, ideálně přímo zabudované v dnešních počítačích. Dalším
+argumentem pro toto rozhodnutí je to, že nutnost pořizovat (natož stavět!)
+přijímač by zvyšoval jak finanční tak výrobní náročnost celého projektu.
 
 S tímto vědomím přicházejí v úvahu 2 technologie.
 
@@ -478,7 +478,8 @@ ve kterém je obsloužena naměřená hodnota. Konkrétně je od této hodnoty o
 čas předchozího pulzu a tím pádem je určena perioda vstupního signálu. Perioda
 je uložena k budoucímu odeslání do počítače.
 
-\textit{Více o dalším zpracování dat naleznete v sekci \ref{namerena-data}.}
+\textit{Více o dalším zpracování dat naleznete v sekci
+\ref{subsec:wsm-kompenzace}.}
 
 \item V primární \texttt{while} smyčce programu se nacházejí časově nekritické
 operace (primární smyčka totiž může být kdykoliv přerušena přerušením). Ve
@@ -549,7 +550,7 @@ návrzích vozu. Pokud se ukáže, že tento jen má výrazný vliv na přesnost
 kalibrace, přistoupí autor k selekci měřicích úseků na kalibračním okruhu.
 Stručně řečeno se bude měřit rychlost jen ve vybraných úsecích (typicky rovných
 úsecích), údaj o poloze vozidla bude založen na vyčítání ujeté vzdálenosti
-vozidla, viz \ref{chapter:merici-metoda}.
+vozidla, viz sekci \ref{sec:wsm-mer-princip}.
 
 Pro oscilaci rychlosti autor vytvořil několik hypotéz.
 
@@ -575,7 +576,7 @@ Osilace tedy není způsobena chybou v konstrukci měřicího vozu.
 
 \item Oscilace je způsobena BEMF regulátorem v dekodéru
 
-Jak bylo zmíněno v kapitole \ref{chapter:bemf}, každý dekodér v sobě má PID
+Jak bylo zmíněno v kapitole \ref{sec:det-static}, každý dekodér v sobě má PID
 regulátor, který zajišťuje udržování rychlosti hnacího vozidla při rozdílném
 počtu zavěšených vozů, resp. při rozdílné zátěži. Jako každý PID regulátor,
 i tento regulátor nemusí být dobře nastaven, výrobce dekodéru ostatně často
