@@ -61,16 +61,16 @@ TODO
 \label{fig:magnetic-sensor}
 \end{figure}
 
-Výhodou tohoto měření je velice vysoká přesnost (řádově 10 bitů na jednu otáčku
--- TODO je to pravda?). Bohužel, při pohledu na obrázek
+Výhodou tohoto měření je velice vysoká přesnost (řádově 10 bitů na jednu
+otáčku). Bohužel, při pohledu na obrázek
 \ref{fig:magnetic-sensor} je velice těžko představitelné, jak umístit senzor na
 nápravu vagónu. Senzor by musel být umístěn z~boku vozu, což by výrazně
 snižovalo jeho stabilitu.
 
 Existují ale i senzory, které se montují přímo na osu rotujícího předmětu
-(TODO: link). Takové by pro náš účel byly nejvhodnější. Smutným faktem ale je,
-že tyto senzory vyžadují magnet o~tak velké velikosti, že jsou pro modelovou
-železnici nepoužitelné.
+\footnote{Například \url{TODO}}. Takové by pro náš účel byly nejvhodnější.
+Smutným faktem ale je, že tyto senzory vyžadují magnet o~tak velké velikosti,
+že jsou pro modelovou železnici nepoužitelné.
 
 \subsection{Magnetický senzor \uv{cykloměřič}}
 \label{subsec:wsm-senzor-cyclo}
@@ -102,9 +102,10 @@ pohybuje. Pražce jsou navíc velice dobře kontrastní vůči štěrku, který 
 nimi, porovnávání obrazů by tak mohlo být velice přesné (srovnejte s~pohybem
 optické myši po takřka uniformním povrchu stolu nebo podložky pod myš).
 
-Pro kalibrační vůz byl vybrán konkrétní senzor ADNS-3050. Kritériem výběru
-bylo to, že (1) senzor má výstup sériovou linkou a že (2) senzor zvládá měřit
-vysoké rychlosti (vagón se typicky pohybuje o~něco rychleji než myš).
+Pro kalibrační vůz byl vybrán konkrétní senzor ADNS-3050 \cite{adns-3050}.
+Kritériem výběru bylo to, že (1) senzor má výstup sériovou linkou a že (2)
+senzor zvládá měřit vysoké rychlosti (vagón se typicky pohybuje o~něco rychleji
+než myš).
 
 Autor nakoupil senzory, osadil je na desku plošných spojů a začal testovat
 přesnost měření pomocí jednoduchého zapojení s~vývojovým kitem Arduino. Velikou
@@ -128,8 +129,6 @@ Padlo tedy rozhodnutí tuto technologii opustit. Autor by rád zdůraznil, že
 jednou z~hlavních motivací pro opuštění této technologie byla přílišná
 komplexnost toho, co se děje v~senzoru, a neschopnost ovlivňování a debugování
 těchto procesů.
-
-TODO: images, link ADNS sensor
 
 \subsection{Optozávora}
 \label{subsec:wsm-senzor-optozavora}
@@ -162,7 +161,9 @@ Výkres kola je zobrazen v příloze \ref{fig:final-wheel}.
 
 Nemalým problémem pak bylo sehnat dostatečně malou optozávoru. Běžné optozávory
 dostupné v~českých obchodech dosahují rozměrů cca $15\times6\times10\ mm$
-(TODO: cite). To je pro účely vozu v~měřítku 1:120 zcela nepřijatelné. Po
+\footnote{Viz například
+\url{https://www.gme.cz/optozavory-reflexni-optocleny}}. To je pro účely vozu
+v~měřítku 1:120 zcela nepřijatelné. Po
 průzkumu možných alternativ byl nakonec vybrán senzor
 GP1S23\cite{gp1s23:datasheet}, který byl dříve hojně montován do disketových
 mechanik. Dnes je senzor běžně dostupný například na modulu k~Arduinu pod
@@ -629,8 +630,6 @@ patrné, že měření frekvence oscilace je za hranou možností našeho měři
 vozu. Počet děr v~perforovaném kolu je na přesné měření frekvence totiž příliš
 malý.
 
-TODO graph:presny
-
 Poslední autorovou hypotézou tedy zůstává to, že oscilace, kterou vidíme grafu,
 je přímým důsledkem postupné aktivace pólů motoru, střídy signálu do motoru,
 případně důsledkem nedokonalých převodů lokomotivy.
@@ -643,6 +642,8 @@ Jako drobnou poznámku autor uvádí, že z~jím naměřených dat nejspíš (!)
 že perioda oscilace se liší u~různých vozidel. Měření na různých vozidlech
 proběhlo, autor ale znovu podotýká, že měření frekvence oscilace je za hranou
 možností měřicího vozu.
+
+\end{enumerate}
 
 \subsection{Kompenzace chyb}
 \label{subsec:wsm-kompenzace}
@@ -666,8 +667,6 @@ navíc za tento čas obvykle nastane alespoň jedna perioda signálu (viz namě�
 data v~grafech).
 
 O~přesné přepínání oken se v~procesoru stará časovač 0.
-
-\end{enumerate}
 
 ---
 
