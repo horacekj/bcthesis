@@ -53,13 +53,17 @@ Tyto senzoru fungují na bázi halových sond. Umí měřit úhel natočení obj
 vzhledem k~senzoru. Jejich primárním účelem je měřit natočení nejrůznějších
 ramen, či prvků ovládaných např. servomotory, opakovaným měřením natočení lze
 ale dosáhnout velice přesného měření rychlosti. Princip těchto senzorů
-dobře ilustruje obrázek \ref{fig-magnetic-sensor}.
+dobře ilustruje obrázek \ref{fig:magnetic-sensor}.
 
-TODO obrázek.
+\begin{figure}[h]
+TODO
+\caption{Ukázka principu činnosti magnetického senzoru}
+\label{fig:magnetic-sensor}
+\end{figure}
 
 Výhodou tohoto měření je velice vysoká přesnost (řádově 10 bitů na jednu otáčku
 -- TODO je to pravda?). Bohužel, při pohledu na obrázek
-\ref{fig-magnetic-sensor} je velice těžko představitelné, jak umístit senzor na
+\ref{fig:magnetic-sensor} je velice těžko představitelné, jak umístit senzor na
 nápravu vagónu. Senzor by musel být umístěn z~boku vozu, což by výrazně
 snižovalo jeho stabilitu.
 
@@ -130,14 +134,20 @@ TODO: images, link ADNS sensor
 \subsection{Optozávora}
 \label{subsec:wsm-senzor-optozavora}
 
+\begin{figure}[h]
+TODO
+\caption{Příklad paprskového kola}
+\label{fig:wheel}
+\end{figure}
+
 Třetí uvažovaná technologie senzorů je inspirována návrhem od kolegy modeláře
-Petra Trávníka. Základem této technologie je paprskové kolo \ref{wheel} upevněné
-na nápravě měřicího vozu. Paprskové kolo se otáčí spolu s~nápravou, k~vozu je
-pak připevněna optozávora, která snímá průchod jednotlivých paprsků. Klíčovým
-faktorem pro použitelnost této technologie jsou zejména technické možnosti
-výroby dostatečného množství paprsků při zajištění rovnoměrnosti rozestupu
-paprsků a malé velikosti kola. Průměr kola by totiž neměl přesáhnout $6\ mm$
-(měřítko TT, 1:120).
+Petra Trávníka. Základem této technologie je paprskové kolo \ref{fig:wheel}
+upevněné na nápravě měřicího vozu. Paprskové kolo se otáčí spolu s~nápravou,
+k~vozu je pak připevněna optozávora, která snímá průchod jednotlivých paprsků.
+Klíčovým faktorem pro použitelnost této technologie jsou zejména technické
+možnosti výroby dostatečného množství paprsků při zajištění rovnoměrnosti
+rozestupu paprsků a malé velikosti kola. Průměr kola by totiž neměl přesáhnout
+$6\ mm$ (měřítko TT, 1:120).
 
 Ze všech uvažovaných technologií autor nakonec zvolil právě technologii
 paprskového kola a optozávory.
@@ -148,16 +158,15 @@ paprsků kolo vyrobit pouze dírkované. Jako vhodný kompromis bylo stanoveno
 8 dírek na kolo, přičemž chyba v~umístění jedné dírky byla výrobou stanovena na
 nejvýše $0.05\ mm$ (TODO: ověřit). To jsou poměrně dobré výsledky.
 
-Výkres kola je zobrazen na obrázku \ref{wheel}.
-
-TODO: figure
+Výkres kola je zobrazen v příloze \ref{fig:final-wheel}.
 
 Nemalým problémem pak bylo sehnat dostatečně malou optozávoru. Běžné optozávory
 dostupné v~českých obchodech dosahují rozměrů cca $15\times6\times10\ mm$
 (TODO: cite). To je pro účely vozu v~měřítku 1:120 zcela nepřijatelné. Po
-průzkumu možných alternativ byl nakonec vybrán senzor GP1S23 (TODO link), který
-byl dříve hojně montován d disketových mechanik. Dnes je senzor běžně dostupný
-například na modulu k~Arduinu pod označením KY-010 (TODO link).
+průzkumu možných alternativ byl nakonec vybrán senzor
+GP1S23\cite{gp1s23:datasheet}, který byl dříve hojně montován do disketových
+mechanik. Dnes je senzor běžně dostupný například na modulu k~Arduinu pod
+označením KY-010 \cite{ky-010}.
 
 \section{Přenos dat do PC}
 \label{sec:wsm-prenos-pc}
@@ -232,10 +241,10 @@ je nutné vybrat hardware, který bude umístěn do měřicího vozu.
 \subsection{ESP-32}
 \label{subsec:wsm-esp32}
 
-Prvním autorovým pokusem byl procesor ESP-32\ref{esp-32}, jehož největší
+Prvním autorovým pokusem byl procesor ESP-32 \cite{esp-32}, jehož největší
 výhodou je vestavěný Bluetooth a WiFi. Jedná se o~poměrně výkonný procesor,
 který lze taktovat až na 240 MHz a to dokonce na dvou jádrech!
-\ref{esp-32-datasheet}
+\cite{esp-32:datasheet}
 
 Autor pořídil ESP-32 vývojový kit a začal zkoušet možnosti komunikace. Jako
 primární komunikační kanál byl vybrán Bluetooth, jelikož vyžaduje oproti
@@ -246,7 +255,7 @@ který přijímá signál z~měřícího vozu, být zároveň připojený do sí
 pomocí WiFi. A~to je nanejvýš nepraktické.
 
 Bluetooth na ESP-32 fungoval zdárně. Na ESP se podařilo aktivovat Bluetooth SPP
-profil \ref{spp}, takže se zařízení poměrně snadno spárovalo s~počítačem a
+profil \cite{spp:specs}, takže se zařízení poměrně snadno spárovalo s~počítačem a
 tvářilo se jako sériová linka. Profil SPP byl vybrán z~toho důvodu, že má
 poměrně dobrou implementaci na celé škále operačních systémů a vytváří dobrou
 abstrakci pro použití z~jakéhokoliv programu. Téměř na každém operačním systému
@@ -271,9 +280,9 @@ nefungovala dobře. Po několika týdnech testování tak bylo ESP-32 zavrhnuto.
 \label{subsec:wsm-atmega}
 
 Autorovou druhou volbou byla jemu dobře známá rodina procesorů s~architekturou
-AVR názvu ATmega\ref{atmega}. Procesory rodiny ATmega jsou univerzální
+AVR názvu ATmega \cite{avr}. Procesory rodiny ATmega jsou univerzální
 nízkopříkonové procesory, které jsou základem například vývojové desky Arduino
-\ref{arduino}. Volba na tuto rodinu procesorů padla také z~toho důvodu, že
+\cite{arduino}. Volba na tuto rodinu procesorů padla také z~toho důvodu, že
 s~jejím programováním měl autor předchozí zkušenosti.
 
 Procesory ATmega v~sobě ale bohužel nezahrnují modul pro bezdrátovou komunikaci.
@@ -290,7 +299,7 @@ Autor experimentálně změřit, že spotřeba nespárovaného HC-05 modulu je
 $TODO\ mA$, spotřeba spárovaného modulu je $TODO\ mA$. To jsou oproti ESP-32
 výrazně příjemnější čísla. Autorovi se navíc podařilo zajistit spolehlivou
 funkci senzoru již při proudu $10\ mA$, což je polovina proudu, na který
-je senzor dimenzován\ref{gp1s23-datasheet}. S~přihlédnutím ke spotřebě procesoru
+je senzor dimenzován \cite{gp1s23:datasheet}. S~přihlédnutím ke spotřebě procesoru
 a drobných součástí jako LE diod by se měla pohybovat celková spotřeba celého
 zařízení kolem cca $30\ mA$. Tato spotřeba byla uznána jako přijatelná.
 
@@ -310,15 +319,19 @@ Vůz se bude po mechanické skládat z~několika základních částí.
 \item Komunikační modul HC-05.
 \end{enumerate}
 
-Jako vůz byl použit běžně dostupný vůz měřítka TT typu Nd\ref{vuz-nd}. Na
+Jako vůz byl použit běžně dostupný vůz měřítka TT typu Nd \cite{vuz-nd}. Na
 jedné straně bylo extrahováno spřáhlo a místo něj byla k~nápravě umístěna
 optozávora. Optozávora je na vlastní miniaturní DPS, k~vozu je DPS mechanicky
 připevněna lepidlem. Vůz Nd je otevřený vůz, autor si (minimálně v~prototypu)
 neklade cíl měřicí elektroniku modelově maskovat. Na plošině vozu je umístěna
 baterie, na ní je řídicí elektronika a na ní je komunikační modul. Celou
-situaci přehledně zobrazuje nákres \ref{vuz-nakres}
+situaci přehledně zobrazuje nákres \ref{fig:vuz-nakres}
 
-TODO: vuz-nakres
+\begin{figure}[h]
+TODO
+\caption{Nákres mechaniky měřicího vozu}
+\label{fig:vuz-nakres}
+\end{figure}
 
 Rozměr plošiny vozu je $20\times80\ mm$. což umožnilo instalaci LiPol baterie
 o~kapacitě $500 mAh$ (napětí $3.7\ V$). Teoretická výdrž vozu je tedy cca $x$
@@ -349,26 +362,26 @@ elektroniky a nabíjet jí externě. Tím se výrazně sníží riziko omylného
 přepólování, nesprávného zacházení s~baterií ze strany uživatele a mechanického
 poškození vozu vlivem časté manipulace s~kabely a konektory.
 
-Schéma desky plošných spojů je k~nahlédnutí v~příloze \ref{wsm-scheme}. Nyní
+Schéma desky plošných spojů je k~nahlédnutí v~příloze \ref{fig:wsm-sch}. Nyní
 krátce popišme jednotlivé prvky schématu a jak přispívají k~naplnění požadavků.
 
-Největší součástkou na desce je procesor ATmega328p. Tento konkrétní typ byl
-vybrán, protože je poměrně moderní a je dnes montován do vývojových desek
-Arduino, tudíž je jeho cena díky vysokému počtu produkovaných kusů malá.
-Tento procesor se stará o~všechnu logiku na desce. Signál z~optozávory je
-připojen na pin ICP, který je speciálně určen k~tomu, aby přesně a rychle měřil
-periodu vstupního signálu. Procesor dále měří napětí na baterce, které je ale
-nejprve nutné srazit napěťovým děličem. Při vývoji hardwaru byla v~jednu chvíli
-překážkou přesnost napěťové reference, nakonec ale byla zvolena jako napěťová
-reference přímo napájecí napětí procesoru, které by mělo kolísat nejvýše $\pm 2\ \%$
-\ref{ldo-datasheet}.
+Největší součástkou na desce je procesor ATmega328p \cite{atmega328p:datasheet}.
+Tento konkrétní typ byl vybrán, protože je poměrně moderní a je dnes montován
+do vývojových desek Arduino, tudíž je jeho cena díky vysokému počtu
+produkovaných kusů malá.  Tento procesor se stará o~všechnu logiku na desce.
+Signál z~optozávory je připojen na pin ICP, který je speciálně určen k~tomu,
+aby přesně a rychle měřil periodu vstupního signálu. Procesor dále měří napětí
+na baterce, které je ale nejprve nutné srazit napěťovým děličem. Při vývoji
+hardwaru byla v~jednu chvíli překážkou přesnost napěťové reference, nakonec ale
+byla zvolena jako napěťová reference přímo napájecí napětí procesoru, které by
+mělo kolísat nejvýše $\pm 2\ \%$ \cite{ldo:datasheet}.
 
 Součástí schématu je dále nabíjecí obvod \textit{MCP73831}, který byl vybrán
 zejména pro jeho velice malé rozměry.
 
 Na tímto obvodem je ochrana proti přepólování (tranzistor \textit{T1A}) a dále
 zapínací a vypínací obvod celé elektroniky. Tento obvod je inspirován projektem
-RB3201\ref{rb3201} od kolegů z~Robotiky Brno\ref{roboticsbrno}.
+RB3201 \cite{rb3201} od kolegů z~Robotiky Brno \cite{roboticsbrno}.
 
 Napětí pro procesor je vytvářeno obvodem LDO\footnote{Low-dropout regulator}
 (obvod \textit{IC3}), procesor pracuje na napětí $3.3\ V$. Tato konstrukce
@@ -383,7 +396,7 @@ plošky a LE diody. Autor věří, že tyto komponenty nepotřebují žádný da
 komentář.
 
 Kompletní materiály k~elektronice jsou k~dispozici pod licencí CC BY-SA 4.0 na
-serveru GitHub\ref{wsm-pcb}.
+serveru GitHub \cite{wsm-pcb}.
 
 \section{Princip měření}
 \label{sec:wsm-mer-princip}
@@ -433,7 +446,7 @@ s~přenášením hodnot parametrů (průměr kola, měřítko) do měřicího vo
 komunikace tak může být pouze jednosměrná.
 
 Pro komunikaci s~počítačem byl navrhnut vlastní binární protokol inspirovaný
-protokolem XpressNET\ref{xpressnet}. Jedná se o~jednoduchý protokol, který
+protokolem XpressNET \cite{xpressnet-specs}. Jedná se o~jednoduchý protokol, který
 v~prvním bytu zprávy určí délku zprávy, poslední byte zprávy je pak její
 kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace o:
 
@@ -450,7 +463,8 @@ ASCII znaky a tyto znaky odmítne přenést (např. \texttt{0x04} \textit{End
 of transmission}). Proto byla použita pouze polovina rozsahu jednoho
 bytu, která neobsahuje kontrolní znaky, konkrétně interval $128$--$255$.
 
-Detailní specifikace protokolu je k~dispozici online\ref{wsm-protocol}.
+Detailní specifikace protokolu je k~dispozici online
+\footnote{\url{https://github.com/kmzbrnoI/wsm-fw/blob/master/protocol.md}}.
 
 \section{Firmware}
 \label{sec:wsm-fw}
@@ -464,7 +478,7 @@ v~programovacím jazyce C má autor práce zkušenosti, tento argument rozhodl p
 programovací jazyk C.
 
 Firmware procesoru je -- podobně jako elektronika -- koncipován jako opensource
-projekt. Je dostupný\ref{wsm-fw} pod licencí \textit{Apache License v2.0}.
+projekt. Je dostupný \cite{wsm-fw} pod licencí \textit{Apache License v2.0}.
 
 Pro kompilaci je využit standardní kompilátor \texttt{avr-gcc}, pro nahrávání
 firmwaru do procesoru je využit opět standardní program \texttt{avrdude}. Deska
@@ -538,15 +552,19 @@ vykazovala chybu například $2000 \pm 100$ (pro modelových $20\ km/h$) ticků
 vyšších intervalech (menší rychlost) byla chyba větší než při kratších
 intervalech (větší rychlost).
 
-TODO graf speed-analog
+\begin{figure}[h]
+TODO
+\caption{Průběh naměřené periody v~čase v analogovém režimu}
+\label{fig:speed-analog}
+\end{figure}
 
-Graf \ref{speed-analog} zachycuje průběh periody v~čase. Každý celek podobných
-rychlostí zachycuje rychlost vozidla při jednom napětí na jeho motoru. Rychlost
-je měřena na vozidlu z~motorem připojeným přímo ke koleji (tzv. varianta
-\textit{analog}, bez dekodéru), aby se eliminoval případný vliv dekodéru.
-Čas na ose $x$ je čas příjmu signálu do počítače, vůči reálnému času zachycení
-signálu procesorem se tento čas může mírně lišit, avšak tento rozdíl by měl
-být skutečně nepatrný.
+Graf \ref{fig:speed-analog} zachycuje průběh periody v~čase. Každý celek
+podobných rychlostí zachycuje rychlost vozidla při jednom napětí na jeho
+motoru. Rychlost je měřena na vozidlu z~motorem připojeným přímo ke koleji
+(tzv. varianta \textit{analog}, bez dekodéru), aby se eliminoval případný vliv
+dekodéru.  Čas na ose $x$ je čas příjmu signálu do počítače, vůči reálnému času
+zachycení signálu procesorem se tento čas může mírně lišit, avšak tento rozdíl
+by měl být skutečně nepatrný.
 
 Krom pravidelné oscilace rychlosti je na grafu občas patrný také globální
 \uv{obloukový} trend při některých rychlostech. Tento jen autor vysvětluje tím,
@@ -572,12 +590,16 @@ v~umístění kola (natočené kolo).
 Pokud je tato hypotéza pravdivá, chyba v~datech by se u~měřicího vozu měla
 projevit, ať u~je zdrojem pohybu vozu cokoliv. Autor tedy přistoupil k~tomu,
 že do vozu prostě \uv{šťouchnul} a sledoval jeho rychlost během zpomalování.
-Tuto rychlost zobrazuje graf \ref{speed-zduch}.
+Tuto rychlost zobrazuje graf \ref{fig:speed-zduch}.
 
-TODO: graf speed-zduch
+\begin{figure}[h]
+TODO
+\caption{Průběh naměřené periody rovnoměrně zpomaleného pohybu}
+\label{fig:speed-zduch}
+\end{figure}
 
 Všimněte si, že rozsah na ode $y$ je velice podobný rozsahu u~grafu
-\ref{speed-analog}, přesto není oscilace na tomto grafu patrná.
+\ref{fig:speed-analog}, přesto není oscilace na tomto grafu patrná.
 
 Osilace tedy není způsobena chybou v~konstrukci měřicího vozu.
 
@@ -596,9 +618,16 @@ přímo na motor.
 \item Oscilace je způsobena charakteristikou motoru a mechanickými vlastnostmi
 modelu
 
-Zde se pouštíme už na poměrně tenký led. Z~grafu \ref{graph:presny} je patrné,
-že měření frekvence oscilace je za hranou možností našeho měřicího vozu. Počet
-děr v~perforovaném kolu je na přesné měření frekvence totiž příliš malý.
+\begin{figure}[h]
+TODO
+\caption{Detailnější pohled na oscilace rychlosti}
+\label{fig:speed-presny}
+\end{figure}
+
+Zde se pouštíme už na poměrně tenký led. Z~grafu \ref{fig:speed-presny} je
+patrné, že měření frekvence oscilace je za hranou možností našeho měřicího
+vozu. Počet děr v~perforovaném kolu je na přesné měření frekvence totiž příliš
+malý.
 
 TODO graph:presny
 
