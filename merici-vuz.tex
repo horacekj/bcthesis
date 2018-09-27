@@ -185,10 +185,10 @@ přijímač by zvyšoval jak finanční tak výrobní náročnost celého projek
 
 S~tímto vědomím přicházejí v~úvahu 2 technologie.
 
-\begin{enumerate}
+\begin{compactenum}
 \item Wi-Fi
 \item Bluetooth
-\end{enumerate}
+\end{compactenum}
 
 \section{Napájení}
 \label{sec:wsm-napajeni}
@@ -196,11 +196,11 @@ S~tímto vědomím přicházejí v~úvahu 2 technologie.
 Jedním z~klíčových faktorů, který určoval výslednou podobu měřicího vozu, bylo
 napájení. Pro napájení elektroniky jsou 3 možnosti.
 
-\begin{enumerate}
+\begin{compactenum}
 \item Napájení z~kolejí.
 \item Napájení z~baterie.
 \item Kombinace předchozích dvou (místo baterie lze případně použít kondenzátory).
-\end{enumerate}
+\end{compactenum}
 
 Výhody a nevýhody jsou poměrně jasné: baterie má omezenou výdrž, napájení
 z~kolejí je jistota. Na tomto místě je ale třeba zmínit, že napětí v~kolejích
@@ -313,13 +313,13 @@ modulem HC-05.
 
 Vůz se bude po mechanické skládat z~několika základních částí.
 
-\begin{enumerate}
+\begin{compactenum}
 \item Perforované kolo připevněné na nápravě.
 \item Optozávora připevněná k~senzoru.
 \item Baterie.
 \item Deska plošných spojů s~hlavní elektronikou.
 \item Komunikační modul HC-05.
-\end{enumerate}
+\end{compactenum}
 
 Jako vůz byl použit běžně dostupný vůz měřítka TT typu Nd \cite{vuz-nd}. Na
 jedné straně bylo extrahováno spřáhlo a místo něj byla k~nápravě umístěna
@@ -348,7 +348,7 @@ $y$ hodin. To je velice uspokojivé číslo.
 
 Základní požadavky na elektroniku měřicího vozu jsou:
 
-\begin{enumerate}
+\begin{compactenum}
 \item Umět rychle a přesně vyhodnocovat data z~optického seznoru.
 \item Umět komunikovat s~modulem HC-05.
 \item Umožnit uživateli zařízení zapnout a vypnout.
@@ -356,7 +356,7 @@ Základní požadavky na elektroniku měřicího vozu jsou:
 \item Umět automaticky vypnout zařízení v~případě vybití baterie.
 \item Zobrazovat stav vozu LE diodami.
 \item Umožnit nabíjet baterii.
-\end{enumerate}
+\end{compactenum}
 
 Všechny požadavky na elektroniku jsou víceméně intuitivní, jen u~posledního
 doplňme, že jeho motivací je to, aby uživatel nemusel odpojovat baterii od
@@ -452,11 +452,11 @@ protokolem XpressNET \cite{xpressnet-specs}. Jedná se o~jednoduchý protokol, k
 v~prvním bytu zprávy určí délku zprávy, poslední byte zprávy je pak její
 kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace o:
 
-\begin{enumerate}
+\begin{compactenum}
 \item aktuální rychlosti,
 \item ujeté vzdálenosti a
 \item napětí na baterce.
-\end{enumerate}
+\end{compactenum}
 
 Zajímavým aspektem protokolu je fakt, že používá kódování \textit{7B8B} a
 nejvýznamnější bit nechává vždy nastavený na $1$. Důvodem této obskurní
@@ -657,11 +657,11 @@ periodická chyba, kterou by bylo vhodné kompenzovat. Za tímto účelem vznikl
 návrh průměrovací metody \textit{kluzné okno}. Tato metoda je implementována
 v~produkční verzi kalibračního vozu, princip její činnosti je následující:
 
-\begin{enumerate}
+\begin{compactenum}
 \item Měř počty ticků a jejich periodu ve $100ms$ oknech.
 \item Každých $100\ ms$ přepni na nové okno.
 \item Data do počítače průměruj z~posledních $10$ oken, tedy celkem z~$1 s$.
-\end{enumerate}
+\end{compactenum}
 
 Tato metoda je poměrně známá, zajímavou věcí na implementaci v~měřicím vozu
 jsou výše uvedené konstanty. $100\ ms$ proto, aby data v~počítači byla viděl
