@@ -437,6 +437,18 @@ kterou bude možné s~přehledem měřit velice přesně.
 Naměřená hodnota bude zaznamenávána do paměti procesoru a jednou za pevný
 interval odeslána do počítače. Tento interval byl zvolen na $100\ ms$.
 
+Z naměřené periody $T$ lze modelovou rychlost spočítat dle vztahu
+\ref{prepocet}
+
+\begin{equation}
+v_m = 3.6 \cdot \frac{\pi d F_{CPU}}{T h c p},
+\label{prepocet}
+\end{equation}
+
+kde $d$ je průměr modelového kola, $F_{CPU} = 3686400\ MHz$ je frekvence
+krystalu k~procesoru, $h = 8$ je počet děr v~kole a $p = 64$ je
+\textit{prescaler} časovače.
+
 Spolu s~aktuální rychlostí je vhodné měřit také ujetou vzdálenost. A~protože
 výpočet vzdálenosti z~rychlosti až v~počítači by mohl být vzhledem k~vzorkování
 rychlosti po $100\ ms$ intervalech nepřesný, je vhodné výpočet ujeté dráhy
@@ -561,28 +573,38 @@ intervalech (větší rychlost).
 
 \begin{figure}[h]
 \input{graph/speed_analog.tex}
-\caption{Průběh naměřené periody v~čase v~analogovém režimu}
+\caption{Průběh naměřené periody a modelové rychlost v~čase v~analogovém
+režimu}
 \label{fig:speed-analog}
 \end{figure}
 
-Graf \ref{fig:speed-analog} zachycuje průběh periody v~čase. Každý celek
-podobných rychlostí zachycuje rychlost vozidla při jednom napětí na jeho
-motoru. Rychlost je měřena na vozidlu z~motorem připojeným přímo ke koleji
-(tzv. varianta \textit{analog}, bez dekodéru), aby se eliminoval případný vliv
-dekodéru.  Čas na ose $x$ je čas příjmu signálu do počítače, vůči reálnému času
-zachycení signálu procesorem se tento čas může mírně lišit, avšak tento rozdíl
-by měl být skutečně nepatrný.
+Graf \ref{fig:speed-analog} zachycuje průběh periody a modelové rychlosti
+v~čase. Každý celek bodů na zhruba stejné souřadnici $y$ zachycuje rychlost
+vozidla při jednom napětí na jeho motoru. Rychlost je měřena na vozidlu
+s~motorem připojeným přímo ke koleji (tzv. varianta \textit{analog}, bez
+dekodéru), aby se eliminoval případný vliv dekodéru. Čas na ose $x$ je čas
+příjmu signálu do počítače, vůči reálnému času zachycení signálu procesorem se
+tento čas může mírně lišit, avšak rozdíl by měl být skutečně nepatrný.
 
-Krom pravidelné oscilace rychlosti je na grafu občas patrný také globální
-\uv{obloukový} trend při některých rychlostech. Tento jen autor vysvětluje tím,
-že v~průběhu měření této rychlosti vozidlo zrovna najíždělo do oblouku, takže
-se jeho rychlost díky odstředivé síle zmenšila. Tento jev je pro proces
-kalibrace parazitický, autor se jeho vlivu obával už při prvních teoretických
-návrzích vozu. Pokud se ukáže, že tento jen má výrazný vliv na přesnost
-kalibrace, přistoupí autor k~selekci měřicích úseků na kalibračním okruhu.
-Stručně řečeno se bude měřit rychlost jen ve vybraných úsecích (typicky rovných
-úsecích), údaj o~poloze vozidla bude založen na vyčítání ujeté vzdálenosti
-vozidla, viz sekci \ref{sec:wsm-mer-princip}.
+Krom pravidelné oscilace rychlosti je na grafu místy patrný globální
+\uv{obloukový} trend. Tento jev autor vysvětluje tím, že v~průběhu měření
+rychlosti vozidlo zrovna najíždělo do oblouku, takže se jeho rychlost díky
+odstředivé síle zmenšila. Komentovaný jev je pro proces kalibrace parazitický,
+autor se jeho vlivu obával už při prvních teoretických návrzích vozu. Později
+se však ukázalo, že při kalibrování na oválů o dostatečně velkých poloměrech
+oblouků je změna rychlosti vlivem průjezdu obloukem minimální, resp. BEMF ji
+okamžitě vykompenzuje. Pokud by uživatel přeci jenom chtěl kalibrovat na
+obloucích o malých poloměrech, nabízí autor možnost výběru používaných a
+nepoužívaných měřicích úseků na kalibračním okruhu.  Stručně řečeno se bude
+měřit rychlost jen ve vybraných úsecích (typicky rovných úsecích), údaj
+o~poloze vozidla bude založen na vyčítání ujeté vzdálenosti vozidla, viz sekci
+\ref{sec:wsm-mer-princip}.
+
+Všimněte si v~grafu \ref{fig:speed-analog} také průběhu naměřené rychlosti.
+Díky způsobu, jakým je naměřená perioda přepočítávána na modelovou rychlost
+(\ref{prepocet}) dochází k~dobré eliminaci velkých chyb při malých rychlostech,
+avšak chyby v~periodě u~větších rychlostí -- přestože jsou v~absolutních
+hodnotách o~mnoho menší -- způsobují mnohem větší oscilace modelové rychlosti.
 
 Pro oscilaci rychlosti autor vytvořil několik hypotéz.
 
