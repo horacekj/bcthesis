@@ -684,17 +684,26 @@ v~produkční verzi kalibračního vozu, princip její činnosti je následujíc
 \begin{compactenum}
 \item Měř počty ticků a jejich periodu ve $100ms$ oknech.
 \item Každých $100\ ms$ přepni na nové okno.
-\item Data do počítače průměruj z~posledních $10$ oken, tedy celkem z~$1 s$.
+\item Data do počítače průměruj z~posledních $10$ oken, tedy celkem z~$1\ s$.
 \end{compactenum}
 
 Tato metoda je poměrně známá, zajímavou věcí na implementaci v~měřicím vozu
-jsou výše uvedené konstanty. $100\ ms$ proto, aby data v~počítači byla viděl
+jsou výše uvedené konstanty. $100\ ms$ proto, aby data v~počítači byla vidět
 v~rozumně \textit{reálném čase} a naopak příliš nezahlcovala komunikační kanál,
 $1\ s$ proto, že se jedná o~latenci, kterou je uživatel ještě schopen tolerovat,
 navíc za tento čas obvykle nastane alespoň jedna perioda signálu (viz naměřená
 data v~grafech).
 
 O~přesné přepínání oken se v~procesoru stará časovač 0.
+
+Průběh naměřené periody a vypočítané rychlosti za použití průměrovací metody
+zachycuje graf \ref{fig:prumer}. Srovnejte s~grafem \ref{fig:speed-analog}!
+
+\begin{figure}[h]
+\input{graph/speed_prumer.tex}
+\caption{Naměřená data za použití průměrovací metody}
+\label{fig:prumer}
+\end{figure}
 
 ---
 
