@@ -157,7 +157,7 @@ Nejvhodnější technologií pro výrobu takového kola je zřejmě leptání, p
 ale autor nemá k~této technologii přístup, rozhodl je místo jednotlivých
 paprsků kolo vyrobit pouze dírkované. Jako vhodný kompromis bylo stanoveno
 8 dírek na kolo, přičemž chyba v~umístění jedné dírky byla výrobou stanovena na
-nejvýše $0.05\ mm$ (TODO: ověřit). To jsou poměrně dobré výsledky.
+nejvýše $0.05\ mm$. To jsou poměrně dobré výsledky.
 
 Výkres kola je zobrazen v příloze \ref{fig:final-wheel}.
 
@@ -298,13 +298,14 @@ co se týče světové dostupnosti, je na tom modul velice dobře. Autor zvažov
 ještě další moduly (HC-06, HC-07), tyto moduly by však pro účel této práce
 nepřinesly žádnou zásadní výhodu.
 
-Autor experimentálně změřit, že spotřeba nespárovaného HC-05 modulu je
-$TODO\ mA$, spotřeba spárovaného modulu je $TODO\ mA$. To jsou oproti ESP-32
-výrazně příjemnější čísla. Autorovi se navíc podařilo zajistit spolehlivou
-funkci senzoru již při proudu $10\ mA$, což je polovina proudu, na který
-je senzor dimenzován \cite{gp1s23:datasheet}. S~přihlédnutím ke spotřebě procesoru
-a drobných součástí jako LE diod by se měla pohybovat celková spotřeba celého
-zařízení kolem cca $30\ mA$. Tato spotřeba byla uznána jako přijatelná.
+Autor experimentálně změřit, že spotřeba nespárovaného HC-05 modulu je $42\ mA
+\pm 0.2\ mA$, spotřeba spárovaného modulu je $20\ mA \pm 2\ mA$. To jsou oproti
+ESP-32 výrazně příjemnější čísla. Autorovi se navíc podařilo zajistit
+spolehlivou funkci senzoru již při proudu $10\ mA$, což je polovina proudu, na
+který je senzor dimenzován \cite{gp1s23:datasheet}. S~přihlédnutím ke spotřebě
+procesoru a drobných součástí jako LE diod by se měla pohybovat celková
+spotřeba celého zařízení kolem cca $30\ mA$. Tato spotřeba byla uznána jako
+přijatelná.
 
 Pro konstrukci měřicího vozu byla tedy vybrána platforma ATmega s~Bluetooth
 modulem HC-05.
