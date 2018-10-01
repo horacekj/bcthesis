@@ -4,12 +4,13 @@ PDFLATEX=pdflatex --shell-escape
 AUXFILES=*.aux *.log *.out *.toc *.lot *.lof *.bcf *.blg *.run.xml \
          *.bbl *.idx *.ind *.ilg *.markdown.*
 PARTS=uvod.tex prehled.tex pozadavky.tex merici-vuz.tex sw.tex
+GRAPHS=$(patsubst data/graph/%.csv, graph/%.tex, $(wildcard data/graph/*.csv))
 
 .PHONY: all clean wipe
 
 all: $(THESIS).pdf clean
 
-$(THESIS).pdf: $(THESIS).tex $(BIB) $(PARTS)
+$(THESIS).pdf: $(THESIS).tex $(BIB) $(PARTS) $(GRAPHS)
 	$(PDFLATEX) $< # The initial typesetting.
 	biber $(basename $<).bcf
 	$(PDFLATEX) $< # Update the index after the bibliography insertion.
@@ -17,8 +18,12 @@ $(THESIS).pdf: $(THESIS).tex $(BIB) $(PARTS)
 	$(PDFLATEX) $< # The final typesetting, now also with index.
 	$(PDFLATEX) $<
 
+graph/%.tex: data/graph/%.csv data/graph/%.gnu
+	mkdir -p graph
+	gnuplot -e "input_file='$(filter %.csv, $^)'" -e "output_file='$@'" $(filter %.gnu, $^)
+
 clean:
 	rm -f $(AUXFILES)
 
-wipe:
-	rm -f $(OUTPUTS)
+wipe: clean
+	rm -f $(THESIS).pdf
