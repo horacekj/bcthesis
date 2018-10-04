@@ -1,8 +1,8 @@
-Pro návrh vhodného řešení procesu automatické kalibrace je nutné si ujasnit
+Pro návrh vhodného řešení procesu automatické kalibrace je nutné formulovat
 požadavky kladené na toto řešení. Základní požadavky seřazené od
 nejdůležitějšího jsou:
 
-\begin{enumerate}
+\begin{compactenum}
 	\item snadné použití pro koncového uživatele, snadná instalace,
 	\item možnost použít řešení pro libovolné modelové měřítko,
 	\item maximalizace automatizace a minimalizace nutné spolupráce s~uživatelem,
@@ -10,31 +10,31 @@ nejdůležitějšího jsou:
 	\item možnost provést dokalibrování za skutečného provozu,
 	\item přehledné verzování projektu, čistý a přehledný kód, využití otevřených
 	technologií.
-\end{enumerate}
+\end{compactenum}
 
-První bod vyplývá z~faktu, že proces kalibrace bude spouštěn běžnou obsluhou
-kolejiště, která často nemá kapacity na to, aby se seznamovala s~novými
-technologiemi. Proto bude kladen důraz na očekávatelné chování grafického
+První bod vyplývá z~faktu, že proces kalibrace bude často spouštěn laickou obsluhou
+kolejiště. Proto bude kladen důraz na očekávatelné chování grafického
 rozhraní a jednoduchost práce se samotným měřicím hardwarem. Řešení bude také
 navrženo tak, aby využívalo běžně dostupné technologie, se kterými jsou
 uživatelé zvyklí pracovat.
 
-Protože v~Klubu odkazovaném výše je provozováno více modelových měřítek, autor
-se vynasnaží navrhnout řešení tak, aby bylo nezávislé na měřítku.
+Protože ve světě a v~Klubu odkazovaném výše je provozováno více modelových
+měřítek, autor se vynasnaží navrhnout řešení tak, aby bylo nezávislé na
+měřítku.
 
-Za okomentování pak určitě stojí bod (5). Po zakoupení nového vozidla se
+Za okomentování dále stojí bod (5). Po zakoupení nového vozidla se
 typicky provádí jeho kalibrace, vozidlo je následně začleněno do provozu, kde
-i~několik let jezdí. Fyzikální realita světa je bohužel neúprosná v~tom směru,
-že ve vozidle dochází k~mechanickému opotřebení prvků, zaběhnutí pohyblivých
+jezdí i~několik let. Fyzikální realita světa je bohužel neúprosná --
+ve vozidle dochází k~mechanickému opotřebení prvků, zaběhnutí pohyblivých
 částí po určité době provozu a ke změně mechanických parametrů vozidla
-v~závislosti na teplotě. Tyto skutečnosti vedou k~tomu, že kalibrace vozidla
-je po určité době provozu narušena. Vychýlení typicky není zásadní, ale často
+v~závislosti na teplotě. Důsledkem těchto skutečností je, že kalibrace vozidla
+po určité době ztrácí přesnost. Vychýlení typicky není zásadní, ale mnohdy
 znatelné.
 
-Proto by bylo vhodné navrhnout kalibrační hardware tak, aby šel použít
-i~v~ostrém provozu na kolejišti. Vozidlo, které by mělo narušenou kalibraci,
-by bylo dispečerem označeno a ovládací SW by se postaral o~to, aby byla
-kalibrace obnovena. Tato práce si rozhodně neklade za cíl automatické
-dokalibrovávání implementovat, protože pro tento úkol bude nutná netriviální
-součinnost s~řídícím SW kolejiště. Bylo by ale nanejvýš vhodné, aby na tento
+Proto je vhodné navrhnout kalibrační hardware tak, aby jej bylo možné použít
+i~v~ostrém provozu na kolejišti. Vozidlo, které by mělo nedokonalou kalibraci,
+by bylo dispečerem označeno a ovládací SW kolejiště by se postaral o~to, aby byla
+kalibrace obnovena. Tato práce si sice neklade za cíl automatické
+dokalibrovávání implementovat -- protože pro tento úkol bude nutná netriviální
+součinnost s~řídícím SW kolejiště -- bylo by ale nanejvýš vhodné, aby na tento
 proces bylo hardwarové řešení připraveno.
