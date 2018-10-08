@@ -11,4 +11,4 @@ HW & FW & SW vyvíjený v rámci práce:
  * [WSM PCB](https://github.com/kmzbrnoI/wsm-pcb)
  * [WSM FW](https://github.com/kmzbrnoI/wsm-fw)
  * [WSM Speed Reader](https://github.com/kmzbrnoI/wsm-speed-reader)
- * [Automatic Calibration SW](https://github.com/kmzbrnoI/auto-calibration)
+ * [Automatic Calibration SW](https://github.com/kmzbrnoI/automatic-calibration)
