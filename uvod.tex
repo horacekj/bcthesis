@@ -59,7 +59,7 @@ s~počítačem pomocí sběrnice \textit{RS232 over USB}. Jejím hlavním úkole
 vytvářet \textit{digitální signál DCC}, který moduluje do kolejí.
 
 Lokomotiva stojící na kolejích tento signál dekóduje pomocí spe\-ciál\-ní
-součástky -- tzv. \textit{dekodéru} -- a podle přijatých dat poveluje periferie
+součástky -- tzv. \textit{dekodéru DCC} -- a podle přijatých dat poveluje periferie
 lokomotivy: motor, světla, nebo třeba zvuk vydávaný vestavěným reproduktorem.
 Signál v~kolejích je zároveň využíván jako výkonový (např. pro napájení
 motoru). Dekodér v~podstatě obsahuje jen jednoduchý mikrokontrolér a několik
@@ -69,6 +69,13 @@ je skutečně malý.
 Každý dekodér má svoji adresu v~rozsahu $1$--$9999$. Počítač pak může vydat příkaz
 pro řízení lokomotivy, např.: \textit{\uv{lokomotivo s~adresou 562, jeď směrem
 vpřed rychlostí 15!}}
+
+Každý dekodér si ukládá svá konfigurační data do volatilní paměti formou tzv.
+\textit{CV}. \textit{CV} (\textit{Configuration Value}) je jedna konfigurační
+jednotka s~rozsahem hodnot 1~byte ($0$--$255$), každé \textit{CV} má svoje číslo
+(typicky $1$--$1023$), výrobce dekodéru (potažmo standardizační organizace) pak
+definuje význam jednotlivých CV. Například CV $\#17$ a $\#18$ jsou vyhrazeny
+k~uložení adresy dekodéru.
 
 \section{Synchronizace rychlosti vozidel}
 
