@@ -156,15 +156,15 @@ Cílem této práce je tento proces automatizovat.
 \section{Synchronizace brzdných křivek vozidel}
 
 Možná ještě fundamentálnějším problémem, než synchronizace rychlostí, je
-synchronizace délky dojezdu z určité fixní rychlosti napříč různými vozidly.
+synchronizace délky dojezdu z~určité fixní rychlosti napříč různými vozidly.
 Lokomotivní dekodér má pro tento účel vyhrazeno CV $\#4$, které definuje
 dobu brzdění. Při nenulové hodnotě tohoto CV tak dekodér po obdržení příkazu
 \uv{stůj} nezastaví ihned, ale postupně zpomaluje.
 
 Tento parametr je naprosto klíčový, ovládací SW totiž typicky vyžaduje, aby dané
-vozidlo zastavilo na konkrétní pozici (před návěstidlem, u nástupiště, ...).
+vozidlo zastavilo na konkrétní pozici (před návěstidlem, u~nástupiště, ...).
 Současné ovládací aplikace problém synchronizace dojezdů řeší typicky tak, že si
-dojezd změří a dále s ním kalkulují v dalších výpočtech. Například program
+dojezd změří a dále s~ním kalkulují v~dalších výpočtech. Například program
 \textit{TrainController} \cite{traincontroller:web} dokonce při brzdění
 posílá dekodéru postupně povely \uv{jeď stupněm 12}, \uv{jeď stupněm 10},
 \uv{jeď stupněm 5}, ..., takže se efekt brzdné křivky prakticky eliminuje.
@@ -172,7 +172,7 @@ posílá dekodéru postupně povely \uv{jeď stupněm 12}, \uv{jeď stupněm 10}
 Autor této práce považuje toto řešení za nešťastné, neboť
 \begin{compactenum}
 \item se zásadně zvyšuje datový tok mezi SW a centrálou,
-\item je třeba si u každé lokomotivy udržovat další data,
+\item je třeba si u~každé lokomotivy udržovat další data,
 \item po převzetí lokomotivy na ruční ovladač se každá lokomotiva chová jinak a
 \item při jízdě přes ruční ovladač jsou typicky dojezdy tak malé, že lokomotiva
       brzdí nemodelově rychle.
@@ -184,7 +184,7 @@ $30$--$35\ cm$}.\footnote{Tato hodnota se liší pro jednotlivá měřítka,
 $30$--$35\ cm$ je standard pro měřítko TT 1:120.} Do této vzdálenosti od
 kýženého bodu zastavení jsou do kolejiště fyzicky montovány senzory. Po
 projetí vozidla senzorem pošle \textit{hJOP} povel \uv{lokomotivo 1254, stůj!},
-lokomotiva začne plynule brzdit a do přesně dané vzdálenosti zastaví. A to vše
+lokomotiva začne plynule brzdit a do přesně dané vzdálenosti zastaví. A~to vše
 modelově plynule.
 
 Kalibrace dojezdů zajišťuje to, že hnací vozidlo nikdy nepřejede návěstidlo nebo
