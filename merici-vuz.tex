@@ -453,8 +453,8 @@ v_m = 3.6 \cdot \frac{\pi d F_{CPU}}{T h c p},
 \end{equation}
 
 kde $d$ je průměr modelového kola, $F_{CPU} = 3686400\ MHz$ je frekvence
-krystalu k~procesoru, $h = 8$ je počet děr v~kole a $p = 64$ je
-\textit{prescaler} časovače.
+krystalu k~procesoru, $h = 8$ je počet děr v~kole, $p = 64$ je
+\textit{prescaler} časovače a $c$ je modelové měřítko (viz výše).
 
 Spolu s~aktuální rychlostí je vhodné měřit také ujetou vzdálenost. A~protože
 výpočet vzdálenosti z~rychlosti až v~počítači by mohl být vzhledem k~vzorkování
@@ -466,7 +466,16 @@ jednotkách jsou pak jak v~případě rychlosti tak v~případě ujeté vzdálen
 ponechány až na počítači, neb ten má spoustu výpočetních prostředků a
 nepotřebuje realizovat časově citlivé operace. Navíc odpadá problém
 s~přenášením hodnot parametrů (průměr kola, měřítko) do měřicího vozu a
-komunikace tak může být pouze jednosměrná.
+komunikace tak může být pouze jednosměrná. Reálnou dráhu $s$ lze pak z~počtu
+kmitů vypočítat pomocí vztahu \ref{real-dist}
+
+\begin{equation}
+s = \frac{i \pi d}{h}
+\label{real-dist}
+\end{equation}
+
+kde $i$ je počet kmitů, $d$ je průměr modelového kola a $h = 8$ je počet děr
+v~kole.
 
 Pro komunikaci s~počítačem byl navrhnut vlastní binární protokol inspirovaný
 protokolem XpressNET \cite{xpressnet-specs}. Jedná se o~jednoduchý protokol, který
@@ -576,6 +585,21 @@ Finální podobu vozu ovlivňovaly nejvíce ze všeho požadavky na malé rozmě
 komponent měřicího vozu, dalším důležitým faktorem pak bylo napájení -- tedy
 sehnat takovou baterii, která se do vozu vhodně vejde a poskytne kapacitu
 alespoň na několik hodin kalibrace.
+
+Po vyrobení vozu byla provedena \uv{kalibrace} samotného vozu -- tedy určení
+konstant uvedených ve vztahu \ref{prepocet}. Pro dosažení maximální přesnosti
+se totiž nelze spoléhat zejména na měření průměru kola pouhým posuvným
+měřidlem, rozdíly v~průměru kola v~řádu setin milimetru totiž způsobují rozdíly
+v~modelové rychlosti v~řádu desetin modelových $km/h$. Autor tedy přistoupil ke
+změření počtu pulzů na rovné koleji o~délce $1\ m$\footnote{Délka byla měřena
+konvenčním svinovacím metrem.}. Postupně byly naměřeny hodnoty $317$, $317$,
+$316$, $316$ a $316$. První tři hodnoty byly měřeny na jednom úseku trati
+v~různých směrech pohybu, zbylé 2 hodnoty byly pro eliminaci chyby měřeny na
+jiném úseku trati, opět každá hodnota v~jiném směru pohybu vozu v~úseku a na
+rovné koleji bez jakýchkoliv nerovností.
+
+Po zprůměrování pěti měření byl tedy průměr kola dle vztahu \ref{real-dist}
+stanoven na $8.05\ mm$, kterážto konstanta je použita v~budoucích programech.
 
 \section{Naměřená data}
 \label{sec:wsm-data}
