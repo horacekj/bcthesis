@@ -231,10 +231,46 @@ Na konci této fáze má program představu o tom, kterému rychlostnímu stupni
 odpovídá minimální rychlost a kterému maximální rychlost.
 
 V této fázi je rychlost lokomotivy měřena v režimu \textit{LT} (viz kapitolu
-\ref{sec:ac:lt-measure}}.
+\ref{sec:ac:lt-measure}).
 
 \subsubsection{Kalibrace jízdních stupňů}
 
+Třída \texttt{CalibStep} umožňuje zkalibrovat jeden jízdní krok. Třída
+\texttt{CalibMan} pak postupně volá třídu \texttt{CalibStep} dokud nejsou
+zkalibrovány všechny jízdní kroky, které si uživatel přál zkalibrovat.
 
+Kalibrace jednoho kroku probíhá následovně.
+
+\begin{compactenum}
+\item V mapě \textit{výkon: rychlost} je vyhledán (interpolován) výkon odpovídající
+      kýžené rychlosti.
+\item Výkon je zapsán do lokomotivy k právě kalibrovanému stupni.
+\item Čekání $2\ s$ na změnu rychlosti lokomotivy.
+\item Inicializace měření \textit{LT}.
+\item Naměřenou hodnotu přidat do mapy \textit{výkon: rychlost}.
+\item Pokud je rychlost v $\epsilon$ toleranci (konstantní konfigurovatelná hodnota)
+      cílové rychlosti, krok je zkalibrován, jinak \texttt{GOTO krok 1}.
+\end{compactenum}
+
+$\epsilon$ je ve výchozím nastavení $1\ km/h$.
+
+Jakmile je zkalibrována rychlost, kterou chceme na více rychlostních stupních,
+jsou i tyto rychlostní stupně nastaveny na právě zkalibrovaný výkon.
+
+Průběh kalibrace je průběžně zobrazován uživateli, uživatel vidí, které rychlostní
+stupně jsou již zkalibrovány a které ještě ne.
 
 \subsubsection{Interpolace}
+
+Po dokončení kalibrace všech bodů zadaných v mapě \textit{rychlostní stupeň:
+rychlost} jsou zbylé body postupně interpolovány.
+
+Po dokončení této fáze zůstává typicky nezkalibrována minimální rychlost
+(měřicí vůz neumí dobře měřit hodně malé rychlosti), pro kterou v \textit{Klubu
+modelářů železnic Brno I} platí úzus, že je to taková nejnižší rychlost, při
+které se hnací vozidlo již začne plynule pohybovat.  Po dokončení kalibrace
+tedy uživatel ručně vybere rychlostní stupeň $1$ a nastaví jej na požadovanou
+hodnotu za současného pozorování pohybu vozidla.
+
+Program se pak postará o to, aby byly stupně do nejbližšího již zkalibrovaného
+stupně interpolovány.
