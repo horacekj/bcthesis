@@ -137,7 +137,7 @@ kalibrace rychlostí může být výrazně rychlejší.
 Aplikace je postavená na objektovém modelu, v~aplikaci je několik tříd
 založených na modelu \textit{singleto}, kde každá třída má jednu konkrétní
 odpovědnost. Diagram tříd je zobrazen na obrázku
-\ref{ac-classes}.
+\ref{fig:ac-classes}.
 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{data/ac_classes.pdf}
@@ -181,8 +181,8 @@ Před kalibrací navíc uživatel zadá maximální kalibrovanou rychlost. Tato 
 je vlastností konkrétního hnacího vozidla, proto je možné ji ovlivnit před
 každou jednotlivou kalibrací. Maximální rychlost spolu s~akcelerací a~decelerací
 a oběma mapami jsou ukládány do \texttt{xml} souboru definice hnacího vozidla,
-jehož formát byl záměrně převzat ze SW JMRI \ref{CITE}, aby bylo možné soubory
-mezi těmito programy navzájem přenášet.
+jehož formát byl záměrně převzat ze SW JMRI \cite{jmri:web}, aby bylo možné
+soubory mezi těmito programy navzájem přenášet.
 
 Další parametry, jako je například umístění zařízení sériového portu centrály
 či maximální povolená odchylka kalibrace jsou načítání z~jediného společného
