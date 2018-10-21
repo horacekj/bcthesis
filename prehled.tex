@@ -1,5 +1,5 @@
-V~této kapitole budou stručně představena existující řešení problému měření
-rychlosti modelového hnacího vozidla doplněná o~komentáře vhodnosti
+V~této kapitole budou stručně představeny existující možnosti měření rychlosti
+modelového hnacího vozidla. Tyto možnosti budou doplněny o~komentáře vhodnosti
 jednotlivých řešení pro problém řešený touto prací. Dále budou představeny
 dostupné technologie senzorů, které jsou pro problém měření rychlosti vhodné.
 
@@ -10,15 +10,15 @@ speciální senzory pro měření dráhy nebudou uvažovány.
 \label{sec:det-static}
 
 Jednou z~nejjednodušších technologií pro detekci rychlosti pohybujícího se
-objektu jsou dva senzory detekující průchod bodem a stopky. V~naší aplikaci na
+objektu jsou dva senzory detekující průchod bodem a~stopky. V~naší aplikaci na
 modelovém kolejišti si lze představit dva (např. optické) senzory umístěné
 v~určité vzdálenosti od sebe, skutečnou rychlost pohybujícího se objektu lze
-pak vypočíst jednoduchým vydělením vzdálenosti senzorů a času, po který se
+pak vypočíst jednoduchým vydělením vzdálenosti senzorů a~času, po který se
 hnací vozidlo pohybovalo mezi senzory.
 
 Měření vychází z~předpokladu, že se hnací vozidlo pohybuje konstantní
 rychlostí (podobně jako řada dalších rozebíraných metod měření níže), tento
-předpoklad je však zejména díky kontrole nad ovládáním vozidla a díky
+předpoklad je však zejména díky kontrole nad ovládáním vozidla a~díky
 BEMF\footnote{Back Electro-motive force, technologie pro měření rychlosti
 ovládaného motoru, viz \url{https://dccwiki.com/Back\_EMF}.}
 možné bez problému splnit.
@@ -26,13 +26,13 @@ možné bez problému splnit.
 Konkrétní instancí této technologie je \textit{Model Railroad
 Speedometer Accutrack II} \cite{accutrackII}.
 
-Nespornými výhodami tohoto přístupu jsou jednoduchost a absence pohyblivých
-prvků, která vede k~delší životnosti a dlouhodobé spolehlivosti měřiče.
-Bohužel, zásadní nevýhodou tohoto řešení je nutnost měřit rychlost pouze ve
+Nespornými výhodami tohoto přístupu jsou jednoduchost a~absence pohyblivých
+prvků, která vede k~delší životnosti a~dlouhodobé spolehlivosti měřiče.
+Bohužel zásadní nevýhodou tohoto řešení je nutnost měřit rychlost pouze ve
 vybraném úseku tratě. V~požadavcích na řešení vyvíjené v~této práci je sice
 specifikováno, že kalibrace bude probíhat na uzavřeném okruhu, avšak představme
 si, že pro jedno změření rychlosti by bylo třeba buď projet celý okruh, nebo se
-za senzorem zastavit a obrátit směr. Pomineme-li fakt, že motory často dávají
+za senzorem zastavit a~obrátit směr. Pomineme-li fakt, že motory často dávají
 při stejné střídě napájecího signálu mírně rozdílné otáčky v~závislosti na
 směru, ve kterém se pohybují, je i~tak čas nutný na celou kalibraci
 nesrovnatelně vyšší než u~senzoru, který by byl schopen odečítat rychlost
@@ -42,7 +42,7 @@ Uvědomme si ale na závěr, že jedna z~klíčových nevýhod tohoto senzoru je
 v~určitém slova smyslu i~jeho výhodou. Totiž fakt, že měření probíhá jen na pevně
 definovaném úseku koleje s~sebou nese tu výhodu, že vozidlo měříme vždy ve
 stejných podmínkách. Nemusíme tedy například řešit, jestli vozidlo zrovna jede
-v~oblouku a je zpomalováno odstředivou silou, protože senzor prostě umístíme
+v~oblouku a~je zpomalováno odstředivou silou, protože senzor prostě umístíme
 na rovný úsek trati.
 
 \section{Statické úsekové detektory}
@@ -57,21 +57,21 @@ Typickým zástupcem této technologie je proudový detektor obsazení, konkrét
 například \textit{BD20} \cite{bd20}.
 
 Proudové detektory obsazení jsou hojně využívány na modelových kolejištích k~detekci
-volnosti úseků a tudíž k~umožnění bezkolizního pohybu vozidla po trati.
+volnosti úseků a~tudíž k~umožnění bezkolizního pohybu vozidla po trati.
 Obdobné systémy se využívají na skutečné železnici, avšak tam jsou známy pod
 názvem \textit{kolejové obvody}.
 
 Konkrétní způsob měření přehledně popisují například tvůrci SW \textit{JMRI}
 \cite{jmri:speedometer} (\textit{A Java Model Railroad Interface}).
 Kalibrační kolej je rozdělena na několik částí (optimálně na tři části),
-kalibrační SW pak lokomotivou postupně projíždí těmito částmi a počítá čas, za
+kalibrační SW pak lokomotivou postupně projíždí těmito částmi a~počítá čas, za
 který vozidlo projede prostřední částí. U~této části má od uživatele zadanou
 její délku, z~které pak vypočte rychlost vozidla.
 
-Výhody a nevýhody tohoto způsobu měření jsou víceméně stejné jako výhody a
+Výhody a~nevýhody tohoto způsobu měření jsou víceméně stejné jako výhody a
 nevýhody statických bodových detektorů. Malou výhodou úsekových detektorů je
 fakt, že kolejiště často bývají vybavena úsekovými detektory pro účely
-zapezpečovacího zařízení, takže není nutný nákup a instalace dalších senzorů.
+zapezpečovacího zařízení, takže není nutný nákup a~instalace dalších senzorů.
 
 \section{Podvalníkové detektory}
 \label{sec:det-podval}
@@ -84,7 +84,7 @@ Lokomotiva je položena na válce, které se pod ní mohou volně pohybovat.
 Lokomotiva svým motorem roztáčí válce, jejichž rychlost je následně měřena.
 
 Zajímavými výhodami této technologie jsou použitelnost prakticky pro jakékoliv
-modelové měřítko, nezávislost na pozici vozidla na trati a v~neposlední řadě
+modelové měřítko, nezávislost na pozici vozidla na trati a~v~neposlední řadě
 zmizení nutnosti pořizovat kalibrační okruh. Celý proces kalibrace tak může
 probíhat na velice malém prostoru.
 
@@ -101,18 +101,18 @@ využitelný například k~výpočtu míry opotřebení lokomotivy.
 \section{Kalibrační SW}
 \label{sec:kalib-sw}
 
-Druhou, zcela zásadní částí této práce, je mimo tvorby senzoru pro měření
-rychlosti hnacího vozidla také vytvoření programu, který zvládne celý proces
+Kromě vytvoření senzoru pro měření rychlosti hnacího vozidla je další zcela
+zásadní částí této práce navržení programu, který zvládne celý proces
 kalibrace automaticky -- bez zásahu uživatele. V~tomto hledisku autor bohužel
 nemůže nabídnout výčet existujících řešení, protože taková řešení
 prakticky neexistují. Je to z~toho důvodu, že většina dostupných SW pro řízení
-modelového kolejiště staví na odlišném principu, než na kterém staví řídicí SW
+modelového kolejiště využívá odlišného principu, než na kterém je založen SW
 hJOP \cite{hjop:web}, pro který je automatická kalibrace řešena.
 
 Většina obslužných programů totiž počítá s~tím, že hnací vozidla na kolejišti
-jsou různá a nesnaží se je jednotně kalibrovat. Místo toho si tyto SW před
+jsou různá a~nesnaží se je jednotně kalibrovat. Místo toho si tyto SW před
 prvním použitím lokomotivy nechají zadat její parametry nebo si je změří jednou
-z~technologií popsaných výše a u~lokomotivy si tzv. \textit{kalibrační tabulku}
+z~technologií popsaných výše a~u~lokomotivy si tzv. \textit{kalibrační tabulku}
 dlouhodobě udržují. Tyto programy tak kompenzují rozdílné vlastnosti vozidel přímo
 povelováním různými rychlostními stupni.
 
