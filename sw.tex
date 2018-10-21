@@ -274,3 +274,19 @@ hodnotu za současného pozorování pohybu vozidla.
 
 Program se pak postará o to, aby byly stupně do nejbližšího již zkalibrovaného
 stupně interpolovány.
+
+
+\subsection{Kalibrace dojezdů}
+
+Po zkalibrování rychlosti následuje kalibrace dojezdů. Ze se autor nakonec
+rozhodl udělat kalibraci pouze poloautomatickou a to zejména z toho důvodu,
+že kalibrace dojezdů je již velmi rychlá.
+
+Program uživateli umožní zadat hodnotu decelerace a pak pomocí kliku na jediné
+tlačítko změřit dojezd z rychlosti $40\ km/h$. Program tedy vozidlo rozjede,
+chvíli počká, pak mu nastaví rychlostní stupeň $0$ a pomocí měřicího vozu
+měří vzdálenost do zastavení. Vzdálenost pak vypsaná uživateli, který na základě
+ní může upravit hodnotu decelerace.
+
+Akcelerace je pak typicky nastavena stejně jako decelerace (ale volba je plně
+na uživateli).
