@@ -8,7 +8,7 @@ na řešení (kapitola \ref{chap:pozadavky}).
 \section{Umístění senzoru}
 \label{sec:wsm-senzor-umisteni}
 
-Prozkoumejme nejprve kam je a není možno senzor umístit. Určitě platí, že
+Prozkoumejme nejprve kam je a kam není možno senzor umístit. Určitě platí, že
 senzor není možné umístit do lokomotivy. Lokomotiva je totiž komerční produkt,
 který umožňuje úpravy její elektroniky nejvýše na úrovní výměny digitálního
 dekodéru DCC. Lokomotiva obvykle bývá vybavena deskou plošných spojů, která
@@ -21,10 +21,10 @@ Druhou možností je doplnit senzor do lokomotivy bez úpravy její elektroniky.
 To s~sebou ale nese pořád tu nevýhodu, že je třeba mechanicky zasahovat do
 (poměrně drahé) lokomotivy.
 
-Třetí možností je umístit senzor mimo hnací vozidlo. Tento senzor může být
+Třetí možností je umístit senzor mimo hnací vozidlo. Senzor může být
 umístěn na kolejiště staticky (podobně jako v~\ref{sec:det-static}) nebo může
-být součástí vagónu připojeného za lokomotivou. Statický senzor je nevyhovující
-zejména proto, že neumožňuje provádění dokalibrace za skutečného provozu.
+být součástí vagónu připojeného za lokomotivou. Statické senzory jsou nevyhovující
+zejména proto, že neumožňují provádění dokalibrace za skutečného provozu.
 
 Jako nejvhodnější řešení se tedy jeví vyrobit vůz, který se připojí ke kalibrované
 lokomotivě jako běžný vagón. Součástí tohoto vozu bude senzor pro měření
@@ -37,7 +37,7 @@ S~uvážením výše uvedených argumentů se autor rozhodl vydat cestou
 \section{Senzor}
 \label{sec:wsm-senzor}
 
-Důležitou součásti měřicího vozu je rychlostní senzor. Zvolená technologie
+Důležitou součástí měřicího vozu je rychlostní senzor. Zvolená technologie
 senzoru ovlivňuje formát a přesnost měření, dále pak mechanicko-elektrické
 vlastnosti měřicího vozu, jeho cenu, snadnost výroby, opakovatelnost výroby
 (dostupnost součástek s~výhledem na několik let) a v~neposlední řadě
@@ -71,17 +71,18 @@ Existují ale i~senzory, které se montují přímo na osu rotujícího předmě
 například senzor \textit{AS5306} \cite{as5306}. Takový senzor by pro účel této
 práce byl nejvhodnější. Nepříznivým faktem ale je, že tyto senzory vyžadují
 magnetický disk, z~nichž nejmenší dosahují průměrů řádově $15\ mm$
-\cite{magnets}. Tato velikost pro modelovou železnici bohužel příliš velká.
+\cite{magnets}. Tento průměr je pro modelovou železnici bohužel příliš velký.
 
 \subsection{Magnetický senzor \uv{cykloměřič}}
 \label{subsec:wsm-senzor-cyclo}
 
 Technologie tzv. \uv{cykloměřiče} byla historicky první metodou jak měřit
 rychlost modelové lokomotivy. Tento senzor autor dokonce viděl v~praxi, je
-založený na stejné principu jako počítač rychlosti na cyklistickém kole.  Na
+založený na stejném principu jako počítač rychlosti na cyklistickém kole.  Na
 osu nápravy je upevněn magnet, ve voze je pak hallova sonda. Magnet vyvolá při
 průchodu kolem hallovy sondy zákmit v~magnetickém poli, který tato sonda
-detekuje. Na jednu otáčku nápravy připadá, cyklopočítač pak počítá počty zákmitů.
+detekuje. Na jednu otáčku nápravy tak připadá jeden zákmit, cyklopočítač pak
+počítá počty zákmitů.
 
 Toto řešení je poměrně jednoduché na instalaci, množství mechanických prvků je
 malé, na druhou stranu ale poskytuje poměrně malou přesnost -- zejména při
@@ -129,7 +130,7 @@ Po několika měsících pokusů o~zprovoznění měření optickým senzorem au
 že s~tímto typem senzoru nebude schopen garantovat přesné a spolehlivé měření.
 Padlo tedy rozhodnutí tuto technologii opustit. Autor by rád zdůraznil, že
 jednou z~hlavních motivací pro opuštění této technologie byla přílišná
-komplexnost senzoru a neschopnost ovlivňovat a debugovát procesy uvnitř něj.
+komplexnost senzoru a neschopnost ovlivňovat a debugovat procesy uvnitř něj.
 
 \subsection{Optozávora}
 \label{subsec:wsm-senzor-optozavora}
@@ -158,7 +159,7 @@ Ze všech zvažovaných technologií autor nakonec zvolil právě technologii
 paprskového kola a optozávory.
 
 Nejvhodnější technologií pro výrobu takového kola je zřejmě leptání, protože
-autor však nemá k~této technologii přístup, rozhodl je místo jednotlivých
+autor však nemá k~této technologii přístup, rozhodl se místo jednotlivých
 paprsků kolo vyrobit dírkované. Jako vhodný kompromis bylo stanoveno
 8 dírek na kolo, přičemž chyba v~umístění jedné dírky byla výrobou stanovena na
 nejvýše $0.05\ mm$. To jsou poměrně dobré výsledky.
@@ -199,7 +200,7 @@ hrotová ložiska, protože při použití sbíracích kontaktů přiložených 
 kolečko vzniká riziko, že tření mezi kontaktem a kolem bude tak vysoké, že kolo
 bude na kolejnici prokluzovat. A~to je v~kontextu faktu, že na tomto kole
 probíhá měření rychlosti, naprosto nemyslitelné. Zátěž byla napájena cca $50 \%$
-času a to i~přes veškerou snahou o~přídavné kondenzátory a případnou přídavnou
+času a to i~přes veškerou snahu o~přídavné kondenzátory a případnou přídavnou
 hmotnost pro zlepšení kontaktu vozu s~kolejemi.
 
 Na základě těchto měření i~autorových předchozích zkušeností se sbíráním
@@ -232,11 +233,11 @@ jsou běžně dostupné, ideálně přímo zabudované v~dnešních počítačí
 argumentem pro toto rozhodnutí je to, že nutnost pořizovat (natož stavět!)
 přijímač by zvyšoval jak finanční tak výrobní náročnost celého projektu.
 
-S~tímto vědomím přicházejí v~úvahu 2 technologie.
+S~tímto vědomím přicházejí v~úvahu 2 technologie:
 
 \begin{compactenum}
-\item Wi-Fi
-\item Bluetooth
+\item Wi-Fi,
+\item Bluetooth.
 \end{compactenum}
 
 \section{Platforma}
@@ -317,11 +318,11 @@ s~Bluetooth modulem \textit{HC-05}.
 \section{Mechanika}
 \label{sec:wsm-mech}
 
-Vůz se bude po mechanické skládat z~několika základních částí.
+Vůz se bude po mechanické stránce skládat z~několika základních částí.
 
 \begin{compactenum}
 \item Perforované kolo připevněné na nápravě.
-\item Optozávora připevněná k~senzoru.
+\item Optozávora připevněná k~vozu snímající perforované kolo.
 \item Baterie.
 \item Deska plošných spojů s~hlavní elektronikou.
 \item Komunikační modul \textit{HC-05}.
@@ -505,7 +506,7 @@ Na poli Embedded System mezi programovacími jazyky dominují zejména jazyky C 
 C++ a to především díky přímočarému provázání příkazů jazyka přímo
 s~výpočetními prostředky a periferiemi mikrokontroléru. Z~relativní
 jednoduchosti úkonů, které bude procesor řešit, plyne také poměrně malá
-velikosti jeho programu. Spolu s~faktem, že s~programováním procesorů rodiny
+velikost jeho programu. Spolu s~faktem, že s~programováním procesorů rodiny
 AVR v~programovacím jazyce C má autor práce zkušenosti, tento argument rozhodl
 pro programovací jazyk C.
 
@@ -576,8 +577,8 @@ Tabulka \ref{tab:wsm-params} shrnuje klíčové parametry měřicího vozu.
 	\end{tabularx}
 	\caption{Přehled základních parametrů měřicího vozu}
 	\label{tab:wsm-params}
-\footnotetext{Rozměr přes nárazníky.}
-\footnotetext{Účelové omezení ve firmwaru,
+\footnotetext[1]{Rozměr přes nárazníky.}
+\footnotetext[2]{Účelové omezení ve firmwaru,
 senzor zvládá měřit alespoň do 1000 modelových km/h}
 \end{table}
 

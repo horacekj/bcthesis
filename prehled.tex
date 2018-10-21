@@ -3,6 +3,9 @@ rychlosti modelového hnacího vozidla doplněná o~komentáře vhodnosti
 jednotlivých řešení pro problém řešený touto prací. Dále budou představeny
 dostupné technologie senzorů, které jsou pro problém měření rychlosti vhodné.
 
+Ze senzorů pro měření rychlosti je obvykle snadno možné dopočítat dráhu, proto
+speciální senzory pro měření dráhy nebudou uvažovány.
+
 \section{Statické bodové detektory}
 \label{sec:det-static}
 
@@ -46,8 +49,8 @@ na rovný úsek trati.
 \label{sec:det-usek}
 
 Podobný přístup, jako u~statických bodových detektorů, nabízejí statické
-úsekové detektory. Rozdíl oproti senzorům popsaným v~předchozí kapitole je
-ve způsobu měření: senzory neměří projetí vozidla daným bodem, ale přítomnost
+úsekové detektory. Rozdíl oproti metodě popsané v~předchozí kapitole je
+ve způsobu měření: senzor neměří projetí vozidla daným bodem, ale přítomnost
 vozidla na úseku tratě určité délky.
 
 Typickým zástupcem této technologie je proudový detektor obsazení, konkrétně
@@ -60,10 +63,10 @@ názvem \textit{kolejové obvody}.
 
 Konkrétní způsob měření přehledně popisují například tvůrci SW \textit{JMRI}
 \cite{jmri:speedometer} (\textit{A Java Model Railroad Interface}).
-Kalibrační kolej je rozdělena na několik částí (optimálně na tři části), kalibrační
-SW pak postupně projíždí těmito částmi a počítá čas, za který vozidlo projede
-prostřední částí. U~této části má od uživatele zadanou její délku, z~které pak
-vypočte rychlost vozidla.
+Kalibrační kolej je rozdělena na několik částí (optimálně na tři části),
+kalibrační SW pak lokomotivou postupně projíždí těmito částmi a počítá čas, za
+který vozidlo projede prostřední částí. U~této části má od uživatele zadanou
+její délku, z~které pak vypočte rychlost vozidla.
 
 Výhody a nevýhody tohoto způsobu měření jsou víceméně stejné jako výhody a
 nevýhody statických bodových detektorů. Malou výhodou úsekových detektorů je
@@ -91,9 +94,9 @@ dokalibrovávat vozidlo za reálného provozu bez nutnosti uvolnění vozidla
 z~reálného provozu na trati.
 
 Stojí za to také poznamenat, že řešení, které by umožňovalo měřit rychlost
-vozidla na kolejišti by s~sebou neslo tu výhodu, že jej lze použít k~měření
-celkové ujeté vzdálenosti hnacího vozidla za delší dobu, což je údaj využitelný
-například k~výpočtu míry opotřebení lokomotivy.
+vozidla na kolejišti za provozu by s~sebou neslo tu výhodu, že jej lze použít
+k~měření celkové ujeté vzdálenosti hnacího vozidla za delší dobu, což je údaj
+využitelný například k~výpočtu míry opotřebení lokomotivy.
 
 \section{Kalibrační SW}
 \label{sec:kalib-sw}
@@ -111,7 +114,7 @@ jsou různá a nesnaží se je jednotně kalibrovat. Místo toho si tyto SW pře
 prvním použitím lokomotivy nechají zadat její parametry nebo si je změří jednou
 z~technologií popsaných výše a u~lokomotivy si tzv. \textit{kalibrační tabulku}
 dlouhodobě udržují. Tyto programy tak kompenzují rozdílné vlastnosti vozidel přímo
-povelováním různými rychlostmi.
+povelováním různými rychlostními stupni.
 
 Koncepce SW hJOP je však jiná. Bylo rozhodnutím autora, že je vhodnější mít
 zkalibrovaná vozidla na úrovni dekodérů, než si v~SW ukládat pro každé hnací
@@ -120,7 +123,7 @@ vozidlo speciální \textit{kalibrační tabulku}.
 \section{Závěr}
 \label{sec:prehled-zaver}
 
-Z popisu vlastností výše uvedených komerčně dostupných technologií měření
-rychlosti modelového hnacího vyplývá, že žádné z~těchto řešení nevyhovuje
-autorovým požadavkům plně. Proto autor přistoupí k~návrhu vlastního měřicího
-systému.
+Z~popisu vlastností výše uvedených komerčně dostupných technologií měření
+rychlosti modelového hnacího vozidla vyplývá, že žádné z~těchto řešení
+nevyhovuje autorovým požadavkům plně. Proto autor přistoupí k~návrhu vlastního
+měřicího systému.
