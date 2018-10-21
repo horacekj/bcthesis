@@ -86,6 +86,7 @@ projektu.
 I přes původní snahy je nutné pro užití knihovny v projektu využít frameworku
 \texttt{Qt} a to zejména kvůli implementaci sériového portu.
 
+
 \section{Automatic Calibration}
 \label{sec:sw-wsm-auto-calib}
 
@@ -114,6 +115,9 @@ Grafické uživatelské rozhraní aplikace je zachyceno na obrázku \ref{fig:ac-
 \caption{Hlavní okno programu Automatic Calibration.}
 \label{fig:ac-gui}
 \end{figure}
+
+Program je k dispozici pod opensource licencí \textit{Apache License v2.0}
+online\footnote{\url{https://github.com/kmzbrnoI/automatic-calibration}}.
 
 Veškeré programování probíhá v režimu \textit{POM} (\textit{Programming on
 Main}), který umožňuje, ačkoliv se nepředpokládá, že se tato možnost využije,
@@ -160,6 +164,11 @@ je rozdělena do několika fází.
 \item Kalibrace jednotlivých jízdních stupňů.
 \item Interpolace nekalibrovaných stupňů.
 \end{compactenum}
+
+Kalibraci je kdykoliv možné přerušit, čímž dojde k zastavení právě prováděné
+operace a k zastavení hnacího vozidla. Protože si ale program pamatuje svůj
+stav, je možné kalibraci kdykoliv spustit znovu a již dokončené fáze jsou
+přeskočeny.
 
 Před začátkem kalibrace je nutné mít v SW načtenou mapu \textit{rychlostní
 stupeň: žádaná rychlost}. Tato mapa je načítána z \texttt{csv} souboru a je
@@ -233,6 +242,10 @@ odpovídá minimální rychlost a kterému maximální rychlost.
 V této fázi je rychlost lokomotivy měřena v režimu \textit{LT} (viz kapitolu
 \ref{sec:ac:lt-measure}).
 
+Pokud uživatel načte profil již změřené lokomotivy ze souboru a v tomto profilu
+jsou body, které tato fáze vyžaduje, tato fáze je přeskočena. Kalibrace vozidla,
+které už jednou bylo kalibrováno, může tedy být přeskočena.
+
 \subsubsection{Kalibrace jízdních stupňů}
 
 Třída \texttt{CalibStep} umožňuje zkalibrovat jeden jízdní krok. Třída
@@ -275,7 +288,6 @@ hodnotu za současného pozorování pohybu vozidla.
 Program se pak postará o to, aby byly stupně do nejbližšího již zkalibrovaného
 stupně interpolovány.
 
-
 \subsection{Kalibrace dojezdů}
 
 Po zkalibrování rychlosti následuje kalibrace dojezdů. Ze se autor nakonec
@@ -290,3 +302,16 @@ ní může upravit hodnotu decelerace.
 
 Akcelerace je pak typicky nastavena stejně jako decelerace (ale volba je plně
 na uživateli).
+
+\section{XpressNET knihovna}
+\label{sec:xn-lib}
+
+Fundamentálním nástrojem pro fungování aplikace \textit{Automatic Calibration}
+je knihovna, která umožňuje komunikaci s centrálou XpressNET. Přestože je tento
+protokol ve střední Evropě hojně rozšířen, pro jazyk C++ autor nenašel žádnou
+rozumnou knihovnu, která by umožňovala s XpressNET centrálou komunikovat.
+
+Autor tedy implementovat vlastní opensource a robustní XpressNET knihovnu
+s potvrzováním příkazů z centrály a vyčlenil ji do samostatného repozitáře
+\footnote{\url{https://github.com/kmzbrnoI/xn-lib-cpp-qt}}. Autor pevně věří, že si
+tato knihovna najde uplatnění napříč modelářskou komunitou.
