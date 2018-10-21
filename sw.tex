@@ -153,13 +153,13 @@ třída \texttt{PowerMap} pak udržuje mapu \textit{výkon motoru: reálná rych
 O kalibraci rychlostních křivek se stará třída \texttt{CalibMan}. Kalibrace
 je rozdělena do několika fází.
 
-\begin{enumerate}
+\begin{compactenum}
 \item Zapsání základních CV.
 \item Program si vytvoří základní přehled o tvaru křivky \textit{výkon motoru:
       reálná rychlost}.
 \item Kalibrace jednotlivých jízdních stupňů.
 \item Interpolace nekalibrovaných stupňů.
-\end{enumerate}
+\end{compactenum}
 
 Před začátkem kalibrace je nutné mít v SW načtenou mapu \textit{rychlostní
 stupeň: žádaná rychlost}. Tato mapa je načítána z \texttt{csv} souboru a je
@@ -178,7 +178,31 @@ Další parametry, jako je například umístění zařízení sériového portu
 či maximální povolená odchylka kalibrace jsou načítání z jediného společného
 konfiguračního souboru.
 
-\subsection{Fáze kalibrace}
+\subsection{Měření rychlosti}
+\label{sec:ac:lt-measure}
+
+Měření rychlosti během kalibrace probíhá ve speciálním režimu \textit{LT --
+Long Term Measure}. Tento speciální režim je vlastností knihovny pro komunikaci
+s měřicím vozem a umožňuje průměrování naměřených rychlostí. Bystrý čtenář si
+jistě všimne, že autor právě představuje druhou vrstvu průměrování dat z
+měřicího vozu (první probíhá již přímo ve vozu). Ano, je to tak. Ovšem cílem
+průměrování na úrovní SW není pouze eliminovat oscilace rychlosti, výstupem
+průměrování je totiž kromě průměrné rychlosti také rozdíl $v_{max} - v_{min}$ v
+měřeném intervalu. Tento jakýsi \uv{pseudorozptyl} umožňuje kalibračnímu SW
+považovat měření za relevantní pouze v případě, že rozptyl je dostatečně malý.
+A přesně to kalibrační SW dělá.
+
+Průměrování typicky probíhá pro $30$ naměřených rychlostí, tedy po dobu $3\ s$.
+
+Kdykoliv je rozdíl $v_{max} - v_{min}$ naměřených rychlostí příliš velký
+(konstanta je konfigurovatelná v nastavení, výchozí nastavení je $3\ km/h$, je
+měření ignorováno a inicializováno měření nové. Pokud se takto několikrát
+nepovede změřit rychlost (opět konfigurovatelná konstanta), je proces kalibrace
+přerušen. Tento jen může být způsoben například nekvalitním vozidlem (a takové
+vozidlo prostě odmítneme zkalibrovat) nebo například členitostí trati --
+přítomností oblouků, stoupání a klesání, s kterými se BEMF nevyrovná.
+
+\subsection{Fáze kalibrace rychlosti}
 
 \subsubsection{Zapsání základních CV}
 
@@ -190,15 +214,15 @@ signálu udpovídá hodnota $255$ výkonu motoru, čímž chtějí umožnit
 každému rychlostnímu stupni.} tak, aby výkony $0$--$255$ reálně pokrývaly celé
 spektrum stříd signálů do motoru.
 
-
 \subsubsection{Vytvoření přehledu}
+
 O tento krok se stará třída \texttt{CalibOverview}.
 Lokomotivě je nastaven rychlostní stupeň $2$ a na tento stupeň je zapsán výkon
-$10/255$. Následně proběhne měření rychlosti. Dokud je rychlost lokomotivy příliš
-malá, výkon je postupně zdvojnásobován a do mapy \textit{výkon: rychlost} jsou
-přidávány nové záznamy. Jakmile se lokomotiva rozjede na rychlost $> v_{min}$,
-program má informaci o tom, který rychlostní stupeň odpovídá minimální rychlosti
-lokomotivy a přechází do další fáze.
+$10/255$. Následně proběhne měření rychlosti. Dokud je rychlost lokomotivy
+příliš malá, výkon je postupně zdvojnásobován a do mapy \textit{výkon:
+rychlost} jsou přidávány nové záznamy. Jakmile se lokomotiva rozjede na
+rychlost $> v_{min}$, program má informaci o tom, který rychlostní stupeň
+odpovídá minimální rychlosti lokomotivy a přechází do další fáze.
 
 V další fázi zkouší program výkony řádově $64-255$ a dokud nenaměří rychlost
 vyšší než je uživatelem zadaná maximální rychlost, zkouší dál.
@@ -206,7 +230,11 @@ vyšší než je uživatelem zadaná maximální rychlost, zkouší dál.
 Na konci této fáze má program představu o tom, kterému rychlostnímu stupni
 odpovídá minimální rychlost a kterému maximální rychlost.
 
+V této fázi je rychlost lokomotivy měřena v režimu \textit{LT} (viz kapitolu
+\ref{sec:ac:lt-measure}}.
 
 \subsubsection{Kalibrace jízdních stupňů}
+
+
 
 \subsubsection{Interpolace}
