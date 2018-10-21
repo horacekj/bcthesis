@@ -3,7 +3,7 @@ BIB=bibliography.bib
 PDFLATEX=pdflatex --shell-escape
 AUXFILES=*.aux *.log *.out *.toc *.lot *.lof *.bcf *.blg *.run.xml \
          *.bbl *.idx *.ind *.ilg *.markdown.*
-PARTS=uvod.tex prehled.tex pozadavky.tex merici-vuz.tex sw.tex appendix.tex
+PARTS=uvod.tex prehled.tex pozadavky.tex merici-vuz.tex sw.tex appendix.tex zaver.tex
 GRAPHS=$(patsubst data/graph/%.csv, graph/%.tex, $(wildcard data/graph/*.csv))
 DATA=$(wildcard data*)
 
