@@ -88,3 +88,125 @@ I přes původní snahy je nutné pro užití knihovny v projektu využít frame
 
 \section{Automatic Calibration}
 \label{sec:sw-wsm-auto-calib}
+
+Program \textit{Automatic Calibration} umožňuje automaticky provést proces
+kalibrace. V souladu s požadavky kladenými na výsledné sofwarové řešení
+umožňuje
+
+\begin{compactitem}
+\item připojení k centrále XpressNET a měřicímu vozu WSM,
+\item ruční řízení libovolnho hnacího vozidla,
+\item vyčítání základních CV lokomotivy,
+\item načtení závislosti rychlostní stupeň -- rychlost ze souboru dle požadavků
+uživatele,
+\item plně automatickou kalibrace rychlostní tabulky,
+\item poloautomatickou kalibraci brzdných křivek,
+\item konfiguraci parametrů kalibrace konfiguračním suborem,
+\item zobrazení průběhu kalibrace a umožnění přerušení a obnovení kalibrace,
+\item načtení a uložení profilu lokomotivy do souboru,
+\item zobrazení grafu závislosti rychlosti na výkonu motoru.
+\end{compactitem}
+
+Grafické uživatelské rozhraní aplikace je zachyceno na obrázku \ref{fig:ac-gui}.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{data/ac_progress.png}
+\caption{Hlavní okno programu Automatic Calibration.}
+\label{fig:ac-gui}
+\end{figure}
+
+Veškeré programování probíhá v režimu \textit{POM} (\textit{Programming on
+Main}), který umožňuje, ačkoliv se nepředpokládá, že se tato možnost využije,
+programování za plného provozu kolejiště.\footnote{DCC centrála umí programovat
+dekodér ve dvou režimech: (1) programování na programovací koleji, (2)
+\textit{Programming on Main -- POM}. Jedině na programovací koleji lze vyčítat
+CV, při zvolení režimu \textit{POM} není možné přenášet data z lokomotivy zpět
+do centrály.  Lokomotiva tedy ani nepotvrdí přijetí dat, centrála ale předem
+počítá s případnou nespolehlivostí sbírání a proto radši posílá POM příkazy
+dekodéru několikrát.  V praxi se problém chybějící odezvy neukazuje zásadní.
+Při programování na prog.  koleji také typicky není možný provoz na kolejišti.}
+Režim \textit{POM} byl zvolen zejména z toho důvodu, že při programování není
+lokomotivu nutné zastavovat (oproti programování na prog. koleji), takže
+kalibrace rychlostí může být výrazně rychlejší.
+
+Aplikace je postavená na objektovém modelu, v aplikaci je několik tříd
+založených na modelu \textit{singleto}, kde každá třída má jednu konkrétní
+odpovědnost. Diagram tříd je zobrazen na obrázku
+\ref{ac-classes}.
+
+\begin{figure}[h]
+\includegraphics[width=0.7\textwidth]{data/ac_classes.pdf}
+\caption{GUI programu WSM Speed Reader.}
+\label{fig:ac-classes}
+\end{figure}
+
+Centrální třídou je třída obsluhující hlavní okno (\texttt{MainWindow}),
+v~projektu jsou dále knihovny umožňující komunikaci s periferiemi (žluté),
+nad těmito knihovnami jsou správci kalibrace (modré třídy). V projektu jsou
+dále pomocné třídy (zelené), které jsou využívány v prakticky celé aplikaci.
+Projekt je navržen tak, aby pouze červené třídy byly propojené s GUI, zbylé
+třídy mezi sebou komunikují pomocí volání funkci a Qt signálů.
+
+Třída \texttt{SpeedMap} udržuje mapu \textit{rychlostní stupeň: žádaná rychlost},
+třída \texttt{PowerMap} pak udržuje mapu \textit{výkon motoru: reálná rychlost}.
+
+O kalibraci rychlostních křivek se stará třída \texttt{CalibMan}. Kalibrace
+je rozdělena do několika fází.
+
+\begin{enumerate}
+\item Zapsání základních CV.
+\item Program si vytvoří základní přehled o tvaru křivky \textit{výkon motoru:
+      reálná rychlost}.
+\item Kalibrace jednotlivých jízdních stupňů.
+\item Interpolace nekalibrovaných stupňů.
+\end{enumerate}
+
+Před začátkem kalibrace je nutné mít v SW načtenou mapu \textit{rychlostní
+stupeň: žádaná rychlost}. Tato mapa je načítána z \texttt{csv} souboru a je
+možné definovat v ní pouze nějaké jízdní stupně. Zbylé jízdní stupně se
+interpolují ze sousedních nakalibrovaných hodnot nebo se nastaví manuálně.
+Tato mapa je vlastností kolejiště, proto se načítá jen jednou.
+
+Před kalibrací navíc uživatel zadá maximální kalibrovanou rychlost. Tato rychlost
+je vlastností konkrétního hnacího vozidla, proto je možné ji ovlivnit před
+každou jednotlivou kalibrací. Maximální rychlost spolu s akcelerací a decelerací
+a oběma mapami jsou ukládány do \texttt{xml} souboru definice hnacího vozidla,
+jehož formát byl záměrně převzat ze SW JMRI \ref{CITE}, aby bylo možné soubory
+mezi těmito programy navzájem přenášet.
+
+Další parametry, jako je například umístění zařízení sériového portu centrály
+či maximální povolená odchylka kalibrace jsou načítání z jediného společného
+konfiguračního souboru.
+
+\subsection{Fáze kalibrace}
+
+\subsubsection{Zapsání základních CV}
+
+V této krátké fázi program nastaví do lokomotivy základní CV. Vypne rozjezdy a
+dojezdy a nastaví škálovací parametry rychlostních křivek\footnote{Některé
+dekodéry umožňují navíc zadat parametr, který určuje, jaké reálné střídě
+signálu udpovídá hodnota $255$ výkonu motoru, čímž chtějí umožnit
+škálování celé rychlostní tabulky bez nutnosti změnit výkon odpovídající
+každému rychlostnímu stupni.} tak, aby výkony $0$--$255$ reálně pokrývaly celé
+spektrum stříd signálů do motoru.
+
+
+\subsubsection{Vytvoření přehledu}
+O tento krok se stará třída \texttt{CalibOverview}.
+Lokomotivě je nastaven rychlostní stupeň $2$ a na tento stupeň je zapsán výkon
+$10/255$. Následně proběhne měření rychlosti. Dokud je rychlost lokomotivy příliš
+malá, výkon je postupně zdvojnásobován a do mapy \textit{výkon: rychlost} jsou
+přidávány nové záznamy. Jakmile se lokomotiva rozjede na rychlost $> v_{min}$,
+program má informaci o tom, který rychlostní stupeň odpovídá minimální rychlosti
+lokomotivy a přechází do další fáze.
+
+V další fázi zkouší program výkony řádově $64-255$ a dokud nenaměří rychlost
+vyšší než je uživatelem zadaná maximální rychlost, zkouší dál.
+
+Na konci této fáze má program představu o tom, kterému rychlostnímu stupni
+odpovídá minimální rychlost a kterému maximální rychlost.
+
+
+\subsubsection{Kalibrace jízdních stupňů}
+
+\subsubsection{Interpolace}
