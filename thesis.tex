@@ -31,6 +31,7 @@
 \usepackage{amsfonts}
 \usepackage{url}      %% Hyperlinks
 \usepackage{listings} %% Source code highlighting
+\usepackage{enumitem}
 \lstset{
   basicstyle      = \ttfamily,%
   identifierstyle = \color{black},%
@@ -45,6 +46,13 @@
 
 \setlength{\parindent}{0cm}
 \setlength{\parskip}{3mm plus2pt minus2pt}
+\setlist{leftmargin=8mm}
+\renewenvironment{compactenum}
+	{\begin{enumerate}[leftmargin=8mm,itemsep=0pt,parsep=1pt,topsep=1pt,partopsep=1pt]}
+	{\end{enumerate}}
+\renewenvironment{compactitem}
+	{\begin{itemize}[leftmargin=8mm,itemsep=0pt,parsep=0pt,topsep=1pt,partopsep=1pt]}
+	{\end{itemize}}
 
 \chapter{Úvod} \label{chap:uvod}
 \input{uvod}
