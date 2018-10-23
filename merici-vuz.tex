@@ -14,8 +14,8 @@ který umožňuje úpravy její elektroniky nejvýše na úrovní výměny digit
 dekodéru DCC. Lokomotiva obvykle bývá vybavena deskou plošných spojů, která
 propojuje jednotlivé součásti lokomotivy (motor, koleje, dekodér, osvětlení,
 ...). Tato deska je specifická pro konkrétní model a~dodává ji výrobce hnacího
-vozidla. Zasahovat do elektroniky lokomotivy je tedy vysoce nepraktické a
-mnohdy i~nemožné.
+vozidla. Zasahovat do elektroniky lokomotivy je tedy vysoce nepraktické
+a~mnohdy i~nemožné.
 
 Druhou možností je doplnit detektor do lokomotivy bez úpravy její elektroniky.
 To s~sebou ale nese pořád tu nevýhodu, že je třeba mechanicky zasahovat do
@@ -124,8 +124,8 @@ Navíc se ukázalo, že hloubka ostrosti senzoru je nejvýše $1$~mm, což reál
 znemožňovalo měřit rychlost na kolejích, které nejsou zasypány štěrkem, ale
 pouze připevněny k~podložce. Složitý optický senzor tak degradoval na zařízení,
 jehož funkci by v~podstatě šlo obstarat pomocí jedné LED diody a~jednoho
-fototranzistoru \footnote{Stačí jednoduše měřit intenzitu odraženého světla a
-zkoumat, jestli je senzor zrovna na pražci nebo mezi pražci.}.
+fototranzistoru \footnote{Stačí jednoduše měřit intenzitu odraženého světla
+a~zkoumat, jestli je senzor zrovna na pražci nebo mezi pražci.}.
 
 Po několika měsících pokusů o~zprovoznění měření optickým senzorem autor naznal,
 že s~tímto typem senzoru nebude schopen garantovat přesné a~spolehlivé měření.
@@ -152,8 +152,8 @@ rozestupu paprsků a~malé velikosti kola. Průměr kola by totiž neměl přes�
 $6$~mm (pro měřítko TT, 1:120).
 
 Tato technologie sice obsahuje mechanické prvky, ale pořád je jich poměrně
-málo. Při dostatečném počtu paprsků dosahuje dobré přesnosti, je jednoduchá, a
-tudíž jsou data z~ní snadno zpracovatelná. Optozávora je také levná a~relativně
+málo. Při dostatečném počtu paprsků dosahuje dobré přesnosti, je jednoduchá,
+a~tudíž jsou data z~ní snadno zpracovatelná. Optozávora je také levná a~relativně
 snadno dostupná.
 
 Ze všech zvažovaných technologií autor nakonec zvolil právě technologii
@@ -265,8 +265,8 @@ který přijímá signál z~měřícího vozu přes WiFi, být zároveň připoj
 internet (přes WiFi). A~to je nanejvýš nepraktické.
 
 Bluetooth na \textit{ESP-32} fungoval zdárně. Na ESP se podařilo aktivovat Bluetooth SPP
-profil \cite{spp:specs}, takže se zařízení poměrně snadno spárovalo s~počítačem a
-tvářilo se jako sériová linka. Profil SPP byl vybrán, protože má
+profil \cite{spp:specs}, takže se zařízení poměrně snadno spárovalo s~počítačem
+a~tvářilo se jako sériová linka. Profil SPP byl vybrán, protože má
 poměrně dobrou implementaci na celé škále operačních systémů a~vytváří dobrou
 abstrakci pro použití z~jakéhokoliv programu. Téměř na každém operačním systému
 je totiž možné \uv{otevřít sériovou linku}. Pokud by se podařilo zvolit pro
@@ -394,8 +394,8 @@ napájecí napětí procesoru, které by mělo kolísat nejvýše $\pm 2$ \%
 Součástí schématu je dále nabíjecí obvod \textit{MCP73831}, který byl vybrán
 zejména pro jeho velice malé rozměry.
 
-Za nabíjecím obvodem je ochrana proti přepólování (tranzistor \textit{T1A}) a
-dále zapínací a~vypínací obvod celé elektroniky. Tento obvod je inspirován
+Za nabíjecím obvodem je ochrana proti přepólování (tranzistor \textit{T1A})
+a~dále zapínací a~vypínací obvod celé elektroniky. Tento obvod je inspirován
 projektem \textit{RB3201} \cite{rb3201} od kolegů z~Robotiky Brno
 \cite{roboticsbrno}.
 
@@ -505,8 +505,8 @@ Kompletní specifikace protokolu je k~dispozici online
 \section{Firmware}
 \label{sec:wsm-fw}
 
-Na poli Embedded System mezi programovacími jazyky dominují zejména jazyky C a
-C++ a~to především díky přímočarému provázání příkazů jazyka přímo
+Na poli Embedded System mezi programovacími jazyky dominují zejména jazyky C
+a~C++ a~to především díky přímočarému provázání příkazů jazyka přímo
 s~výpočetními prostředky a~periferiemi mikrokontroléru. Z~relativní
 jednoduchosti úkonů, které bude procesor řešit, plyne také poměrně malá
 velikost jeho programu. Spolu s~faktem, že s~programováním procesorů rodiny
@@ -674,8 +674,8 @@ autor se jeho vlivu obával už při prvních teoretických návrzích vozu. Poz
 se však ukázalo, že při kalibrování na oválu o~dostatečně velkých poloměrech
 oblouků je změna rychlosti vlivem průjezdu obloukem minimální, resp. BEMF ji
 okamžitě vykompenzuje. Pokud by uživatel přeci jenom chtěl kalibrovat na
-obloucích o~malých poloměrech, nabízí se možnost výběru používaných a
-nepoužívaných měřicích úseků na kalibračním okruhu. Stručně řečeno se bude
+obloucích o~malých poloměrech, nabízí se možnost výběru používaných
+a~nepoužívaných měřicích úseků na kalibračním okruhu. Stručně řečeno se bude
 měřit rychlost jen ve vybraných úsecích (typicky rovných úsecích), údaj
 o~poloze vozidla bude založen na vyčítání ujeté vzdálenosti vozidla, viz sekci
 \ref{sec:wsm-mer-princip}.
