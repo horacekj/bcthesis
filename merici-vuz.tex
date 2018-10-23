@@ -1,15 +1,15 @@
-Tato kapitola popisuje celkovou koncepci vlastního senzoru pro měření
+Tato kapitola popisuje celkovou koncepci vlastního detektoru pro měření
 rychlosti hnacího vozidla -- tzv. měřicího vozu. Dále popisuje
-a zdůvodňuje rozhodnutí, která autor při konstrukci senzoru zvolil.
+a zdůvodňuje rozhodnutí, která autor při konstrukci detektoru zvolil.
 
 V~kontextu následujícího textu si autor dovoluje připomenout Požadavky
 na řešení (kapitola \ref{chap:pozadavky}).
 
-\section{Umístění senzoru}
+\section{Umístění detektoru}
 \label{sec:wsm-senzor-umisteni}
 
-Prozkoumejme nejprve kam je a~kam není možno senzor umístit. Určitě platí, že
-senzor není možné umístit do lokomotivy. Lokomotiva je totiž komerční produkt,
+Prozkoumejme nejprve kam je a~kam není možno detektor umístit. Určitě platí, že
+detektor není možné umístit do lokomotivy. Lokomotiva je totiž komerční produkt,
 který umožňuje úpravy její elektroniky nejvýše na úrovní výměny digitálního
 dekodéru DCC. Lokomotiva obvykle bývá vybavena deskou plošných spojů, která
 propojuje jednotlivé součásti lokomotivy (motor, koleje, dekodér, osvětlení,
@@ -17,17 +17,18 @@ propojuje jednotlivé součásti lokomotivy (motor, koleje, dekodér, osvětlen�
 vozidla. Zasahovat do elektroniky lokomotivy je tedy vysoce nepraktické a
 mnohdy i~nemožné.
 
-Druhou možností je doplnit senzor do lokomotivy bez úpravy její elektroniky.
+Druhou možností je doplnit detektor do lokomotivy bez úpravy její elektroniky.
 To s~sebou ale nese pořád tu nevýhodu, že je třeba mechanicky zasahovat do
 (poměrně drahé) lokomotivy.
 
-Třetí možností je umístit senzor mimo hnací vozidlo. Senzor může být
+Třetí možností je umístit detektor mimo hnací vozidlo. Detektor může být
 umístěn na kolejiště staticky (podobně jako v~\ref{sec:det-static}) nebo může
-být součástí vagónu připojeného za lokomotivou. Statické senzory jsou nevyhovující
-zejména proto, že neumožňují provádění dokalibrace za skutečného provozu.
+být součástí vagónu připojeného za lokomotivou. Statické detektory jsou
+nevyhovující zejména proto, že neumožňují provádění dokalibrace za skutečného
+provozu.
 
 Jako nejvhodnější řešení se tedy jeví vyrobit vůz, který se připojí ke kalibrované
-lokomotivě jako běžný vagón. Součástí tohoto vozu bude senzor pro měření
+lokomotivě jako běžný vagón. Součástí tohoto vozu bude detektor pro měření
 rychlosti. Vůz pak bude možné připojit bez narušení provozu i~za vlak na
 \uv{produkčním} kolejišti.
 
