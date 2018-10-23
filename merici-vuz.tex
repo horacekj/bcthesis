@@ -1,6 +1,6 @@
 Tato kapitola popisuje celkovou koncepci vlastního detektoru pro měření
 rychlosti hnacího vozidla -- tzv. měřicího vozu. Dále popisuje
-a zdůvodňuje rozhodnutí, která autor při konstrukci detektoru zvolil.
+a~zdůvodňuje rozhodnutí, která autor při konstrukci detektoru zvolil.
 
 V~kontextu následujícího textu si autor dovoluje připomenout Požadavky
 na řešení (kapitola \ref{chap:pozadavky}).
@@ -13,7 +13,7 @@ detektor není možné umístit do lokomotivy. Lokomotiva je totiž komerční p
 který umožňuje úpravy její elektroniky nejvýše na úrovní výměny digitálního
 dekodéru DCC. Lokomotiva obvykle bývá vybavena deskou plošných spojů, která
 propojuje jednotlivé součásti lokomotivy (motor, koleje, dekodér, osvětlení,
-...), tato deska je specifická pro konkrétní model a~dodává ji výrobce hnacího
+...). Tato deska je specifická pro konkrétní model a~dodává ji výrobce hnacího
 vozidla. Zasahovat do elektroniky lokomotivy je tedy vysoce nepraktické a
 mnohdy i~nemožné.
 
@@ -42,7 +42,7 @@ Důležitou součástí měřicího vozu je rychlostní senzor. Zvolená technol
 senzoru ovlivňuje formát a~přesnost měření, dále pak mechanicko-elektrické
 vlastnosti měřicího vozu, jeho cenu, snadnost výroby, opakovatelnost výroby
 (dostupnost součástek s~výhledem na několik let) a~v~neposlední řadě
-poruchovost a~servisovatelnost měřicího vozu.
+poruchovost a~opravitelnost měřicího vozu.
 
 Autor uvážil několik dostupných technologií senzorů.
 
@@ -51,14 +51,15 @@ Autor uvážil několik dostupných technologií senzorů.
 
 První uváženou technologií jsou tzv. \textit{magnetické poziční senzory}.
 Tyto senzory fungují na bázi hallových sond. Umí měřit úhel natočení objektu
-vzhledem k~senzoru. Jejich primárním účelem je měřit natočení nejrůznějších
-ramen, či prvků ovládaných např. servomotory, opakovaným měřením natočení lze
-ale dosáhnout také velice přesného měření rychlosti. Princip těchto senzorů
-dobře ilustruje obrázek \ref{fig:magnetic-sensor}.
+vzhledem k~senzoru na základě magnetického pole. Jejich primárním účelem je
+měřit natočení nejrůznějších ramen, či prvků ovládaných např. servomotory,
+opakovaným měřením natočení lze ale dosáhnout také velice přesného měření
+rychlosti. Princip těchto senzorů dobře ilustruje obrázek
+\ref{fig:magnetic-sensor}.
 
 \begin{figure}[h]
 \includegraphics[width=0.5\textwidth]{data/magnetic_sensor.png}
-\caption{Ukázka principu činnosti magnetického senzoru, převzato
+\caption{Senzor AS5304 měřící natočení obruče na základě počítání pólů. Převzato
 z~\cite{as5306}.}
 \label{fig:magnetic-sensor}
 \end{figure}
@@ -71,19 +72,18 @@ musel být umístěn z~boku vozu, což by výrazně snižovalo jeho stabilitu.
 Existují ale i~senzory, které se montují přímo na osu rotujícího předmětu viz
 například senzor \textit{AS5306} \cite{as5306}. Takový senzor by pro účel této
 práce byl nejvhodnější. Nepříznivým faktem ale je, že tyto senzory vyžadují
-magnetický disk, z~nichž nejmenší dosahují průměrů řádově $15\ mm$
+magnetický disk, přičemž ten nejmenší dosahuje průměru řádově $15$~mm
 \cite{magnets}. Tento průměr je pro modelovou železnici bohužel příliš velký.
 
 \subsection{Magnetický senzor \uv{cykloměřič}}
 \label{subsec:wsm-senzor-cyclo}
 
 Technologie tzv. \uv{cykloměřiče} byla historicky první metodou jak měřit
-rychlost modelové lokomotivy. Tento senzor autor dokonce viděl v~praxi, je
-založený na stejném principu jako počítač rychlosti na cyklistickém kole.  Na
-osu nápravy je upevněn magnet, ve voze je pak hallova sonda. Magnet vyvolá při
-průchodu kolem hallovy sondy zákmit v~magnetickém poli, který tato sonda
-detekuje. Na jednu otáčku nápravy tak připadá jeden zákmit, cyklopočítač pak
-počítá počty zákmitů.
+rychlost modelové lokomotivy. Tento senzor je založený na stejném principu jako
+počítač rychlosti na cyklistickém kole. Na osu nápravy je upevněn magnet, ve
+voze je pak hallova sonda. Magnet vyvolá při průchodu kolem hallovy sondy
+zákmit v~magnetickém poli, který tato sonda detekuje. Na jednu otáčku nápravy
+tak připadá jeden zákmit, cyklopočítač pak zaznamenává počty zákmitů.
 
 Toto řešení je poměrně jednoduché na instalaci, množství mechanických prvků je
 malé, na druhou stranu ale poskytuje poměrně malou přesnost -- zejména při
@@ -94,9 +94,9 @@ práce také nejeví jako vhodná.
 \label{subsec:wsm-senzor-opto}
 
 Třetí zvažovanou technologií je optický senzor. Tento senzor je proslulý svým
-užitím v~optických myších, pracuje na principu snímání obrazu podložky CCD
+užitím v~optických myších. Pracuje na principu snímání obrazu podložky CCD
 čipem a~porovnávání dvou obrazů pořízených v~krátkém časovém intervalu za
-sebou. Ze dvou obrazů je pak určen rozdíl polohy myši. \footnote{Zajímavostí
+sebou. Ze dvou obrazů je pak určen rozdíl polohy myši.\footnote{Zajímavostí
 je, že celá logika porovnávání dvou obrazů je v~takovýchto senzorech
 implementována hardwarově.}
 
@@ -119,8 +119,8 @@ AV ČR se však povedlo dostatečně malou čočku obstarat.
 
 První měření ukázala, že pro dobrou funkci senzoru je třeba poměrně kontrastní
 snímaná plocha a~poměrně intenzivní červené světlo (na to je CCD čip v~senzoru
-nejcitlivější \footnote{Proto si optická myš přisvětluje červeným světlem.})
-Navíc se ukázalo, že hloubka ostrosti senzoru je nejvýše $1\ mm$, což reálně
+nejcitlivější\footnote{Proto si optická myš přisvětluje červeným světlem.}).
+Navíc se ukázalo, že hloubka ostrosti senzoru je nejvýše $1$~mm, což reálně
 znemožňovalo měřit rychlost na kolejích, které nejsou zasypány štěrkem, ale
 pouze připevněny k~podložce. Složitý optický senzor tak degradoval na zařízení,
 jehož funkci by v~podstatě šlo obstarat pomocí jedné LED diody a~jednoho
@@ -143,16 +143,16 @@ komplexnost senzoru a~neschopnost ovlivňovat a~debugovat procesy uvnitř něj.
 \end{figure}
 
 Čtvrtá uvažovaná technologie senzorů je inspirována návrhem od kolegy modeláře
-Petra Trávníka. Jejím základem je paprskové kolo \ref{fig:wheel}
+Petra Trávníka. Jejím základem je paprskové kolo (viz obr. \ref{fig:wheel})
 upevněné na nápravě měřicího vozu. Paprskové kolo se otáčí spolu s~nápravou,
 k~vozu je pak připevněna optozávora, která snímá průchod jednotlivých paprsků.
 Klíčovým faktorem pro použitelnost této technologie jsou zejména technické
 možnosti výroby dostatečného množství paprsků při zajištění rovnoměrnosti
 rozestupu paprsků a~malé velikosti kola. Průměr kola by totiž neměl přesáhnout
-$6\ mm$ (pro měřítko TT, 1:120).
+$6$~mm (pro měřítko TT, 1:120).
 
 Tato technologie sice obsahuje mechanické prvky, ale pořád je jich poměrně
-málo, při dostatečném počtu paprsků dosahuje dobré přesnosti, je jednoduchá, a
+málo. Při dostatečném počtu paprsků dosahuje dobré přesnosti, je jednoduchá, a
 tudíž jsou data z~ní snadno zpracovatelná. Optozávora je také levná a~relativně
 snadno dostupná.
 
@@ -163,17 +163,17 @@ Nejvhodnější technologií pro výrobu takového kola je zřejmě leptání, p
 autor však nemá k~této technologii přístup, rozhodl se místo jednotlivých
 paprsků kolo vyrobit dírkované. Jako vhodný kompromis bylo stanoveno
 8 dírek na kolo, přičemž chyba v~umístění jedné dírky byla výrobou stanovena na
-nejvýše $0.05\ mm$. To jsou poměrně dobré výsledky.
+nejvýše $0,05$~mm. To jsou poměrně dobré výsledky.
 
 Výkres kola je zobrazen v příloze \ref{fig:final-wheel}.
 
 Drobným problémem pak bylo sehnat dostatečně malou optozávoru. Běžné optozávory
-dostupné v~českých obchodech dosahují rozměrů cca $15\times6\times10\ mm$
+dostupné v~českých obchodech dosahují rozměrů cca $15\times6\times10$~mm
 \footnote{Viz například
 \url{https://www.gme.cz/optozavory-reflexni-optocleny}}. To je pro účely vozu
 v~měřítku 1:120 zcela nepřijatelné. Po
 průzkumu možných alternativ byl nakonec vybrán senzor
-GP1S23\cite{gp1s23:datasheet}, který byl dříve hojně montován do disketových
+GP1S23 \cite{gp1s23:datasheet}, který byl dříve hojně montován do disketových
 mechanik. Dnes je senzor běžně dostupný například na modulu k~vývojové desce
 Arduino pod označením \textit{KY-010} \cite{ky-010}.
 
@@ -190,7 +190,7 @@ napájení. Pro napájení elektroniky jsou 3 možnosti.
 \end{compactenum}
 
 Výhody a~nevýhody jsou poměrně jasné: baterie má omezenou výdrž, napájení
-z~kolejí je jistota. Na tomto místě je ale třeba zmínit, že napětí v~kolejích
+z~kolejí je stálé. Na tomto místě je ale třeba zmínit, že napětí v~kolejích
 sice je (téměř) trvale přítomné, ale zajistit jeho spolehlivé sbírání je
 skutečně výzva. Sbírání je typicky realizováno plíšky s~kontakty na kola.
 Na základě odhadnuté spotřeby měřicího vozu (viz níže) byla vytvořena modelová
@@ -205,9 +205,9 @@ probíhá měření rychlosti, naprosto nemyslitelné. Zátěž byla napájena c
 hmotnost pro zlepšení kontaktu vozu s~kolejemi.
 
 Na základě těchto měření i~autorových předchozích zkušeností se sbíráním
-u~přípojných vozů bylo rozhodnuto, že tudy cesta nevede. Později byla zvažována
-řešení zahrnující baterie i~sbírání, ale tato řešení se ukázala jako příliš
-komplikovaná.
+u~přípojných vozů bylo rozhodnuto zkonstruovat vůz bez sbírání. Později byla
+zvažována řešení zahrnující baterie i~sbírání dohromady, tato řešení se ale
+ukázala jako příliš komplikovaná.
 
 Poslední alternativou tedy zůstala baterie. Výzvou při použití baterie je
 vměstnat co největší baterii do malého prostoru vozu. Minimální doba kalibrace
@@ -230,9 +230,10 @@ příjemce je pro účely této práce počítač, pokud se však podaří vybra
 technologii, aby data mohla být přenášena například i~na mobilní telefon či
 tablet, bude to pro měřicí vůz jen výhodou. Autor se proto rozhodl vyhnout se
 proprietárním řešením pro bezdrátový přenos dat a~cílit na technologie, které
-jsou běžně dostupné, ideálně přímo zabudované v~dnešních počítačích. Dalším
-argumentem pro toto rozhodnutí je to, že nutnost pořizovat (natož stavět!)
-přijímač by zvyšoval jak finanční tak výrobní náročnost celého projektu.
+jsou běžně dostupné, ideálně přímo zabudované v~dnešních počítačích.
+V~neposlední řadě je třeba zmínit, že nutnost pořizovat či stavět přijímač by
+zvyšovala náročnost celého projektu, a to jak po stránce finanční, tak po
+stránce výrobní.
 
 S~tímto vědomím přicházejí v~úvahu 2 technologie:
 
@@ -258,8 +259,8 @@ který lze taktovat až na 240 MHz a~to dokonce na dvou jádrech!
 Autor pořídil \textit{ESP-32} vývojový kit a~začal zkoušet možnosti komunikace. Jako
 primární komunikační kanál byl vybrán Bluetooth, jelikož vyžaduje oproti WiFi
 menší režii spojenou s~ustanovením spojení. Tento problém by šel u~WiFi řešit
-tím, že se měřicí vůz nepřipojuje k~již existující síti, ale sám síť vytváří,
-negativem tohoto přístupu je však ale to, že typicky není možné na počítači,
+tím, že se měřicí vůz nepřipojuje k~již existující síti, ale sám síť vytváří.
+Negativem tohoto přístupu je však ale to, že typicky není možné na počítači,
 který přijímá signál z~měřícího vozu přes WiFi, být zároveň připojený do sítě
 internet (přes WiFi). A~to je nanejvýš nepraktické.
 
@@ -273,7 +274,7 @@ vývoj aplikace na počítač takový framework, který zvládá abstrahovat sé
 port nezávisle na cílové platformě, vzniklá aplikace by byla dokonale
 multiplatformní.
 
-Po nasazení profilu SPP se však ukázalo, že spotřeba \textit{ESP-32} je cca $80\ mA$,
+Po nasazení profilu SPP se však ukázalo, že spotřeba \textit{ESP-32} je cca $80$ mA,
 což jej dělá -- v~kontextu napájení z~baterie -- nepoužitelným. Bylo zvažováno
 využít specifikace \textit{BLE (Bluetooth Low Energy)}, BLE však nemá
 profil pro sériovou linku, takže by bylo nutné vytvořit profil vlastní. To
@@ -281,9 +282,9 @@ by znamenalo dodat specifikaci profilu do klientského zařízení (do počíta�
 a místo abstrakce sériovou linkou přistupovat přímo k~zařízení Bluetooth.
 Toto řešení bylo zamítnuto pro příliš velkou pracnost a~ztrátu elegance.
 
-Autor ještě chvíli zvažoval, jak problém se spotřebou řešit pomocí sbírání či
+Autor ještě zvažoval, jak problém se spotřebou řešit pomocí sbírání či
 zvětšení baterie, všechna navrhovaná řešení však byla příliš komplikovaná nebo
-nefungovala dobře. Po několika týdnech testování tak bylo ESP-32 zavrhnuto.
+nefungovala dobře. ESP-32 tak bylo zavrhnuto.
 
 \subsection{ATmega + HC-05}
 \label{subsec:wsm-atmega}
@@ -291,27 +292,28 @@ nefungovala dobře. Po několika týdnech testování tak bylo ESP-32 zavrhnuto.
 Druhou volbou byla autorovi dobře známá rodina procesorů s~architekturou
 \textit{AVR} názvu \textit{ATmega} \cite{avr}. Procesory rodiny \textit{ATmega}
 jsou univerzální nízkopříkonové procesory, které jsou základem například
-vývojové desky Arduino \cite{arduino}. Volba na tuto rodinu procesorů padla
-také z~toho důvodu, že s~jejím programováním má autor předchozí zkušenosti.
+vývojové desky Arduino \cite{arduino}. Rodina procesorů \textit{ARmega} byla
+zvolena také z~toho důvodu, že s~jejím programováním má autor předchozí
+zkušenosti.
 
 Procesory \textit{ATmega} ale bohužel neobsahují vestavěný modul pro
-bezdrátovou komunikaci.  Bylo tedy nutné využít externí Bluetooth modul
-propojený s~procesorem pomocí sběrnice. Při výběru modulu padla jasná volba na
+bezdrátovou komunikaci. Bylo tedy nutné využít externí Bluetooth modul
+propojený s~procesorem pomocí sběrnice. Pro tento účel byl zvolen
 běžně dostupný BT modul typu \textit{HC-05}. Výhodou tohoto modulu je jeho
 dostupnost a~nízká cena, nevýhodou je to, že modul trpí neduhy typickými pro
-celou řadu v~Číně vyráběných zařízení. K~modulu například není k~dispozici
+celou řadu zařízení vyráběných v~Číně. K~modulu například není k~dispozici
 kvalitní dokumentace a~v~Česku je to s~jeho dostupností horší. Každopádně
 -- co se týče světové dostupnosti -- je na tom modul \textit{HC-05} velice
 dobře. Autor zvažoval ještě další moduly (\textit{HC-06}, \textit{HC-07}), tyto
 moduly by však pro účel této práce nepřinesly žádnou zásadní výhodu.
 
 Autor experimentálně změřil, že spotřeba nespárovaného \textit{HC-05} modulu je
-$42\ mA \pm 0.2\ mA$, spotřeba spárovaného modulu je $20\ mA \pm 2\ mA$. To
-jsou oproti ESP-32 výrazně příjemnější čísla. Navíc se podařilo zajistit
-spolehlivou funkci optozávory již při proudu $10\ mA$, což je polovina proudu,
+$42$ mA $\pm$ $0,2$ mA, spotřeba spárovaného modulu je $20\ mA \pm 2$ mA. To
+jsou oproti ESP-32 výrazně příznivější čísla. Navíc se podařilo zajistit
+spolehlivou funkci optozávory již při proudu $10$ mA, což je polovina proudu,
 na který je senzor dimenzován \cite{gp1s23:datasheet}. S~přihlédnutím ke
 spotřebě procesoru a~dalších drobných součástek by se měla pohybovat celková
-spotřeba vozu kolem cca $30\ mA$. Tato spotřeba byla uznána jako přijatelná.
+spotřeba vozu kolem cca $30$ mA. Tato spotřeba byla uznána jako přijatelná.
 
 Pro konstrukci měřicího vozu byla tedy vybrána platforma \textit{ATmega}
 s~Bluetooth modulem \textit{HC-05}.
@@ -344,13 +346,13 @@ TODO
 \label{fig:vuz-nakres}
 \end{figure}
 
-Rozměr plošiny vozu je $20\times80\ mm$, což umožnilo instalaci LiPol baterie
+Rozměr plošiny vozu je $20\times80$~mm, což umožnilo instalaci LiPol baterie
 o~kapacitě $500 mAh$ (napětí $3.7\ V$). Teoretická výdrž vozu je tedy cca $15$
 hodin. Je však nutno poznamenat, že toto číslo je pouze teoretické, spotřeba
 zařízení se výrazně liší ve spárovaném a~nespárovaném stavu, navíc níže
 zjistíme, že baterii nevybíjíme až na její hranice. Předestřeme však již nyní
 naměřenou hodnotu, tj. že spárovaný vůz vydržel reálně komunikovat $14$ hodin.
-To je velice uspokojivé číslo.
+To je velice uspokojivý výsledek.
 
 \section{Elektronika}
 \label{sec:wsm-ele}
@@ -374,7 +376,8 @@ přepólování, nesprávného zacházení s~baterií ze strany uživatele a~mec
 poškození vozu vlivem časté manipulace s~kabely a~konektory.
 
 Schéma desky plošných spojů je k~nahlédnutí v~příloze \ref{fig:wsm-sch}. Nyní
-krátce popišme jednotlivé prvky schématu a~jak přispívají k~naplnění požadavků.
+budou krátce popsány jednotlivé prvky schématu a~jak tyto prvky přispívají
+k~naplnění požadavků.
 
 Hlavní součástkou na DPS je procesor \textit{ATmega328p}
 \cite{atmega328p:datasheet}.  Tento konkrétní typ byl vybrán, protože je
@@ -385,7 +388,7 @@ speciálně určen k~tomu, aby přesně a~rychle měřil periodu vstupního sign
 Procesor dále měří napětí na baterce, které je ale nejprve nutné srazit
 napěťovým děličem. Při vývoji hardwaru byla v~jednu chvíli překážkou přesnost
 napěťové reference, nakonec ale byla zvolena jako napěťová reference přímo
-napájecí napětí procesoru, které by mělo kolísat nejvýše $\pm 2\ \%$
+napájecí napětí procesoru, které by mělo kolísat nejvýše $\pm 2$ \%
 \cite{ldo:datasheet}.
 
 Součástí schématu je dále nabíjecí obvod \textit{MCP73831}, který byl vybrán
@@ -397,16 +400,15 @@ projektem \textit{RB3201} \cite{rb3201} od kolegů z~Robotiky Brno
 \cite{roboticsbrno}.
 
 Napětí pro procesor je vytvářeno obvodem LDO\footnote{Low-dropout regulator}
-(obvod \textit{IC3}), procesor pracuje na napětí $3.3\ V$. Tato konstrukce
+(obvod \textit{IC3}), procesor pracuje na napětí $3.3$ V. Tato konstrukce
 s~sebou nese zásadní omezení pro čerpání baterie: napětí na baterii nikdy nesmí
-klesnout pod $3.5\ V$. Tato hodnota zahrnuje i~korekce vypočítané z~nepřesnosti
+klesnout pod $3,5$ V. Tato hodnota zahrnuje i~korekce vypočítané z~nepřesnosti
 výstupu LDO, jedná se tedy o~\textit{napětí, které měří procesor}. Jakmile
-procesor na baterce změří méně než $3.5\ V$, musí se odpojit. Jinak hrozí
+procesor na baterce změří méně než $3,5$ V, musí se odpojit. Jinak hrozí
 pokles referenčního napětí na AD převodníku, který měří napětí na baterii.
 
 DPS dále obsahuje konektory pro periferie, testovací konektory, testovací
-plošky a~LE diody. Autor věří, že tyto komponenty nepotřebují žádný další
-komentář.
+plošky a~LE diody.
 
 Kompletní materiály k~elektronice jsou k~dispozici pod licencí \textit{CC BY-SA
 4.0} na serveru GitHub \cite{wsm-pcb}.
@@ -416,14 +418,14 @@ Kompletní materiály k~elektronice jsou k~dispozici pod licencí \textit{CC BY-
 
 První pohled na měření rychlosti vozidla by mohl vycházet z~analogie
 s~tachometrem na kole: stačí měřit kolik pulzů za sekundu se na senzoru vytvoří
-a podle toho počítat rychlost. Ukazuje se však, že tato metoda měření dosahuje
-zejména při malých rychlostech nedostatečné přesnosti.
+a podle toho počítat rychlost. Ukazuje se však, že tato metoda měření nedosahuje
+zejména při malých rychlostech dostatečné přesnosti.
 
 Mnohem přesnějším způsobem měření je měřit periodu mezi jednotlivými pulzy ze
 senzoru. Zde vyvstává otázka, jestli bude procesor schopný měřit i~rychlosti
-okolo modelových rychlostí cca 120\ km/h.
+okolo modelových rychlostí cca $120$ km/h.
 
-Uvažme tedy modelovou rychlost vozidla $v_m = 120\ km/h \doteq 33.3\ m/s$.
+Uvažme tedy modelovou rychlost vozidla $v_m = 120$ km/h $\doteq$ $33,3$ m/s.
 Protože se jedná o~rychlost v~modelu, pro získání reálné rychlosti $v$ je třeba
 uvážit modelové měřítko $c$ (např. $c = 1:120$, $c = 1:87$).
 
@@ -438,15 +440,15 @@ Oba předchozí vztahy už stačí jen dát do rovnosti, vyjádřit výslednou f
 a tuto frekvenci vynásobit počtem děr na kole. Získáme tak nejvyšší frekvenci,
 kterou by měl vůz být schopen s~přehledem měřit.
 
-Po dosazení nejhorších hodnot (měřítko $1:87$, průměr kola $8\ mm$, rychlost
-$120\ km/h$) dostáváme frekvenci přibližně $220\ Hz$. To je ve srovnání
-s~kmitočtem krystalu procesoru $f_{CLK} = 3.6864\ MHz$ zanedbatelná frekvence,
+Po dosazení nejhorších hodnot (měřítko $1:87$, průměr kola $8$~mm, rychlost
+$120$ km/h) dostáváme frekvenci přibližně $220$ Hz. To je ve srovnání
+s~kmitočtem krystalu procesoru $f_{CLK} = 3,6864$ MHz zanedbatelná frekvence,
 kterou bude možné s~přehledem měřit velice přesně.
 
-Naměřená hodnota bude zaznamenávána do paměti procesoru a~jednou za pevný
-interval odeslána do počítače. Tento interval byl zvolen na $100\ ms$.
+Naměřená hodnota bude zaznamenávána do paměti procesoru a~jednou za pevně daný
+interval bude odeslána do počítače. Tento interval byl zvolen na $100$~ms.
 
-Z naměřené periody $T$ lze modelovou rychlost spočítat dle vztahu
+Z~naměřené periody $T$ lze modelovou rychlost spočítat dle vztahu
 \ref{prepocet}
 
 \begin{equation}
@@ -460,15 +462,15 @@ krystalu k~procesoru, $h = 8$ je počet děr v~kole, $p = 64$ je
 
 Spolu s~aktuální rychlostí je vhodné měřit také ujetou vzdálenost. A~protože
 výpočet vzdálenosti z~rychlosti až v~počítači by mohl být vzhledem k~vzorkování
-rychlosti po $100 ms$ intervalech nepřesný, je vhodné výpočet ujeté dráhy
+rychlosti po $100$ms intervalech nepřesný, je vhodné výpočet ujeté dráhy
 implementovat přímo do měřicího vozu. Druhou měřenou hodnotou je tedy čítač
 pulzů senzoru. Hodnota čítače je 32-bitové číslo, které je do počítače zasíláno
-jednou za $500\ ms$. Příslušné přepočty na hodnoty v~lidsky čitelných
+jednou za $500$~ms. Příslušné přepočty na hodnoty v~uživateli čitelných
 jednotkách jsou pak jak v~případě rychlosti tak v~případě ujeté vzdálenosti
-ponechány až na počítači, neb ten má spoustu výpočetních prostředků a
-nepotřebuje realizovat časově citlivé operace. Navíc odpadá problém
-s~přenášením hodnot parametrů (průměr kola, měřítko) do měřicího vozu a
-komunikace tak může být pouze jednosměrná. Reálnou dráhu $s$ lze pak z~počtu
+ponechány až na počítači, neb ten má spoustu výpočetních prostředků
+a~nepotřebuje realizovat časově citlivé operace. Navíc odpadá problém
+s~přenášením hodnot parametrů (průměr kola, měřítko) do měřicího vozu
+a~komunikace tak může být pouze jednosměrná. Reálnou dráhu $s$ lze pak z~počtu
 kmitů vypočítat pomocí vztahu \ref{real-dist}
 
 \begin{equation}
@@ -490,8 +492,8 @@ kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace
 \item napětí na baterce.
 \end{compactenum}
 
-Zajímavým aspektem protokolu je fakt, že používá kódování \textit{7B8B} a
-nejvýznamnější bit nechává vždy nastavený na $1$. Důvodem pro tuto obskurní
+Zajímavým aspektem protokolu je fakt, že používá kódování \textit{7B8B}
+a~nejvýznamnější bit nechává vždy nastavený na $1$. Důvodem pro tuto vskutku podivnou
 vlastnost je fakt, že modul \textit{HC-05} interpretuje hodnoty bytů jako
 ASCII znaky a~některé znaky odmítne přenést (např. \texttt{0x04} \textit{End
 of transmission}). Proto byla použita pouze polovina rozsahu jednoho
@@ -512,7 +514,7 @@ AVR v~programovacím jazyce C má autor práce zkušenosti, tento argument rozho
 pro programovací jazyk C.
 
 Firmware procesoru je -- podobně jako elektronika -- koncipován jako
-opensource. Je dostupný \cite{wsm-fw} pod licencí \textit{Apache License v2.0}.
+opensource. Je dostupný pod licencí \textit{Apache License v2.0} \cite{wsm-fw}.
 
 Pro kompilaci je využit standardní kompilátor \texttt{avr-gcc}, pro nahrávání
 firmwaru do procesoru je využit program \texttt{avrdude}. Deska
@@ -538,8 +540,8 @@ vstupního signálu. Perioda je uložena k~budoucímu odeslání do počítače.
 
 \item V~primární \texttt{while} smyčce programu se nacházejí časově nekritické
 operace (primární smyčka totiž může být kdykoliv přerušena). Ve
-smyčce se každých $100\ ms$ odesílá aktuální rychlost do počítače, dále se každých
-$500\ ms$ odesílá informace o~ujeté vzdálenosti a~každých $5\ s$ se měří napětí
+smyčce se každých $100$~ms odesílá aktuální rychlost do počítače, dále se každých
+$500$~ms odesílá informace o~ujeté vzdálenosti a~každých $5$~s se měří napětí
 na baterce.
 
 \end{enumerate}
@@ -548,17 +550,19 @@ na baterce.
 \label{sec:wsm-prototype}
 
 Na základě výše uvedených požadavků a~specifikací se podařilo vytvořit prototyp
-měřicího vozu. Tento prototyp je vyobrazen na obrázku \ref{fig:vuz-photo}
+měřicího vozu. Tento prototyp je vyobrazen na obrázku \ref{fig:vuz-photo}.
 
-\begin{figure}[h]
+Tabulka \ref{tab:wsm-params} shrnuje klíčové parametry měřicího vozu.
+
+\afterpage{
+
+\begin{figure}[t!]
 \includegraphics[width=\textwidth]{data/wsm_3d.jpg}
 \caption{Fotografie prototypu měřicího vozu.}
 \label{fig:vuz-photo}
 \end{figure}
 
-Tabulka \ref{tab:wsm-params} shrnuje klíčové parametry měřicího vozu.
-
-\begin{table}
+\begin{table}[h!]
 	\begin{tabularx}{\textwidth}{lrl}
 		\toprule
 		Parametr & Hodnota & Jednotka \\
@@ -568,7 +572,7 @@ Tabulka \ref{tab:wsm-params} shrnuje klíčové parametry měřicího vozu.
 		Spotřeba vozu při spárovaném BT & 33 & mA \\
 		Kapacita baterie & 500 & mAh \\
 		Výdrž baterie & 14 & h \\
-		Pracovní napětí baterie & 3.5 -- 4.2 & V \\
+		Pracovní napětí baterie & 3,5--4,2 & V \\
 		Využitá kapacita baterie & > 90 & \% \\
 		Minimální měřitelná rychlost & 4 & modelový km/h\\
 		Maximální měřitelná rychlost\footnote & 300 & modelový
@@ -580,8 +584,10 @@ Tabulka \ref{tab:wsm-params} shrnuje klíčové parametry měřicího vozu.
 	\label{tab:wsm-params}
 \footnotetext[1]{Rozměr přes nárazníky.}
 \footnotetext[2]{Účelové omezení ve firmwaru,
-senzor zvládá měřit alespoň do 1000 modelových km/h}
+senzor zvládá měřit alespoň do 1000 modelových km/h.}
 \end{table}
+\newpage
+} % end of argument of `\afterpage` command
 
 Finální podobu vozu ovlivňovaly nejvíce ze všeho požadavky na malé rozměry všech
 komponent měřicího vozu, dalším důležitým faktorem pak bylo napájení -- tedy
@@ -601,7 +607,7 @@ jiném úseku trati, opět každá hodnota v~jiném směru pohybu vozu v~úseku 
 rovné koleji bez jakýchkoliv nerovností.
 
 Po zprůměrování pěti měření byl tedy průměr kola dle vztahu \ref{real-dist}
-stanoven na $8.05\ mm$, kterážto konstanta je použita v~budoucích programech.
+stanoven na $8.05$~mm, kterážto konstanta je použita v~budoucích programech.
 
 \section{Naměřená data}
 \label{sec:wsm-data}
@@ -609,21 +615,22 @@ stanoven na $8.05\ mm$, kterážto konstanta je použita v~budoucích programech
 Měření rychlosti se ukázalo býti funkčním, vůz pravidelně posílal naměřená
 data, rychlost se pohybovala v~odhadovaných intervalech. V~naměřených datech
 byla ale vidět poměrně silná oscilace rychlosti, jejíž perioda byla řádově
-\textit{vyšší desetiny sekundy}. Tato oscilace vykazovala amplitudu až
+vyšší desetiny sekundy. Tato oscilace vykazovala amplitudu až
 modelových 5 km/h, což je pro účely kalibrace zcela nevyhovující.
 
 Autor tedy přistoupil ke zkoumání příčin této oscilace a~snaze o~jejich
 odstranění. Autor upravil firmware v~procesoru tak, aby zasílal do počítače
 každou naměřenou hodnotu a~v~počítači tak bylo možné vyhodnocovat surová data.
 
-Při jemnějším pohledu na pohybující se vůz si šlo všimnout, že vůz ve spřáhlu
+Při bližším pohledu na pohybující se vůz si šlo všimnout, že vůz ve spřáhlu
 s~lokomotivou poměrně intenzivně pruží. To je dáno jak mechanickou konstrukcí
 spřáhla, tak tím, že vůz i~lokomotiva obsahují kinematiku\footnote{Kinematika
 je mechanismus uchycení spřáhla v~lokomotivě, ve kterém je spřáhlo k~rámu
 lokomotivy připevněno přes pružiny, které zaručují natočení spřáhla při
 průjezdu obloukem.}.
-Autor tedy přistoupil k~nahrazení spřáhla za spřáhlo pevné. Tento krok pomohl
-ke snížení amplitudy oscilace, avšak oscilace rychlosti byla nadále přítomná.
+Autor tedy přistoupil k~nahrazení spřáhla pružného za spřáhlo pevné. Tento krok
+pomohl ke snížení amplitudy oscilace, avšak oscilace rychlosti byla nadále
+přítomná.
 
 Ukázalo se tedy, že pro efektivní proces kalibrace bude nutné na kalibrované
 lokomotivě vždy vyměnit spřáhlo. Toto zjištění je nepříjemné, neboť
@@ -657,11 +664,11 @@ v~čase. Každý celek bodů na zhruba stejné souřadnici $y$ zachycuje rychlos
 vozidla při jednom napětí na jeho motoru. Rychlost je měřena na vozidlu
 s~motorem připojeným přímo ke koleji (tzv. varianta \textit{analog}, bez
 dekodéru), aby se eliminoval případný vliv dekodéru. Čas na ose $x$ je čas
-příjmu signálu do počítače, vůči reálnému času zachycení signálu procesorem se
+příjmu signálu do počítače. Vůči reálnému času zachycení signálu procesorem se
 tento čas může mírně lišit, avšak rozdíl by měl být skutečně nepatrný.
 
 Krom pravidelné oscilace rychlosti je na grafu místy patrný globální
-\uv{obloukový} trend. Tento jev si autor vysvětluje tím, že v~průběhu měření
+\uv{obloukový} trend. Tento jev lze vysvětlit tím, že v~průběhu měření
 rychlosti vozidlo zrovna najíždělo do oblouku, takže se jeho rychlost díky
 odstředivé síle zmenšila. Komentovaný jev je pro proces kalibrace parazitický,
 autor se jeho vlivu obával už při prvních teoretických návrzích vozu. Později
@@ -741,7 +748,7 @@ Fakt, že amplituda oscilace je při nižších rychlostech vyšší lze vysvět
 že vozidlo má při nižších rychlostech menší setrvačnost a~tudíž se pulzní
 charakter regulace a~nepřesnosti v~převodech více projevuje.
 
-Jako drobnou poznámku autor uvádí, že z~jím naměřených dat nejspíš (!) plyne,
+Jako drobnou poznámku autor uvádí, že z~naměřených dat nejspíš (!) plyne,
 že perioda oscilace se liší u~různých vozidel. Měření na různých vozidlech
 proběhlo, autor ale znovu podotýká, že měření frekvence oscilace je za hranou
 možností měřicího vozu.
@@ -751,31 +758,31 @@ možností měřicího vozu.
 \subsection{Kompenzace chyb}
 \label{subsec:wsm-kompenzace}
 
+\begin{figure}[h]
+\input{graph/speed_prumer.tex}
+\caption{Naměřená data za použití průměrovací metody.}
+\label{fig:prumer}
+\end{figure}
+
 Z~naměřených dat vyplývá, že v~signálu se vyskytuje určitá periodická chyba,
 kterou by bylo vhodné kompenzovat. Za tímto účelem vznikl návrh průměrovací
 metody \textit{kluzné okno}. Tato metoda je implementována v~produkční verzi
 kalibračního vozu, princip její činnosti je následující:
 
 \begin{compactenum}
-\item Měř počty ticků a~jejich periodu ve $100ms$ oknech.
-\item Každých $100\ ms$ přepni na nové okno.
-\item Data do počítače průměruj z~posledních $10$ oken, tedy celkem z~$1\ s$.
+\item Měř počty ticků a~jejich periodu ve $100$ms oknech.
+\item Každých $100$~ms přepni na nové okno.
+\item Data do počítače průměruj z~posledních $10$ oken, tedy celkem z~$1$~s.
 \end{compactenum}
 
 Tato metoda je poměrně známá, zajímavou věcí na implementaci v~měřicím vozu
-jsou výše uvedené konstanty. $100\ ms$ proto, aby data v~počítači byla vidět
-v~rozumně \textit{reálném čase} a~naopak příliš nezahlcovala komunikační kanál,
-$1\ s$ proto, že se jedná o~latenci, kterou je uživatel ještě schopen tolerovat,
-navíc za tento čas obvykle nastane alespoň jedna perioda signálu (viz naměřená
-data v~grafech výše).
+jsou výše uvedené konstanty. Sto milisekund proto, aby data v~počítači byla
+vidět v~rozumně \textit{reálném čase} a~naopak příliš nezahlcovala komunikační
+kanál, Jedna sekunda proto, že se jedná o~latenci, kterou je uživatel ještě
+schopen tolerovat, navíc za tento čas obvykle nastane alespoň jedna perioda
+signálu (viz naměřená data v~grafech výše).
 
 O~přesné přepínání oken se v~procesoru stará časovač 0.
 
 Průběh naměřené periody a~vypočítané rychlosti za použití průměrovací metody
-zachycuje graf \ref{fig:prumer}. Srovnejte s~grafem \ref{fig:speed-analog}!
-
-\begin{figure}[h]
-\input{graph/speed_prumer.tex}
-\caption{Naměřená data za použití průměrovací metody.}
-\label{fig:prumer}
-\end{figure}
+zachycuje graf \ref{fig:prumer}. Srovnejte s~grafem \ref{fig:speed-analog}.
