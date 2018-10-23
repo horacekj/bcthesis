@@ -253,7 +253,7 @@ je nutné vybrat hardware, který bude umístěn do měřicího vozu.
 
 Prvním kandidátem byl procesor \textit{ESP-32} \cite{esp-32}, jehož největší
 výhodou je vestavěný Bluetooth a~WiFi. Jedná se o~poměrně výkonný procesor,
-který lze taktovat až na 240 MHz a~to dokonce na dvou jádrech!
+který lze taktovat až na $240$~MHz a~to dokonce na dvou jádrech!
 \cite{esp-32:datasheet}
 
 Autor pořídil \textit{ESP-32} vývojový kit a~začal zkoušet možnosti komunikace. Jako
@@ -441,8 +441,8 @@ a tuto frekvenci vynásobit počtem děr na kole. Získáme tak nejvyšší frek
 kterou by měl vůz být schopen s~přehledem měřit.
 
 Po dosazení nejhorších hodnot (měřítko $1:87$, průměr kola $8$~mm, rychlost
-$120$~km/h) dostáváme frekvenci přibližně $220$ Hz. To je ve srovnání
-s~kmitočtem krystalu procesoru $f_{CLK} = 3,6864$ MHz zanedbatelná frekvence,
+$120$~km/h) dostáváme frekvenci přibližně $220$~Hz. To je ve srovnání
+s~kmitočtem krystalu procesoru $f_{CLK} = 3,6864$~MHz zanedbatelná frekvence,
 kterou bude možné s~přehledem měřit velice přesně.
 
 Naměřená hodnota bude zaznamenávána do paměti procesoru a~jednou za pevně daný
@@ -456,7 +456,7 @@ v_m = 3.6 \cdot \frac{\pi d F_{CPU}}{T h c p},
 \label{prepocet}
 \end{equation}
 
-kde $d$ je průměr modelového kola, $F_{CPU} = 3686400\ MHz$ je frekvence
+kde $d$ je průměr modelového kola, $F_{CPU} = 3686400$~MHz je frekvence
 krystalu k~procesoru, $h = 8$ je počet děr v~kole, $p = 64$ je
 \textit{prescaler} časovače a~$c$ je modelové měřítko (viz výše).
 
