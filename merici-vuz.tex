@@ -274,7 +274,7 @@ vývoj aplikace na počítač takový framework, který zvládá abstrahovat sé
 port nezávisle na cílové platformě, vzniklá aplikace by byla dokonale
 multiplatformní.
 
-Po nasazení profilu SPP se však ukázalo, že spotřeba \textit{ESP-32} je cca $80$ mA,
+Po nasazení profilu SPP se však ukázalo, že spotřeba \textit{ESP-32} je cca $80$~mA,
 což jej dělá -- v~kontextu napájení z~baterie -- nepoužitelným. Bylo zvažováno
 využít specifikace \textit{BLE (Bluetooth Low Energy)}, BLE však nemá
 profil pro sériovou linku, takže by bylo nutné vytvořit profil vlastní. To
@@ -308,12 +308,12 @@ dobře. Autor zvažoval ještě další moduly (\textit{HC-06}, \textit{HC-07}),
 moduly by však pro účel této práce nepřinesly žádnou zásadní výhodu.
 
 Autor experimentálně změřil, že spotřeba nespárovaného \textit{HC-05} modulu je
-$42$ mA $\pm$ $0,2$ mA, spotřeba spárovaného modulu je $20\ mA \pm 2$ mA. To
+$42$~mA~$\pm$~$0,2$~mA, spotřeba spárovaného modulu je $20$~mA $\pm$ $2$~mA. To
 jsou oproti ESP-32 výrazně příznivější čísla. Navíc se podařilo zajistit
-spolehlivou funkci optozávory již při proudu $10$ mA, což je polovina proudu,
+spolehlivou funkci optozávory již při proudu $10$~mA, což je polovina proudu,
 na který je senzor dimenzován \cite{gp1s23:datasheet}. S~přihlédnutím ke
 spotřebě procesoru a~dalších drobných součástek by se měla pohybovat celková
-spotřeba vozu kolem cca $30$ mA. Tato spotřeba byla uznána jako přijatelná.
+spotřeba vozu kolem cca $30$~mA. Tato spotřeba byla uznána jako přijatelná.
 
 Pro konstrukci měřicího vozu byla tedy vybrána platforma \textit{ATmega}
 s~Bluetooth modulem \textit{HC-05}.
@@ -347,7 +347,7 @@ TODO
 \end{figure}
 
 Rozměr plošiny vozu je $20\times80$~mm, což umožnilo instalaci LiPol baterie
-o~kapacitě $500 mAh$ (napětí $3.7\ V$). Teoretická výdrž vozu je tedy cca $15$
+o~kapacitě $500$~mAh (napětí $3,7$~V). Teoretická výdrž vozu je tedy cca $15$
 hodin. Je však nutno poznamenat, že toto číslo je pouze teoretické, spotřeba
 zařízení se výrazně liší ve spárovaném a~nespárovaném stavu, navíc níže
 zjistíme, že baterii nevybíjíme až na její hranice. Předestřeme však již nyní
@@ -400,11 +400,11 @@ projektem \textit{RB3201} \cite{rb3201} od kolegů z~Robotiky Brno
 \cite{roboticsbrno}.
 
 Napětí pro procesor je vytvářeno obvodem LDO\footnote{Low-dropout regulator}
-(obvod \textit{IC3}), procesor pracuje na napětí $3.3$ V. Tato konstrukce
+(obvod \textit{IC3}), procesor pracuje na napětí $3,3$~V. Tato konstrukce
 s~sebou nese zásadní omezení pro čerpání baterie: napětí na baterii nikdy nesmí
 klesnout pod $3,5$ V. Tato hodnota zahrnuje i~korekce vypočítané z~nepřesnosti
 výstupu LDO, jedná se tedy o~\textit{napětí, které měří procesor}. Jakmile
-procesor na baterce změří méně než $3,5$ V, musí se odpojit. Jinak hrozí
+procesor na baterce změří méně než $3,5$~V, musí se odpojit. Jinak hrozí
 pokles referenčního napětí na AD převodníku, který měří napětí na baterii.
 
 DPS dále obsahuje konektory pro periferie, testovací konektory, testovací
