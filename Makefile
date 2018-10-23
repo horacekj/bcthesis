@@ -12,12 +12,11 @@ DATA=$(wildcard data/*)
 all: $(THESIS).pdf clean
 
 $(THESIS).pdf: $(THESIS).tex $(BIB) $(PARTS) $(GRAPHS) $(DATA)
-	$(PDFLATEX) $< # The initial typesetting.
+	$(PDFLATEX) -interaction=batchmode $< # The initial typesetting.
 	biber $(basename $<).bcf
-	$(PDFLATEX) $< # Update the index after the bibliography insertion.
+	$(PDFLATEX) -interaction=batchmode $< # Update the index after the bibliography insertion.
 	# texindy -I latex -C utf8 -L english $(basename $<).idx
 	$(PDFLATEX) $< # The final typesetting, now also with index.
-	$(PDFLATEX) $<
 
 graph/%.tex: data/graph/%.csv data/graph/%.gnu
 	mkdir -p graph
