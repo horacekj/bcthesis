@@ -105,7 +105,7 @@ umožňuje
 \item konfiguraci parametrů kalibrace konfiguračním souborem,
 \item zobrazení průběhu kalibrace a~umožnění přerušení a~obnovení kalibrace,
 \item načtení a~uložení profilu lokomotivy do souboru,
-\item zobrazení grafu závislosti rychlosti na výkonu (otáčkách) motoru.
+\item zobrazení grafu závislosti rychlosti na otáčkách motoru.
 \end{compactitem}
 
 Grafické uživatelské rozhraní aplikace je zachyceno na obrázku \ref{fig:ac-gui}.
@@ -129,18 +129,18 @@ Rychlostní stupeň je hodnota v~rozsahu $0$--$28$. Tuto hodnotu odesílá poč�
 Centrála rychlostní stupeň přeposílá do lokomotivy. Změnou rychlostního stupně
 se řídí rychlost lokomotivy.
 
-\item \textit{Výkon přiřazený konkrétnímu rychlostnímu stupni}
+\item \textit{Otáčky přiřazené konkrétnímu rychlostnímu stupni}
 
-Výkon přiřazený konkrétnímu rychlostnímu stupni se ukládá do CV (viz
-\ref{sec:trendy}) dekodéru. Výkon je v~rozsahu $0$--$255$ a odpovídá napětí
-pouštěnému do motoru -- tedy otáčkám motoru. Výkon lze nastavovat jedině
-programováním dekodéru a neočekává se, že se při ostrém provozu bude měnit.
-Více rychlostních stupňů může mít stejný výkon.
+Otáčky přiřazené konkrétnímu rychlostnímu stupni se ukládají do CV (viz
+\ref{sec:trendy}) dekodéru a mají mají rozsah $0$--$255$. Pro každý rychlostní
+stupeň je právě jedno CV. Nastavení těchto CV lze měnit jedině programováním
+dekodéru a neočekává se, že se při ostrém provozu bude do tohoto nastavení
+zasahovat. Více rychlostních stupňů může mít přiřazeno stejné otáčky.
 
 \item \textit{Rychlost}
 
 Rychlost je skutečná rychlost modelu měřená např. měřicím vozem. Rychlost
-je svázaná s~výkonem, více rychlostních stupňů může odpovídat stejné rychlosti.
+je svázaná s~otáčkami, více rychlostních stupňů může odpovídat stejné rychlosti.
 
 \end{enumerate}
 
@@ -178,14 +178,14 @@ aplikaci. Projekt je navržen tak, aby pouze červené třídy byly propojené
 s~GUI, zbylé třídy mezi sebou komunikují pomocí volání funkcí a~Qt signálů.
 
 Třída \texttt{SpeedMap} udržuje mapu \textit{rychlostní stupeň: žádaná rychlost},
-třída \texttt{PowerMap} pak udržuje mapu \textit{výkon motoru: naměřená rychlost}.
+třída \texttt{PowerMap} pak udržuje mapu \textit{otáčky motoru: naměřená rychlost}.
 
 O~kalibraci rychlostních křivek se stará třída \texttt{CalibMan}. Kalibrace
 je rozdělena do čtyřech fází.
 
 \begin{compactenum}
 \item Zapsání základních CV.
-\item Vytvoření základního přehledu o~závislosti \textit{výkon motoru: rychlost}.
+\item Vytvoření základního přehledu o~závislosti \textit{otáčky motoru: rychlost}.
 \item Kalibrace jednotlivých jízdních stupňů.
 \item Interpolace zbylých jízdních stupňů.
 \end{compactenum}
@@ -243,25 +243,25 @@ nevyrovná.
 
 V~této krátké fázi program nastaví do lokomotivy základní CV. Vypne rozjezdy
 a~dojezdy a~nastaví škálovací parametry rychlostních křivek\footnote{Některé
-dekodéry umožňují kromě přiřazení výkonu každému stupni navíc zadat parametr,
-který určuje, jaké reálné střídě signálu udpovídá maximální hodnota výkonu,
-čímž chtějí umožnit škálování celé rychlostní tabulky bez nutnosti změnit výkon
-odpovídající každému rychlostnímu stupni.} tak, aby výkony $0$--$255$ reálně
-pokrývaly celé spektrum stříd signálů do motoru.
+dekodéry umožňují kromě přiřazení otáček každému stupni navíc zadat parametr,
+který určuje, jaké reálné střídě signálu odpovídá maximální hodnota otáček,
+čímž chtějí umožnit škálování celé rychlostní tabulky bez nutnosti změnit otáčky
+odpovídající každému rychlostnímu stupni.} tak, aby hodnoty otáček $0$--$255$
+reálně pokrývaly celé spektrum stříd signálů do motoru.
 
 O~tento krok se stará přímo třída \texttt{CalibMan}.
 
 \subsubsection{Vytvoření přehledu}
 
 O~tento krok se stará třída \texttt{CalibOverview}.
-Lokomotivě je nastaven rychlostní stupeň $2$ a~na tento stupeň je zapsán výkon
+Lokomotivě je nastaven rychlostní stupeň $2$ a~na tento stupeň je zapsána hodnota otáček
 $10$. Následně proběhne měření rychlosti. Dokud je rychlost lokomotivy
-neměřitelná (příliš malá), výkon je postupně zdvojnásobován a~do mapy
-\textit{výkon: rychlost} jsou přidávány nové záznamy. Jakmile se lokomotiva
+neměřitelná (příliš malá), otáčky jsou postupně zdvojnásobovány a~do mapy
+\textit{otáčky: rychlost} jsou přidávány nové záznamy. Jakmile se lokomotiva
 rozjede na rychlost $> v_{min}$, program má informaci o~tom, který rychlostní
 stupeň odpovídá minimální rychlosti lokomotivy a~přechází do další fáze.
 
-V~další fázi zkouší program výkony v~intervalu $64$--$255$ dokud nenaměří
+V~další fázi zkouší program otáčky v~intervalu $64$--$255$ dokud nenaměří
 rychlost vyšší než je uživatelem zadaná maximální rychlost.
 
 Nyní má program představu o~tom, kterému rychlostnímu stupni odpovídá minimální
@@ -281,12 +281,12 @@ zkalibrovány všechny jízdní stupně, které si uživatel přál zkalibrovat.
 Kalibrace jednoho stupně probíhá následovně.
 
 \begin{compactenum}
-\item V~mapě \textit{výkon: rychlost} je vyhledán (interpolován) výkon odpovídající
+\item V~mapě \textit{otáčky: rychlost} jsou vyhledány (interpolovány) otáčky odpovídající
       kýžené rychlosti.
-\item Výkon je zapsán do lokomotivy k~právě kalibrovanému stupni.
+\item Otáčky jsou zapsány do lokomotivy k~právě kalibrovanému stupni.
 \item Čeká se $2\ s$ na změnu rychlosti lokomotivy.
 \item Začne měření rychlosti v~režimu \textit{LT}.
-\item Naměřená hodnota je přidána do mapy \textit{výkon: rychlost}.
+\item Naměřená hodnota je přidána do mapy \textit{otáčky: rychlost}.
 \item Pokud je rychlost v~$\epsilon$ toleranci (konstantní konfigurovatelná hodnota)
       cílové rychlosti, krok je zkalibrován, jinak se přechází na krok (1).
 \end{compactenum}
@@ -294,7 +294,7 @@ Kalibrace jednoho stupně probíhá následovně.
 $\epsilon$ je ve výchozím nastavení $1\ km/h$.
 
 Jakmile je zkalibrována rychlost, která je přiřazena více rychlostním stupňům,
-jsou i~tyto rychlostní stupně nastaveny na právě zkalibrovaný výkon.
+jsou i~tyto rychlostní stupně nastaveny na právě zkalibrovanou hodnotu otáček.
 
 Průběh kalibrace je průběžně zobrazován uživateli, uživatel vidí, které
 rychlostní stupně jsou již zkalibrovány a~které ještě ne.
@@ -308,8 +308,8 @@ Po dokončení této fáze zůstává typicky nezkalibrována minimální
 rychlost\footnote{Měřicí vůz neumí dobře měřit hodně malé rychlosti.}, pro kterou
 v~\textit{Klubu modelářů železnic Brno I} platí úzus, že je to taková nejnižší
 rychlost, při které se hnací vozidlo již začne plynule pohybovat. Po dokončení
-kalibrace tedy uživatel ručně vybere rychlostní stupeň $1$ a~nastaví jej na
-požadovaný výkon za současného pozorování pohybu vozidla.
+kalibrace tedy uživatel ručně vybere rychlostní stupeň $1$ a~nastaví mu
+požadované otáčky za současného pozorování pohybu vozidla.
 
 Program se pak postará o~to, aby byly stupně do nejbližšího již zkalibrovaného
 stupně interpolovány.
