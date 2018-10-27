@@ -1,8 +1,8 @@
-set style line 1 lc rgb '#FF9933' lt 19 lw 2.5
+set style line 1 lc rgb '#EE7700' lt 19 lw 2.5
 set style line 2 lc rgb '#003999' lt 17 lw 2.5
 set xlabel "Čas [s]"
-set ylabel "Perioda signálu [ticky krystalu]" tc rgb '#FF9933'
-set ytics nomirror tc rgb '#FF9933'
+set ylabel "Perioda signálu [ticky krystalu]" tc rgb '#EE7700'
+set ytics nomirror tc rgb '#EE7700'
 set y2label "Modelová rychlost [km/h]" tc rgb '#003999'
 set y2tics nomirror tc rgb '#003999'
 set key left top
