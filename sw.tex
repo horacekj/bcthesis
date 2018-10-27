@@ -6,7 +6,7 @@ kalibrace.
 \section{Volba nástrojů}
 \label{sec:sw-nastroje}
 
-Zásadní otázkou, kterou je třeba zodpovědět před vytváření programu, je
+Zásadní otázkou, kterou je třeba zodpovědět před vytvářením programu, je
 jaký programovací jazyk a~případně framework zvolit. Zde měl autor poměrně
 jasný požadavek na programovací jazyk: jazyk musí mít poměrně silný typový
 systém tak, aby netriviální množství kontrol proběhlo již během překladu.
@@ -57,8 +57,9 @@ aplikace bude psána v~programovacím jazyce \texttt{C++} (konkrétně
 \section{WSM Speed Reader}
 \label{sec:sw-wsm-speed-reader}
 
-První aplikací je \textit{WSM Speed Reader} -- jednoduchý zobrazovač vyčtených
-dat. Aplikace se skládá z~jednoho okna a~je především typu
+První aplikací je \textit{WSM Speed Reader}\footnote{WSM je obchodní název
+vyvinutého měřicího vozu: \textit{WSM: A Wireless Speedometer}.} -- jednoduchý
+zobrazovač vyčtených dat. Aplikace se skládá z~jednoho okna a~je především typu
 \textit{proof of concept}. GUI aplikace je zachyceno na obrázku
 \ref{fig:wsm-speed-reader-gui}.
 
@@ -80,7 +81,7 @@ hlavičkového souboru \texttt{wsm.h}, který definuje API třídy \texttt{Wsm},
 implementace této knihovny (v~samostatném \texttt{cpp} souboru) a~pomocných
 souborů. Knihovna je k~dispozici
 online\footnote{\url{https://github.com/kmzbrnoI/wsm-lib-cpp-qt}}, bylo k~ní
-vytvořeno srozumitelné README a~dodány všechny náležitosti samostatné stojícího
+vytvořeno srozumitelné README a~dodány všechny náležitosti samostatně stojícího
 projektu.
 
 I~přes původní snahy je nutné pro užití knihovny v~projektu využít frameworku
@@ -99,7 +100,10 @@ umožňuje
 \item připojení k~XpressNET centrále a~měřicímu vozu WSM,
 \item ruční řízení libovolného hnacího vozidla,
 \item vyčítání základních CV (viz \ref{sec:trendy}) lokomotivy,
-\item načtení závislosti \textit{rychlostní stupeň -- rychlost} ze souboru,
+\item načtení závislosti \textit{jízdní stupeň -- rychlost} ze
+souboru\footnote{Tato závislost je úzus a~je typicky jediná v~rámci
+modelářského klubu či většího celku. V~KMŽ Brno~I je používána závislost
+definovaná v~příloze \ref{fig:step-to-speed}.},
 \item plně automatickou kalibraci rychlostní tabulky,
 \item poloautomatickou kalibraci hodnoty decelerace,
 \item konfiguraci parametrů kalibrace konfiguračním souborem,
@@ -122,42 +126,43 @@ online\footnote{\url{https://github.com/kmzbrnoI/automatic-calibration}}.
 Pro pochopení následujícího textu je třeba striktně rozlišovat několik pojmů:
 
 \begin{enumerate}
-\item \textit{Rychlostní stupeň}
+\item \textit{Jízdní stupeň}
 
-Rychlostní stupeň je hodnota v~rozsahu $0$--$28$. Tuto hodnotu odesílá počítač
+Jízdní stupeň je hodnota v~rozsahu $0$--$28$. Tuto hodnotu odesílá počítač
 (nebo ovladač) do digitální centrály DCC během ostrého provozu na kolejišti.
-Centrála rychlostní stupeň přeposílá do lokomotivy. Změnou rychlostního stupně
+Centrála jízdní stupeň přeposílá do lokomotivy. Nastavením jízdního stupně
 se řídí rychlost lokomotivy.
 
-\item \textit{Otáčky přiřazené konkrétnímu rychlostnímu stupni}
+\item \textit{Otáčky přiřazené konkrétnímu jízdnímu stupni}
 
-Otáčky přiřazené konkrétnímu rychlostnímu stupni se ukládají do CV (viz
-\ref{sec:trendy}) dekodéru a mají mají rozsah $0$--$255$. Pro každý rychlostní
+Otáčky motoru přiřazené konkrétnímu jízdnímu stupni se ukládají do CV (viz
+\ref{sec:trendy}) dekodéru a mají mají rozsah $0$--$255$. Pro každý jízdní
 stupeň je právě jedno CV. Nastavení těchto CV lze měnit jedině programováním
 dekodéru a neočekává se, že se při ostrém provozu bude do tohoto nastavení
-zasahovat. Více rychlostních stupňů může mít přiřazeno stejné otáčky.
+zasahovat. Více jízdních stupňů může mít přiřazeno stejné otáčky.
 
 \item \textit{Rychlost}
 
 Rychlost je skutečná rychlost modelu měřená např. měřicím vozem. Rychlost
-je svázaná s~otáčkami, více rychlostních stupňů může odpovídat stejné rychlosti.
+je svázaná s~otáčkami motoru, více jízdních stupňů může mít nastavené
+stejné otáčky (a tudíž stejnou rychlost).
 
 \end{enumerate}
 
-Veškeré programování probíhá v~režimu \textit{POM} (\textit{Programming on
-Main}), který umožňuje -- ačkoliv se nepředpokládá, že se tato možnost využije --
-programování za plného provozu kolejiště.\footnote{DCC centrála umí programovat
-dekodér ve dvou režimech: (1) programování na programovací koleji, (2)
-\textit{Programming on Main -- POM}. Jedině na programovací koleji lze vyčítat
-CV, při zvolení režimu \textit{POM} není možné přenášet data z~lokomotivy zpět
-do centrály, CV lze tedy pouze nastavovat. Lokomotiva ani nemůže potvrdit
-správné přijetí dat. Centrála ale předem počítá s~případnou nespolehlivostí
-přenosu dat a~proto posílá \textit{POM} příkaz dekodéru několikrát. V~praxi se
-problém chybějící odezvy neukazuje zásadní. Při programování na prog. koleji
-typicky není možný provoz na kolejišti.} Režim \textit{POM} byl zvolen zejména
-z~toho důvodu, že při programování není lokomotivu nutné zastavovat (oproti
-programování na prog. koleji), takže kalibrace rychlostí může být výrazně
-rychlejší.
+Veškeré programování dekodéru v~lokomotivě probíhá v~režimu \textit{POM}
+(\textit{Programming on Main}), který umožňuje -- ačkoliv se nepředpokládá, že
+se tato možnost využije -- programování za plného provozu
+kolejiště.\footnote{DCC centrála umí programovat dekodér ve dvou režimech: (1)
+programování na programovací koleji, (2) \textit{Programming on Main -- POM}.
+Jedině na programovací koleji lze vyčítat CV, při zvolení režimu \textit{POM}
+není možné přenášet data z~lokomotivy zpět do centrály, CV lze tedy pouze
+nastavovat. Lokomotiva ani nemůže potvrdit správné přijetí dat. Centrála ale
+předem počítá s~případnou nespolehlivostí přenosu dat a~proto posílá
+\textit{POM} příkaz dekodéru několikrát. V~praxi se problém chybějící odezvy
+neukazuje zásadní. Při programování na prog. koleji typicky není možný provoz
+na kolejišti.} Režim \textit{POM} byl zvolen zejména z~toho důvodu, že při
+programování není lokomotivu nutné zastavovat (oproti programování na prog.
+koleji), takže kalibrace rychlostí může být výrazně rychlejší.
 
 Aplikace je vystavěna objektově, je zde několik tříd založených na modelu
 \textit{singleto}, kde každá třída má jednu konkrétní odpovědnost. Diagram
@@ -177,7 +182,7 @@ dále pomocné třídy (zelené obdélníky), které jsou využívány v~praktic
 aplikaci. Projekt je navržen tak, aby pouze červené třídy byly propojené
 s~GUI, zbylé třídy mezi sebou komunikují pomocí volání funkcí a~Qt signálů.
 
-Třída \texttt{SpeedMap} udržuje mapu \textit{rychlostní stupeň: žádaná rychlost},
+Třída \texttt{SpeedMap} udržuje mapu \textit{jízdní stupeň: žádaná rychlost},
 třída \texttt{PowerMap} pak udržuje mapu \textit{otáčky motoru: naměřená rychlost}.
 
 O~kalibraci rychlostních křivek se stará třída \texttt{CalibMan}. Kalibrace
@@ -195,12 +200,13 @@ operace a~k~zastavení hnacího vozidla. Protože si ale program pamatuje svůj
 stav, je možné kalibraci kdykoliv spustit znovu a~již dokončené fáze jsou
 přeskočeny.
 
-Před začátkem kalibrace je nutné mít v~SW načtenou mapu \textit{rychlostní
-stupeň: žádaná rychlost}. Tato mapa je načítána z~\texttt{csv} souboru a~je
-možné definovat v~ní všechny, či pouze vybrané jízdní stupně. Zbylé jízdní
-stupně se interpolují ze sousedních nakalibrovaných hodnot nebo je nastaví
-uživatel manuálně. Tato mapa je vlastností kolejiště a typicky se nemění, proto
-se načítá z~jediného souboru.
+Před začátkem kalibrace je nutné mít v~SW načtenou mapu \textit{jízdní
+stupeň: žádaná rychlost} (viz přílohu \ref{fig:step-to-speed}). Tato mapa je
+načítána z~\texttt{csv} souboru a~je možné definovat v~ní všechny, či pouze
+vybrané jízdní stupně. Zbylé jízdní stupně se interpolují ze sousedních
+nakalibrovaných hodnot nebo je nastaví uživatel manuálně. Tato mapa je
+dohodnutou vlastností kolejiště a~typicky se nemění, proto se načítá z~jediného
+souboru.
 
 Před kalibrací navíc uživatel zadá \textit{maximální kalibrovanou rychlost}.
 Tato rychlost je vlastností konkrétního hnacího vozidla, proto je možné ji
@@ -224,12 +230,12 @@ z~měřicího vozu (první probíhá již přímo ve vozu). Ano, je to tak. Ovš
 průměrování na úrovní SW není pouze eliminovat oscilace rychlosti, výstupem
 je totiž kromě průměrné rychlosti také rozdíl $v_{max} - v_{min}$ v~měřeném
 intervalu. Tento \uv{pseudorozptyl} umožňuje kalibračnímu SW rozhodnout, kdy
-je a není měření relevantní. A~přesně to kalibrační SW dělá.
+je a kdy není měření relevantní. A~přesně to kalibrační SW dělá.
 
 Průměrování typicky probíhá pro $30$ naměřených rychlostí, tedy po dobu $3$~s.
 
 Kdykoliv je rozdíl $v_{max} - v_{min}$ naměřených rychlostí příliš velký
-(konstanta je konfigurovatelná v~nastavení (výchozí nastavení je 3 km/h) je
+(konstanta je konfigurovatelná v~nastavení, výchozí nastavení je $3$~km/h) je
 měření ignorováno a~inicializováno měření nové. Pokud se nepovede změřit
 rychlost několikrát (opět konfigurovatelná konstanta), proces kalibrace je
 přerušen. Velký rozptyl rychlostí může být způsoben například nekvalitním
@@ -246,7 +252,7 @@ a~dojezdy a~nastaví škálovací parametry rychlostních křivek\footnote{Někt
 dekodéry umožňují kromě přiřazení otáček každému stupni navíc zadat parametr,
 který určuje, jaké reálné střídě signálu odpovídá maximální hodnota otáček,
 čímž chtějí umožnit škálování celé rychlostní tabulky bez nutnosti změnit otáčky
-odpovídající každému rychlostnímu stupni.} tak, aby hodnoty otáček $0$--$255$
+odpovídající každému jízdnímu stupni.} tak, aby hodnoty otáček $0$--$255$
 reálně pokrývaly celé spektrum stříd signálů do motoru.
 
 O~tento krok se stará přímo třída \texttt{CalibMan}.
@@ -254,17 +260,17 @@ O~tento krok se stará přímo třída \texttt{CalibMan}.
 \subsubsection{Vytvoření přehledu}
 
 O~tento krok se stará třída \texttt{CalibOverview}.
-Lokomotivě je nastaven rychlostní stupeň $2$ a~na tento stupeň je zapsána hodnota otáček
+Lokomotivě je nastaven jízdní stupeň $2$ a~na tento stupeň je zapsána hodnota otáček
 $10$. Následně proběhne měření rychlosti. Dokud je rychlost lokomotivy
 neměřitelná (příliš malá), otáčky jsou postupně zdvojnásobovány a~do mapy
 \textit{otáčky: rychlost} jsou přidávány nové záznamy. Jakmile se lokomotiva
-rozjede na rychlost $> v_{min}$, program má informaci o~tom, který rychlostní
-stupeň odpovídá minimální rychlosti lokomotivy a~přechází do další fáze.
+rozjede na rychlost $> V_{min}$, program má informaci o~tom, která hodnota
+otáček motoru odpovídá minimální rychlosti lokomotivy a~přechází do další fáze.
 
 V~další fázi zkouší program otáčky v~intervalu $64$--$255$ dokud nenaměří
 rychlost vyšší než je uživatelem zadaná maximální rychlost.
 
-Nyní má program představu o~tom, kterému rychlostnímu stupni odpovídá minimální
+Nyní má program představu o~tom, které hodnotě otáček motoru odpovídá minimální
 rychlost a~kterému maximální rychlost. Všechna měření rychlosti lokomotivy
 probíhají v~režimu \textit{LT} (viz kapitolu \ref{sec:ac:lt-measure}).
 
@@ -288,16 +294,18 @@ Kalibrace jednoho stupně probíhá následovně.
 \item Začne měření rychlosti v~režimu \textit{LT}.
 \item Naměřená hodnota je přidána do mapy \textit{otáčky: rychlost}.
 \item Pokud je rychlost v~$\epsilon$ toleranci (konstantní konfigurovatelná hodnota)
-      cílové rychlosti, krok je zkalibrován, jinak se přechází na krok (1).
+      cílové rychlosti, krok je zkalibrován, jinak se přechází na krok
+      (1)\footnote{Všimněte si, že v~následující iteraci je zapsána jiná (lepší)
+      hodnota otáček, neboť došlo ke zpřesnění mapy \textit{otáčky: rychlost}.}.
 \end{compactenum}
 
 $\epsilon$ je ve výchozím nastavení $1\ km/h$.
 
-Jakmile je zkalibrována rychlost, která je přiřazena více rychlostním stupňům,
-jsou i~tyto rychlostní stupně nastaveny na právě zkalibrovanou hodnotu otáček.
+Jakmile je zkalibrována rychlost, která je přiřazena více jízdním stupňům,
+jsou i~tyto jízdní stupně nastaveny na právě zkalibrovanou hodnotu otáček.
 
 Průběh kalibrace je průběžně zobrazován uživateli, uživatel vidí, které
-rychlostní stupně jsou již zkalibrovány a~které ještě ne.
+jízdní stupně jsou již zkalibrovány a~které ještě ne.
 
 \subsubsection{Interpolace}
 
@@ -308,7 +316,7 @@ Po dokončení této fáze zůstává typicky nezkalibrována minimální
 rychlost\footnote{Měřicí vůz neumí dobře měřit hodně malé rychlosti.}, pro kterou
 v~\textit{Klubu modelářů železnic Brno I} platí úzus, že je to taková nejnižší
 rychlost, při které se hnací vozidlo již začne plynule pohybovat. Po dokončení
-kalibrace tedy uživatel ručně vybere rychlostní stupeň $1$ a~nastaví mu
+kalibrace tedy uživatel ručně vybere jízdní stupeň $1$ a~nastaví mu
 požadované otáčky za současného pozorování pohybu vozidla.
 
 Program se pak postará o~to, aby byly stupně do nejbližšího již zkalibrovaného
@@ -320,11 +328,11 @@ Po zkalibrování rychlosti následuje kalibrace dojezdů. Zde se autor nakonec
 rozhodl pro poloautomatickou kalibraci a~to zejména z~toho důvodu, že kalibrace
 dojezdů je již velmi rychlá.
 
-Program uživateli umožní zadat hodnotu decelerace a~pak pomocí kliku na jediné
-tlačítko změřit dojezd z~rychlosti $40$ km/h. Program tedy vozidlo rozjede,
-chvíli počká, pak mu nastaví rychlostní stupeň $0$ a~pomocí měřicího vozu
-měří dráhu do zastavení. Vzdálenost pak vypíše uživateli, který na základě
-ní může upravit hodnotu decelerace.
+Program uživateli umožní zadat hodnotu decelerace (CV \#4) a~pak pomocí kliku
+na jediné tlačítko změřit dojezd z~rychlosti $40$~km/h. Program tedy vozidlo
+rozjede, chvíli počká na ustálení rychlost, pak vozidlu nastaví jízdní stupeň
+$0$ a~pomocí měřicího vozu měří dráhu do zastavení. Vzdálenost pak vypíše
+uživateli, který na základě ní může upravit hodnotu decelerace.
 
 Akcelerace je pak typicky nastavena stejně jako decelerace (ale volba je plně
 na uživateli).
