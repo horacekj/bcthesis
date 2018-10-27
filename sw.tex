@@ -183,7 +183,7 @@ aplikaci. Projekt je navržen tak, aby pouze červené třídy byly propojené
 s~GUI, zbylé třídy mezi sebou komunikují pomocí volání funkcí a~Qt signálů.
 
 Třída \texttt{SpeedMap} udržuje mapu \textit{jízdní stupeň: žádaná rychlost},
-třída \texttt{PowerMap} pak udržuje mapu \textit{otáčky motoru: naměřená rychlost}.
+třída \texttt{Power\-Map} pak udržuje mapu \textit{otáčky motoru: naměřená rychlost}.
 
 O~kalibraci rychlostních křivek se stará třída \texttt{CalibMan}. Kalibrace
 je rozdělena do čtyřech fází.
@@ -289,7 +289,7 @@ Kalibrace jednoho stupně probíhá následovně.
 \begin{compactenum}
 \item V~mapě \textit{otáčky: rychlost} jsou vyhledány (interpolovány) otáčky odpovídající
       kýžené rychlosti.
-\item Otáčky jsou zapsány do lokomotivy k~právě kalibrovanému stupni.
+\item Otáčky jsou zapsány do lokomotivy k~právě kalibrovanému stup\-ni.
 \item Čeká se $2\ s$ na změnu rychlosti lokomotivy.
 \item Začne měření rychlosti v~režimu \textit{LT}.
 \item Naměřená hodnota je přidána do mapy \textit{otáčky: rychlost}.
