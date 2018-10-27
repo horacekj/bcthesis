@@ -156,8 +156,8 @@ paprskového kola a~optozávory.
 Nejvhodnější technologií pro výrobu takového kola je zřejmě leptání, protože
 autor však nemá k~této technologii přístup, rozhodl se místo jednotlivých
 paprsků kolo vyrobit dírkované. Jako vhodný kompromis bylo stanoveno
-8 dírek na kolo, přičemž chyba v~umístění jedné dírky byla výrobou stanovena na
-nejvýše $0,05$~mm. To jsou poměrně dobré výsledky.
+8 dírek na kolo. Při výrobě se podařilo dosáhnout přesnosti umístění jedné
+dírky $\pm 0,05$~mm. To jsou poměrně dobré výsledky.
 
 Výkres kola je zobrazen v příloze \ref{fig:final-wheel}.
 
@@ -188,20 +188,21 @@ z~kolejí je stálé. Na tomto místě je ale třeba zmínit, že napětí v~kol
 sice je (téměř) trvale přítomné, ale zajistit jeho spolehlivé sbírání je
 skutečně výzva. Sbírání je typicky realizováno plíšky s~kontakty na kola.
 Na základě odhadnuté spotřeby měřicího vozu (viz níže) byla vytvořena modelová
-zátěž a~indikace, jak dobře je sbírání schopno tuto zátěž \uv{uživit}.
+zátěž a~indikace, jak dobře je sbírání schopno tuto zátěž napájet.
 
 Naměřená data bohužel byla naprosto tristní. Sbírání bylo realizováno skrze
-hrotová ložiska, protože při použití sbíracích kontaktů přiložených přímo na
-kolečko vzniká riziko, že tření mezi kontaktem a~kolem bude tak vysoké, že kolo
-bude na kolejnici prokluzovat. A~to je v~kontextu faktu, že na tomto kole
-probíhá měření rychlosti, naprosto nemyslitelné. Zátěž byla napájena cca $50 \%$
-času a~to i~přes veškerou snahu o~přídavné kondenzátory a~případnou přídavnou
-hmotnost pro zlepšení kontaktu vozu s~kolejemi.
+hrotová ložiska (obou náprav dvounápravového měřicího vozu), protože při použití
+sbíracích kontaktů přiložených přímo na kolo nápravy vzniká riziko, že tření mezi
+kontaktem a~kolem bude tak vysoké, že kolo bude na kolejnici prokluzovat. A~to
+je v~kontextu faktu, že na nápravě probíhá měření rychlosti, naprosto
+nemyslitelné. Zátěž byla napájena cca $50 \%$ času a~to i~přes veškerou snahu
+o~přídavné kondenzátory a~případnou přídavnou hmotnost pro zlepšení kontaktu
+vozu s~kolejemi.
 
 Na základě těchto měření i~autorových předchozích zkušeností se sbíráním
-u~přípojných vozů bylo rozhodnuto zkonstruovat vůz bez sbírání. Později byla
-zvažována řešení zahrnující baterie i~sbírání dohromady, tato řešení se ale
-ukázala jako příliš komplikovaná.
+u~vagónů bylo rozhodnuto zkonstruovat vůz bez sbírání. Později byla zvažována
+řešení zahrnující baterie i~sbírání dohromady -- tedy baterie dobíjené z~kolejí
+--, tato řešení se ale ukázala jako příliš komplikovaná.
 
 Poslední alternativou tedy zůstala baterie. Výzvou při použití baterie je
 vměstnat co největší baterii do malého prostoru vozu. Minimální doba kalibrace
@@ -240,7 +241,10 @@ S~tímto vědomím přicházejí v~úvahu 2 technologie:
 \label{sec:wsm-platforma}
 
 Na základě požadavků vyplynuvších z~předchozích kapitol (senzor, přenos dat)
-je nutné vybrat hardware, který bude umístěn do měřicího vozu.
+je nutné vybrat hardware, který bude umístěn do měřicího vozu. Hardware
+musí zajistit (1) zpracování signálu ze senzoru, (2) komunikaci s~nadřazeným
+zařízením, (3) ochranu proti podvybití baterie a (4) možnost zařízení vypnout
+a~zapnout.
 
 \subsection{ESP-32}
 \label{subsec:wsm-esp32}
@@ -357,7 +361,7 @@ Základní požadavky na elektroniku měřicího vozu jsou:
 \item Umět rychle a~přesně vyhodnocovat data z~optického senzoru.
 \item Umět komunikovat s~modulem \textit{HC-05}.
 \item Umožnit uživateli zařízení zapnout a~vypnout.
-\item Umět měřit napětí na baterce.
+\item Umět měřit napětí na baterii.
 \item Umět automaticky vypnout zařízení v~případě vybití baterie.
 \item Zobrazovat stav vozu LE diodami.
 \item Umožnit nabíjet baterii.
@@ -379,9 +383,9 @@ poměrně moderní a~je dnes montován do vývojových desek Arduino, tudíž je
 cena díky vysokému počtu produkovaných kusů malá. Procesor se stará o~všechnu
 logiku na desce.  Signál z~optozávory je připojen na pin \textit{ICP}, který je
 speciálně určen k~tomu, aby přesně a~rychle měřil periodu vstupního signálu.
-Procesor dále měří napětí na baterce, které je ale nejprve nutné srazit
+Procesor dále měří napětí na baterii, které je ale nejprve nutné snižit
 napěťovým děličem. Při vývoji hardwaru byla v~jednu chvíli překážkou přesnost
-napěťové reference, nakonec ale byla zvolena jako napěťová reference přímo
+napěťové reference, nakonec ale bylo zvoleno jako napěťová reference přímo
 napájecí napětí procesoru, které by mělo kolísat nejvýše $\pm 2$ \%
 \cite{ldo:datasheet}.
 
@@ -395,11 +399,14 @@ projektem \textit{RB3201} \cite{rb3201} od kolegů z~Robotiky Brno
 
 Napětí pro procesor je vytvářeno obvodem LDO\footnote{Low-dropout regulator}
 (obvod \textit{IC3}), procesor pracuje na napětí $3,3$~V. Tato konstrukce
-s~sebou nese zásadní omezení pro čerpání baterie: napětí na baterii nikdy nesmí
-klesnout pod $3,5$ V. Tato hodnota zahrnuje i~korekce vypočítané z~nepřesnosti
-výstupu LDO, jedná se tedy o~\textit{napětí, které měří procesor}. Jakmile
-procesor na baterce změří méně než $3,5$~V, musí se odpojit. Jinak hrozí
-pokles referenčního napětí na AD převodníku, který měří napětí na baterii.
+s~sebou nese zásadní omezení pro vybíjení baterie: napětí na baterii nikdy nesmí
+klesnout pod $3,5$~V\footnote{Protože \textit{drop voltage} použitého
+regulátoru je $0,2$~V. \cite{ldo:datasheet}}. Tato hodnota zahrnuje
+i~korekce vypočítané z~nepřesnosti výstupu LDO, jedná se tedy o~\textit{napětí,
+které měří procesor}. Jakmile procesor na baterii změří méně než $3,5$~V, musí
+se odpojit\footnote{Pod touto úrovní napětí přestává fungovat měření napětí
+baterie korektně a při delším provozování měřicího vozu by mohlo dojít k~jejímu
+podvybití a zničení.}.
 
 DPS dále obsahuje konektory pro periferie, testovací konektory, testovací
 plošky a~LE diody.
@@ -420,8 +427,8 @@ senzoru. Zde vyvstává otázka, jestli bude procesor schopný měřit i~rychlos
 okolo modelových rychlostí cca $120$~km/h.
 
 Uvažme tedy modelovou rychlost vozidla $v_m = 120$~km/h $\doteq$ $33,3$~m/s.
-Protože se jedná o~rychlost v~modelu, pro získání reálné rychlosti $v$ je třeba
-uvážit modelové měřítko $c$ (např. $c = 1:120$, $c = 1:87$).
+Protože se jedná o~modelovou rychlost, pro získání reálné rychlosti měřicího
+vozu $v$ je třeba uvážit modelové měřítko $c$ (např. $c = 1:120$, $c = 1:87$).
 
 $$v = v_m \cdot c$$
 
@@ -431,33 +438,35 @@ dostáváme vztah
 $$v = \omega r = 2 \pi f r.$$
 
 Oba předchozí vztahy už stačí jen dát do rovnosti, vyjádřit výslednou frekvenci
-a tuto frekvenci vynásobit počtem děr na kole. Získáme tak nejvyšší frekvenci,
-kterou by měl vůz být schopen s~přehledem měřit.
+a~tuto frekvenci vynásobit počtem děr na kole. Získáme tak nejvyšší frekvenci,
+kterou by měla být elektronika vozu schopna s~přehledem měřit.
 
 Po dosazení nejhorších hodnot (měřítko $1:87$, průměr kola $8$~mm, rychlost
 $120$~km/h) dostáváme frekvenci přibližně $220$~Hz. To je ve srovnání
 s~kmitočtem krystalu procesoru $f_{CLK} = 3,6864$~MHz zanedbatelná frekvence,
 kterou bude možné s~přehledem měřit velice přesně.
 
-Naměřená hodnota bude zaznamenávána do paměti procesoru a~jednou za pevně daný
-interval bude odeslána do počítače. Tento interval byl zvolen na $100$~ms.
+Naměřené hodnoty budou zaznamenávány do paměti procesoru a~jednou za pevně daný
+interval bude jejich průměr odeslán do počítače (o~průměrování více v~kapitole
+\ref{subsec:wsm-kompenzace}). Tento interval byl zvolen na $100$~ms.
 
-Z~naměřené periody $T$ lze modelovou rychlost spočítat dle vztahu
+Z~naměřené periody $T$ (bezrozměrné číslo, jedná se o~počet kmitů časovače
+procesoru) lze modelovou rychlost spočítat dle vztahu
 \ref{prepocet}
 
 \begin{equation}
-v_m = 3.6 \cdot \frac{\pi d F_{CPU}}{T h c p},
+v_m = 3,6 \cdot \frac{\pi d F_{CPU}}{T h c p},
 \label{prepocet}
 \end{equation}
 
-kde $d$ je průměr modelového kola, $F_{CPU} = 3686400$~MHz je frekvence
-krystalu k~procesoru, $h = 8$ je počet děr v~kole, $p = 64$ je
+kde $d$ je průměr kola nápravy měřicího vozu, $F_{CPU} = 3,6864$~MHz je
+frekvence krystalu k~procesoru, $h = 8$ je počet děr v~kole, $p = 64$ je
 \textit{prescaler} časovače a~$c$ je modelové měřítko (viz výše).
 
 Spolu s~aktuální rychlostí je vhodné měřit také ujetou vzdálenost. A~protože
 výpočet vzdálenosti z~rychlosti až v~počítači by mohl být vzhledem k~vzorkování
 rychlosti po $100$ms intervalech nepřesný, je vhodné výpočet ujeté dráhy
-implementovat přímo do měřicího vozu. Druhou měřenou hodnotou je tedy čítač
+implementovat přímo do měřicího vozu. Druhou měřenou hodnotou je tedy počet
 pulzů senzoru. Hodnota čítače je 32-bitové číslo, které je do počítače zasíláno
 jednou za $500$~ms. Příslušné přepočty na hodnoty v~uživateli čitelných
 jednotkách jsou pak jak v~případě rychlosti tak v~případě ujeté vzdálenosti
@@ -472,7 +481,7 @@ s = \frac{i \pi d}{h}
 \label{real-dist}
 \end{equation}
 
-kde $i$ je počet kmitů, $d$ je průměr modelového kola a~$h = 8$ je počet děr
+kde $i$ je počet pulzů senzoru, $d$ je průměr modelového kola a~$h = 8$ je počet děr
 v~kole.
 
 Pro komunikaci s~počítačem byl navrhnut vlastní binární protokol inspirovaný
@@ -483,7 +492,7 @@ kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace
 \begin{compactenum}
 \item aktuální rychlosti,
 \item ujeté vzdálenosti a
-\item napětí na baterce.
+\item napětí na baterii.
 \end{compactenum}
 
 Zajímavým aspektem protokolu je fakt, že používá kódování \textit{7B8B}
@@ -526,17 +535,19 @@ měří periodu mezi jednotlivými pulzy senzoru.
 vzestupné hraně na pinu \textit{ICP} velice rychle (hardwarově, bez generace
 přerušení) zkopíruje hodnotu čítače časovače do registru procesoru. Poté je
 vyvoláno přerušení, ve kterém je obsloužena naměřená hodnota. Konkrétně je od
-této hodnoty odečten čas předchozího pulzu a~tím pádem je určena perioda
-vstupního signálu. Perioda je uložena k~budoucímu odeslání do počítače.
+této hodnoty odečten čas předchozího pulzu\footnote{Resp. hodnota čítače
+odpovídající okamžiku předchozí vzestupné hrany na pinu ICP.} a~tím pádem je
+určena perioda vstupního signálu. Perioda je uložena k~budoucímu odeslání do
+počítače.
 
-\textit{Více o~dalším zpracování dat lze nalézt v~sekci
-\ref{subsec:wsm-kompenzace}.}
+Více o~dalším zpracování dat lze nalézt v~sekci
+\ref{subsec:wsm-kompenzace}.
 
 \item V~primární \texttt{while} smyčce programu se nacházejí časově nekritické
 operace (primární smyčka totiž může být kdykoliv přerušena). Ve
-smyčce se každých $100$~ms odesílá aktuální rychlost do počítače, dále se každých
-$500$~ms odesílá informace o~ujeté vzdálenosti a~každých $5$~s se měří napětí
-na baterce.
+smyčce se každých $100$~ms odesílá aktuální rychlost (tj. perioda, viz bod (1))
+do počítače, dále se každých $500$~ms odesílá informace o~ujeté vzdálenosti
+a~každých $5$~s se měří napětí na baterii.
 
 \end{enumerate}
 
@@ -592,10 +603,10 @@ konstant uvedených ve vztahu \ref{prepocet}. Pro dosažení maximální přesno
 se totiž nelze spoléhat zejména na měření průměru kola pouhým posuvným
 měřidlem, rozdíly v~průměru kola v~řádu setin milimetru totiž způsobují rozdíly
 v~modelové rychlosti v~řádu desetin modelových km/h. Autor tedy přistoupil ke
-změření počtu pulzů na rovné koleji o~délce 1 m\footnote{Délka byla měřena
-konvenčním svinovacím metrem.}. Postupně byly naměřeny hodnoty $317$, $317$,
+změření počtu pulzů na rovné koleji o~délce 1 m.\footnote{Délka byla měřena
+konvenčním svinovacím metrem.} Postupně byly naměřeny hodnoty $317$, $317$,
 $316$, $316$ a~$316$. První tři hodnoty byly měřeny na jednom úseku trati
-v~různých směrech pohybu, zbylé 2 hodnoty byly pro eliminaci chyby měřeny na
+v~obou směrech pohybu, zbylé 2 hodnoty byly pro eliminaci chyby měřeny na
 jiném úseku trati, opět každá hodnota v~jiném směru pohybu vozu v~úseku a~na
 rovné koleji bez jakýchkoliv nerovností.
 
@@ -609,17 +620,18 @@ Měření rychlosti se ukázalo býti funkčním, vůz pravidelně posílal nam�
 data, rychlost se pohybovala v~odhadovaných intervalech. V~naměřených datech
 byla ale vidět poměrně silná oscilace rychlosti, jejíž perioda byla řádově
 vyšší desetiny sekundy. Tato oscilace vykazovala amplitudu až
-modelových 5~km/h, což je pro účely kalibrace zcela nevyhovující.
+5~modelových km/h, což je pro účely kalibrace zcela nevyhovující.
 
 Autor tedy přistoupil ke zkoumání příčin této oscilace a~snaze o~jejich
 odstranění. Autor upravil firmware v~procesoru tak, aby zasílal do počítače
-každou naměřenou hodnotu a~v~počítači tak bylo možné vyhodnocovat surová data.
+každou naměřenou hodnotu (nikoliv průměr) a~v~počítači tak bylo možné
+vyhodnocovat surová data.
 
 Při bližším pohledu na pohybující se vůz si šlo všimnout, že vůz ve spřáhlu
 s~lokomotivou poměrně intenzivně pruží. To je dáno jak mechanickou konstrukcí
 spřáhla, tak tím, že vůz i~lokomotiva obsahují kinematiku\footnote{Kinematika
-je mechanismus uchycení spřáhla v~lokomotivě, ve kterém je spřáhlo k~rámu
-lokomotivy připevněno přes pružiny, které zaručují natočení spřáhla při
+je mechanismus uchycení spřáhla v~lokomotivách a vagónech, ve kterém je spřáhlo
+k~rámu vozidla připevněno přes pružiny, které zaručují natočení spřáhla při
 průjezdu obloukem.}.
 Autor tedy přistoupil k~nahrazení spřáhla pružného za spřáhlo pevné. Tento krok
 pomohl ke snížení amplitudy oscilace, avšak oscilace rychlosti byla nadále
@@ -655,24 +667,25 @@ režimu.}
 Graf \ref{fig:speed-analog} zachycuje průběh periody a~modelové rychlosti
 v~čase. Každý celek bodů na zhruba stejné souřadnici $y$ zachycuje rychlost
 vozidla při jednom napětí na jeho motoru. Rychlost je měřena na vozidlu
-s~motorem připojeným přímo ke koleji (tzv. varianta \textit{analog}, bez
-dekodéru), aby se eliminoval případný vliv dekodéru. Čas na ose $x$ je čas
-příjmu signálu do počítače. Vůči reálnému času zachycení signálu procesorem se
-tento čas může mírně lišit, avšak rozdíl by měl být skutečně nepatrný.
+s~motorem připojeným přes kola náprav přímo ke koleji (tzv. varianta
+\textit{analog}, bez dekodéru), aby se eliminoval případný vliv dekodéru. Čas
+na ose $x$ je čas příjmu signálu do počítače. Vůči reálnému času zachycení
+signálu procesorem se tento čas může mírně lišit, avšak rozdíl latencí
+přenosů vůz--PC by měl být skutečně nepatrný.
 
-Krom pravidelné oscilace rychlosti je na grafu místy patrný globální
-\uv{obloukový} trend. Tento jev lze vysvětlit tím, že v~průběhu měření
-rychlosti vozidlo zrovna najíždělo do oblouku, takže se jeho rychlost díky
-odstředivé síle zmenšila. Komentovaný jev je pro proces kalibrace parazitický,
-autor se jeho vlivu obával už při prvních teoretických návrzích vozu. Později
-se však ukázalo, že při kalibrování na oválu o~dostatečně velkých poloměrech
-oblouků je změna rychlosti vlivem průjezdu obloukem minimální, resp. BEMF ji
-okamžitě vykompenzuje. Pokud by uživatel přeci jenom chtěl kalibrovat na
-obloucích o~malých poloměrech, nabízí se možnost výběru používaných
-a~nepoužívaných měřicích úseků na kalibračním okruhu. Stručně řečeno se bude
-měřit rychlost jen ve vybraných úsecích (typicky rovných úsecích), údaj
-o~poloze vozidla bude založen na vyčítání ujeté vzdálenosti vozidla, viz sekci
-\ref{sec:wsm-mer-princip}.
+Krom pravidelné oscilace rychlosti je na grafu místy patrný (např. v~čase
+$37$--$42$~s) globální \uv{obloukový} trend. Tento jev lze vysvětlit tím, že
+v~průběhu měření rychlosti vozidlo zrovna najíždělo do oblouku, takže se jeho
+rychlost díky odstředivé síle zmenšila. Komentovaný jev je pro proces kalibrace
+parazitický, autor se jeho vlivu obával už při prvních teoretických návrzích
+vozu. Později se však ukázalo, že při kalibrování na oválu o~dostatečně velkých
+poloměrech oblouků je změna rychlosti vlivem průjezdu obloukem minimální, resp.
+BEMF (viz \ref{sec:det-static}) ji okamžitě vykompenzuje. Pokud by uživatel
+přeci jenom chtěl kalibrovat na obloucích o~malých poloměrech, nabízí se
+možnost výběru používaných a~nepoužívaných měřicích úseků na kalibračním
+okruhu. Stručně řečeno se bude měřit rychlost jen ve vybraných úsecích (typicky
+rovných úsecích), údaj o~poloze vozidla bude založen na vyčítání ujeté
+vzdálenosti vozidla, viz sekci \ref{sec:wsm-mer-princip}.
 
 Všimněte si v~grafu \ref{fig:speed-analog} také průběhu naměřené rychlosti.
 Díky způsobu, jakým je naměřená perioda přepočítávána na modelovou rychlost
@@ -742,7 +755,7 @@ Fakt, že amplituda oscilace je při nižších rychlostech vyšší lze vysvět
 charakter regulace a~nepřesnosti v~převodech více projevuje.
 
 Jako drobnou poznámku autor uvádí, že z~naměřených dat nejspíš (!) plyne,
-že perioda oscilace se liší u~různých vozidel. Měření na různých vozidlech
+že frekvence oscilace se liší u~různých vozidel. Měření na různých vozidlech
 proběhlo, autor ale znovu podotýká, že měření frekvence oscilace je za hranou
 možností měřicího vozu.
 
@@ -763,9 +776,9 @@ metody \textit{kluzné okno}. Tato metoda je implementována v~produkční verzi
 kalibračního vozu, princip její činnosti je následující:
 
 \begin{compactenum}
-\item Měř počty ticků a~jejich periodu ve $100$ms oknech.
-\item Každých $100$~ms přepni na nové okno.
-\item Data do počítače průměruj z~posledních $10$ oken, tedy celkem z~$1$~s.
+\item Měř periody ticků ve $100$ms rámcích.
+\item Každých $100$~ms přepni na nový rámec.
+\item Data do počítače průměruj z~posledních $10$ rámců, tedy celkem z~$1$~s.
 \end{compactenum}
 
 Tato metoda je poměrně známá, zajímavou věcí na implementaci v~měřicím vozu
@@ -773,9 +786,9 @@ jsou výše uvedené konstanty. Sto milisekund proto, aby data v~počítači byl
 vidět v~rozumně \textit{reálném čase} a~naopak příliš nezahlcovala komunikační
 kanál, Jedna sekunda proto, že se jedná o~latenci, kterou je uživatel ještě
 schopen tolerovat, navíc za tento čas obvykle nastane alespoň jedna perioda
-signálu (viz naměřená data v~grafech výše).
+rušivé oscilace signálu (viz naměřená data v~grafech výše).
 
-O~přesné přepínání oken se v~procesoru stará časovač 0.
+O~přesné přepínání oken se v~procesoru stará časovač~0.
 
 Průběh naměřené periody a~vypočítané rychlosti za použití průměrovací metody
 zachycuje graf \ref{fig:prumer}. Srovnejte s~grafem \ref{fig:speed-analog}.
