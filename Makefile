@@ -17,7 +17,7 @@ $(THESIS).pdf: $(THESIS).tex $(BIB) $(PARTS) $(GRAPHS) $(DATA)
 	biber $(basename $<).bcf
 	$(PDFLATEX) -interaction=batchmode $< # Update the index after the bibliography insertion.
 	# texindy -I latex -C utf8 -L english $(basename $<).idx
-	$(PDFLATEX) $< # The final typesetting, now also with index.
+	texfot $(PDFLATEX) $< # The final typesetting, now also with index.
 
 graph/%.tex: data/graph/%.csv data/graph/%.gnu
 	mkdir -p graph
