@@ -1,12 +1,11 @@
-Pro potřeby této práce byly vytvořeny 2 aplikace a~2 knihovny. První aplikace je
-demonstrační aplikací k~měřicímu vozu, tato aplikace pouze zobrazuje naměřená
-data. Druhá aplikace je o~mnoho komplexnější a~řeší přímo problém automatické
-kalibrace.
+Pro potřeby této práce byly vytvořeny 2 aplikace a~2 knihovny. První aplikace
+je demonstrační aplikací k~měřicímu vozu a pouze zobrazuje naměřená data. Druhá
+aplikace je o~mnoho komplexnější a~řeší přímo problém automatické kalibrace.
 
 \section{Volba nástrojů}
 \label{sec:sw-nastroje}
 
-Zásadní otázkou, kterou je třeba zodpovědět před vytvářením programu, je
+Zásadní otázkou, kterou je třeba zodpovědět před vytvářením programu, je,
 jaký programovací jazyk a~případně framework zvolit. Zde měl autor poměrně
 jasný požadavek na programovací jazyk: jazyk musí mít poměrně silný typový
 systém tak, aby netriviální množství kontrol proběhlo již během překladu.
@@ -23,7 +22,7 @@ Dalším kritériem při výběru programovacího jazyka byla jeho předchozí z
 autorem práce. Zejména u~kritických aplikací je totiž nanejvýš důležité, aby
 programátor přesně věděl, co dělá.
 
-Při rozmýšlení nad technologií aplikace bylo rozhodnuto, že program by měl
+Při zvažování technologií aplikace bylo rozhodnuto, že program by měl
 mít grafické uživatelské rozhraní (GUI), neboť je nanejvýš vhodné zobrazovat
 přehledně aktuální průběh kalibrace a~neboť jsou běžní uživatelé na GUI
 aplikace zvyklí.
@@ -107,7 +106,7 @@ definovaná v~příloze \ref{fig:step-to-speed}.},
 \item plně automatickou kalibraci rychlostní tabulky,
 \item poloautomatickou kalibraci hodnoty decelerace,
 \item konfiguraci parametrů kalibrace konfiguračním souborem,
-\item zobrazení průběhu kalibrace a~umožnění přerušení a~obnovení kalibrace,
+\item zobrazení průběhu kalibrace, přerušení a~obnovení kalibrace,
 \item načtení a~uložení profilu lokomotivy do souboru,
 \item zobrazení grafu závislosti rychlosti na otáčkách motoru.
 \end{compactitem}
@@ -159,12 +158,12 @@ není možné přenášet data z~lokomotivy zpět do centrály, CV lze tedy pouz
 nastavovat. Lokomotiva ani nemůže potvrdit správné přijetí dat. Centrála ale
 předem počítá s~případnou nespolehlivostí přenosu dat a~proto posílá
 \textit{POM} příkaz dekodéru několikrát. V~praxi se problém chybějící odezvy
-neukazuje zásadní. Při programování na prog. koleji typicky není možný provoz
-na kolejišti.} Režim \textit{POM} byl zvolen zejména z~toho důvodu, že při
-programování není lokomotivu nutné zastavovat (oproti programování na prog.
-koleji), takže kalibrace rychlostí může být výrazně rychlejší.
+neukazuje zásadní. Při programování na programovací koleji typicky není možný
+provoz na kolejišti.} Režim \textit{POM} byl zvolen zejména z~toho důvodu, že
+při programování není lokomotivu nutné zastavovat (oproti programování na
+programovací koleji), takže kalibrace rychlostí může být výrazně rychlejší.
 
-Aplikace je vystavěna objektově, je zde několik tříd založených na modelu
+Aplikace je vystavěna objektově. Je zde několik tříd založených na modelu
 \textit{singleto}, kde každá třída má jednu konkrétní odpovědnost. Diagram
 tříd je zobrazen na obrázku \ref{fig:ac-classes}, šipky reprezentují vztah
 \textit{vlastní}.
@@ -212,11 +211,11 @@ Před kalibrací navíc uživatel zadá \textit{maximální kalibrovanou rychlos
 Tato rychlost je vlastností konkrétního hnacího vozidla, proto je možné ji
 ovlivnit před každou jednotlivou kalibrací. Maximální rychlost spolu
 s~akcelerací a~decelerací a oběma mapami jsou ukládány do \texttt{xml} souboru
-definice hnacího vozidla, jehož formát byl záměrně převzat ze SW JMRI
-\cite{jmri:web}, aby bylo možné soubory mezi programy navzájem přenášet.
+definice hnacího vozidla. Formát tohoto souboru byl záměrně převzat ze SW JMRI
+\cite{jmri:web}, aby bylo možné soubory mezi programy přenášet.
 
 Další parametry, jako je například umístění zařízení sériového portu centrály
-či maximální povolená odchylka kalibrace, jsou načítání z~jediného
+či maximální povolená odchylka kalibrace, jsou načítány z~jediného
 konfiguračního souboru formátu \texttt{ini}.
 
 \subsection{Měření rychlosti}
@@ -235,7 +234,7 @@ je a kdy není měření relevantní. A~přesně to kalibrační SW dělá.
 Průměrování typicky probíhá pro $30$ naměřených rychlostí, tedy po dobu $3$~s.
 
 Kdykoliv je rozdíl $v_{max} - v_{min}$ naměřených rychlostí příliš velký
-(konstanta je konfigurovatelná v~nastavení, výchozí nastavení je $3$~km/h) je
+(konstanta je konfigurovatelná, výchozí hodnota je $3$~km/h), je
 měření ignorováno a~inicializováno měření nové. Pokud se nepovede změřit
 rychlost několikrát (opět konfigurovatelná konstanta), proces kalibrace je
 přerušen. Velký rozptyl rychlostí může být způsoben například nekvalitním
@@ -250,8 +249,8 @@ nevyrovná.
 V~této krátké fázi program nastaví do lokomotivy základní CV. Vypne rozjezdy
 a~dojezdy a~nastaví škálovací parametry rychlostních křivek\footnote{Některé
 dekodéry umožňují kromě přiřazení otáček každému stupni navíc zadat parametr,
-který určuje, jaké reálné střídě signálu odpovídá maximální hodnota otáček,
-čímž chtějí umožnit škálování celé rychlostní tabulky bez nutnosti změnit otáčky
+který určuje, jaké reálné střídě signálu odpovídá maximální hodnota otáček.
+Tím chtějí umožnit škálovat celou rychlostní tabulku bez nutnosti změnit otáčky
 odpovídající každému jízdnímu stupni.} tak, aby hodnoty otáček $0$--$255$
 reálně pokrývaly celé spektrum stříd signálů do motoru.
 
@@ -267,7 +266,7 @@ neměřitelná (příliš malá), otáčky jsou postupně zdvojnásobovány a~do
 rozjede na rychlost $> V_{min}$, program má informaci o~tom, která hodnota
 otáček motoru odpovídá minimální rychlosti lokomotivy a~přechází do další fáze.
 
-V~další fázi zkouší program otáčky v~intervalu $64$--$255$ dokud nenaměří
+V~další fázi zkouší program otáčky v~intervalu $64$--$255$, dokud nenaměří
 rychlost vyšší než je uživatelem zadaná maximální rychlost.
 
 Nyní má program představu o~tom, které hodnotě otáček motoru odpovídá minimální
@@ -294,8 +293,8 @@ Kalibrace jednoho stupně probíhá následovně.
 \item Začne měření rychlosti v~režimu \textit{LT}.
 \item Naměřená hodnota je přidána do mapy \textit{otáčky: rychlost}.
 \item Pokud je rychlost v~$\epsilon$ toleranci (konstantní konfigurovatelná hodnota)
-      cílové rychlosti, krok je zkalibrován, jinak se přechází na krok
-      (1)\footnote{Všimněte si, že v~následující iteraci je zapsána jiná (lepší)
+      cílové rychlosti, krok je zkalibrován, jinak se přechází znovu na krok
+      (1)\footnote{Všimněte si, že v~následující iteraci je zapsána jiná (přesnější)
       hodnota otáček, neboť došlo ke zpřesnění mapy \textit{otáčky: rychlost}.}.
 \end{compactenum}
 
@@ -304,7 +303,7 @@ $\epsilon$ je ve výchozím nastavení $1\ km/h$.
 Jakmile je zkalibrována rychlost, která je přiřazena více jízdním stupňům,
 jsou i~tyto jízdní stupně nastaveny na právě zkalibrovanou hodnotu otáček.
 
-Průběh kalibrace je průběžně zobrazován uživateli, uživatel vidí, které
+Průběh kalibrace je průběžně zobrazován uživateli. Uživatel vidí, které
 jízdní stupně jsou již zkalibrovány a~které ještě ne.
 
 \subsubsection{Interpolace}
@@ -312,7 +311,7 @@ jízdní stupně jsou již zkalibrovány a~které ještě ne.
 Po dokončení kalibrace všech stupňů načtených z~\texttt{csv} souboru jsou zbylé
 stupně interpolovány.
 
-Po dokončení této fáze zůstává typicky nezkalibrována minimální
+Po této fázi zůstává typicky nezkalibrována minimální
 rychlost\footnote{Měřicí vůz neumí dobře měřit hodně malé rychlosti.}, pro kterou
 v~\textit{Klubu modelářů železnic Brno I} platí úzus, že je to taková nejnižší
 rychlost, při které se hnací vozidlo již začne plynule pohybovat. Po dokončení
