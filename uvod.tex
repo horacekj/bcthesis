@@ -36,12 +36,12 @@ využívaných na skutečné železnici. Nejen v~těchto případech vzniká pot
 kolejiště ovládat \textit{zabezpečovacím zařízením}. Typickým příkladem
 současného zabezpečovacího zařízení na skutečné železnici je
 \textit{elektronické stavědlo} spolu s~grafickou nadstavbou
-\textit{JOP} (\textit{Jednotné obslužné pracoviště}), která umožňuje řízení
+\textit{\gls{JOP}} (\textit{Jednotné obslužné pracoviště}), která umožňuje řízení
 stavědla přes počítač.
 
 Obdobný systém je využíván také v~\textit{Klubu modelářů železnic Brno I}.
 V~tomto klubu je nasazen systém řízení kolejišť zvaný \textit{hJOP}
-\cite{hjop:web}, který je klonem JOP upraveným pro potřeby řízení modelu. Jeho
+\cite{hjop:web}, který je klonem \gls{JOP} upraveným pro potřeby řízení modelu. Jeho
 primárním cílem je řídit jízdu vlaku a~omezením lidského faktoru předejít
 možným kolizím.
 
@@ -54,16 +54,16 @@ K~řízení modelových kolejišť je v~současné době napříč zeměmi využ
 nebo český SW \textit{modelJOP} \cite{modeljop:web}.
 
 Výše zmíněné aplikace potřebují komunikovat s~hardwarovými prvky kolejiště.
-Nejdůležitějším z~těchto prvků je digitální centrála DCC. Digitální centrála je
+Nejdůležitějším z~těchto prvků je digitální centrála \gls{DCC}. Digitální centrála je
 obecný pojem, konkrétními instancemi od jednotlivých výrobců jsou pak např.
 \textit{Z21} \cite{z21:web}, \textit{NanoX} \cite{nanox:web} nebo třeba
 \textit{Intellibox} \cite{intellibox:web}. Centrála nejčastěji komunikuje
 s~počítačem pomocí sběrnice \textit{RS232 over USB}. Jejím hlavním úkolem je
-vytvářet \textit{digitální signál DCC} \cite{nmra:dcc:ele}, který moduluje do
+vytvářet \textit{digitální signál \gls{DCC}} \cite{nmra:dcc:ele}, který moduluje do
 kolejí.
 
 Lokomotiva stojící na kolejích tento signál dekóduje pomocí spe\-ciál\-ní
-součástky -- tzv. \textit{dekodéru DCC} -- a~podle přijatých dat poveluje
+součástky -- tzv. \textit{dekodéru \gls{DCC}} -- a~podle přijatých dat poveluje
 periferie lokomotivy: motor, světla, nebo třeba zvuk vydávaný vestavěným
 reproduktorem. Modulovaný výkonový signál v~kolejích je zároveň využíván jako
 (1) nosič informace pro dekodéry a~(2) po usměrnění jako napájecí napětí pro
@@ -76,10 +76,10 @@ pro řízení lokomotivy, např.: \textit{\uv{lokomotivo s~adresou 562, jeď sm�
 vpřed rychlostí 15!}}
 
 Každý dekodér si ukládá svá konfigurační data do volatilní paměti formou tzv.
-\textit{CV} (\textit{Configuration Value}). \textit{CV} je jedna konfigurační
-jednotka s~rozsahem hodnot 1~byte ($0$--$255$). Každé \textit{CV} má svoje číslo
+\textit{\gls{CV}} (\textit{Configuration Value}). \textit{\gls{CV}} je jedna konfigurační
+jednotka s~rozsahem hodnot 1~byte ($0$--$255$). Každé \textit{\gls{CV}} má svoje číslo
 (typicky $1$--$1023$). Výrobce dekodéru (potažmo standardizační organizace) pak
-definuje význam jednotlivých CV. Například CV $\#17$ a~$\#18$ jsou vyhrazeny
+definuje význam jednotlivých \gls{CV}. Například \gls{CV} $\#17$ a~$\#18$ jsou vyhrazeny
 k~uložení adresy dekodéru \cite{zimo:cvs}.
 
 \section{Synchronizace rychlosti vozidel}
@@ -173,8 +173,8 @@ Cílem této práce je tento proces automatizovat.
 
 Možná ještě fundamentálnějším problémem, než synchronizace rychlostí, je
 synchronizace délky dojezdu z~určité fixní rychlosti napříč různými vozidly.
-Lokomotivní dekodér má pro tento účel vyhrazeno CV $\#4$ \cite{zimo:cvs}, které
-definuje dobu brzdění. Při nenulové hodnotě tohoto CV tak dekodér po obdržení
+Lokomotivní dekodér má pro tento účel vyhrazeno \gls{CV} $\#4$ \cite{zimo:cvs}, které
+definuje dobu brzdění. Při nenulové hodnotě tohoto \gls{CV} tak dekodér po obdržení
 příkazu \uv{stůj} nezastaví ihned, ale postupně zpomaluje.
 
 Tento parametr je naprosto klíčový, ovládací SW totiž typicky vyžaduje, aby dané

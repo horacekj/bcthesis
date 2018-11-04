@@ -37,6 +37,8 @@
 \usepackage{listings} %% Source code highlighting
 \usepackage{enumitem}
 \usepackage{afterpage}
+\usepackage{glossaries}
+\makeglossaries
 \lstset{
   basicstyle      = \ttfamily,%
   identifierstyle = \color{black},%
@@ -62,6 +64,8 @@
 \renewenvironment{compactitem}
 	{\begin{itemize}[leftmargin=8mm,itemsep=0pt,parsep=0pt,topsep=1pt,partopsep=1pt]}
 	{\end{itemize}}
+
+\input{zkratky}
 
 \chapter{Úvod} \label{chap:uvod}
 \input{uvod}

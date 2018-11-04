@@ -2,9 +2,10 @@ THESIS=thesis
 BIB=bibliography.bib
 PDFLATEX=pdflatex --shell-escape
 AUXFILES=*.aux *.log *.out *.toc *.lot *.lof *.bcf *.blg *.run.xml \
-         *.bbl *.idx *.ind *.ilg *.markdown.*
+         *.bbl *.idx *.ind *.ilg *.markdown.* *.acn *.acr *.alg *.glg *.glo \
+         *.gls *.glsdefs *.ist
 PARTS=uvod.tex prehled.tex pozadavky.tex merici-vuz.tex sw.tex appendix.tex
-PARTS+=zaver.tex abstrakt.tex dik.tex
+PARTS+=zaver.tex abstrakt.tex dik.tex zkratky.tex
 GRAPHS=$(patsubst data/graph/%.csv, graph/%.tex, $(wildcard data/graph/*.csv))
 DATA=$(wildcard data/*)
 
@@ -15,6 +16,7 @@ all: $(THESIS).pdf clean
 $(THESIS).pdf: $(THESIS).tex $(BIB) $(PARTS) $(GRAPHS) $(DATA)
 	$(PDFLATEX) -interaction=batchmode $< # The initial typesetting.
 	biber $(basename $<).bcf
+	makeglossaries $(THESIS)
 	$(PDFLATEX) -interaction=batchmode $< # Update the index after the bibliography insertion.
 	# texindy -I latex -C utf8 -L english $(basename $<).idx
 	texfot $(PDFLATEX) $< # The final typesetting, now also with index.

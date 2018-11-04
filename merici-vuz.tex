@@ -262,23 +262,23 @@ Negativem tohoto přístupu je však ale to, že typicky není možné na počí
 který přijímá signál z~měřícího vozu přes WiFi, být zároveň připojený do sítě
 internet (přes WiFi). A~to je nanejvýš nepraktické.
 
-Bluetooth na \textit{ESP-32} fungoval zdárně. Na ESP se podařilo aktivovat Bluetooth SPP
-profil \cite{spp:specs}, takže se zařízení poměrně snadno spárovalo s~počítačem
-a~tvářilo se jako sériová linka. Profil SPP byl vybrán, protože má
-poměrně dobrou implementaci na celé škále operačních systémů a~vytváří dobrou
-abstrakci pro použití z~jakéhokoliv programu. Téměř na každém operačním systému
-je totiž možné \uv{otevřít sériovou linku}. Pokud by se podařilo zvolit pro
-vývoj aplikace na počítač takový framework, který zvládá abstrahovat sériový
-port nezávisle na cílové platformě, vzniklá aplikace by byla dokonale
-multiplatformní.
+Bluetooth na \textit{ESP-32} fungoval zdárně. Na ESP se podařilo aktivovat
+Bluetooth \gls{SPP} profil \cite{spp:specs}, takže se zařízení poměrně snadno
+spárovalo s~počítačem a~tvářilo se jako sériová linka. Profil \gls{SPP} byl
+vybrán, protože má poměrně dobrou implementaci na celé škále operačních systémů
+a~vytváří dobrou abstrakci pro použití z~jakéhokoliv programu. Téměř na každém
+operačním systému je totiž možné \uv{otevřít sériovou linku}. Pokud by se
+podařilo zvolit pro vývoj aplikace na počítač takový framework, který zvládá
+abstrahovat sériový port nezávisle na cílové platformě, vzniklá aplikace by
+byla dokonale multiplatformní.
 
-Po nasazení profilu SPP se však ukázalo, že spotřeba \textit{ESP-32} je cca $80$~mA,
-což jej dělá -- v~kontextu napájení z~baterie -- nepoužitelným. Bylo zvažováno
-využít specifikace \textit{BLE (Bluetooth Low Energy)}, BLE však nemá
-profil pro sériovou linku, takže by bylo nutné vytvořit profil vlastní. To
-by znamenalo dodat specifikaci profilu do klientského zařízení (do počítače)
-a místo abstrakce sériovou linkou přistupovat přímo k~zařízení Bluetooth.
-Toto řešení bylo zamítnuto pro příliš velkou pracnost a~ztrátu elegance.
+Po nasazení profilu \gls{SPP} se však ukázalo, že spotřeba \textit{ESP-32} je
+cca $80$~mA, což jej dělá -- v~kontextu napájení z~baterie -- nepoužitelným.
+Bylo zvažováno využít specifikace \textit{BLE (Bluetooth Low Energy)}, BLE však
+nemá profil pro sériovou linku, takže by bylo nutné vytvořit profil vlastní. To
+by znamenalo dodat specifikaci profilu do klientského zařízení (do počítače) a
+místo abstrakce sériovou linkou přistupovat přímo k~zařízení Bluetooth.  Toto
+řešení bylo zamítnuto pro příliš velkou pracnost a~ztrátu elegance.
 
 Autor ještě zvažoval, jak problém se spotřebou řešit pomocí sbírání či
 zvětšení baterie, všechna navrhovaná řešení však byla příliš komplikovaná nebo
@@ -297,7 +297,7 @@ zkušenosti.
 Procesory \textit{ATmega} ale bohužel neobsahují vestavěný modul pro
 bezdrátovou komunikaci. Bylo tedy nutné využít externí Bluetooth modul
 propojený s~procesorem pomocí sběrnice. Pro tento účel byl zvolen
-běžně dostupný BT modul typu \textit{HC-05}. Výhodou tohoto modulu je jeho
+běžně dostupný \gls{BT} modul typu \textit{HC-05}. Výhodou tohoto modulu je jeho
 dostupnost a~nízká cena, nevýhodou je to, že modul trpí neduhy typickými pro
 celou řadu zařízení vyráběných v~Číně. K~modulu například není k~dispozici
 kvalitní dokumentace a~v~Česku je to s~jeho dostupností horší. Každopádně
@@ -381,7 +381,7 @@ Hlavní součástkou na DPS je procesor \textit{ATmega328p}
 \cite{atmega328p:datasheet}.  Tento konkrétní typ byl vybrán, protože je
 poměrně moderní a~je dnes montován do vývojových desek Arduino, tudíž je jeho
 cena díky vysokému počtu produkovaných kusů malá. Procesor se stará o~všechnu
-logiku na desce.  Signál z~optozávory je připojen na pin \textit{ICP}, který je
+logiku na desce.  Signál z~optozávory je připojen na pin \textit{\gls{ICP}}, který je
 speciálně určen k~tomu, aby přesně a~rychle měřil periodu vstupního signálu.
 Procesor dále měří napětí na baterii, které je ale nejprve nutné snižit
 napěťovým děličem. Při vývoji hardwaru byla v~jednu chvíli překážkou přesnost
@@ -397,12 +397,12 @@ a~dále zapínací a~vypínací obvod celé elektroniky. Tento obvod je inspirov
 projektem \textit{RB3201} \cite{rb3201} od kolegů z~Robotiky Brno
 \cite{roboticsbrno}.
 
-Napětí pro procesor je vytvářeno obvodem LDO\footnote{Low-dropout regulator}
+Napětí pro procesor je vytvářeno obvodem \gls{LDO}\footnote{Low-dropout regulator}
 (obvod \textit{IC3}), procesor pracuje na napětí $3,3$~V. Tato konstrukce
 s~sebou nese zásadní omezení pro vybíjení baterie: napětí na baterii nikdy nesmí
 klesnout pod $3,5$~V\footnote{Protože \textit{drop voltage} použitého
 regulátoru je $0,2$~V. \cite{ldo:datasheet}}. Tato hodnota zahrnuje
-i~korekce vypočítané z~nepřesnosti výstupu LDO, jedná se tedy o~\textit{napětí,
+i~korekce vypočítané z~nepřesnosti výstupu \gls{LDO}, jedná se tedy o~\textit{napětí,
 které měří procesor}. Jakmile procesor na baterii změří méně než $3,5$~V, musí
 se odpojit\footnote{Pod touto úrovní napětí přestává fungovat měření napětí
 baterie korektně a při delším provozování měřicího vozu by mohlo dojít k~jejímu
@@ -528,15 +528,15 @@ usnadňuje vývoj vozu (firmware je možno kdykoliv aktualizovat).
 Základní činnost procesoru lze shrnout do dvou bodů.
 
 \begin{enumerate}
-\item Procesor pomocí přerušení a~využití speciálního pinu \textit{ICP}
+\item Procesor pomocí přerušení a~využití speciálního pinu \textit{\gls{ICP}}
 měří periodu mezi jednotlivými pulzy senzoru.
 
-\textit{ICP} je speciální mód časovače 1. V~tomto režimu časovač čítá a~při
-vzestupné hraně na pinu \textit{ICP} velice rychle (hardwarově, bez generace
+\textit{\gls{ICP}} je speciální mód časovače 1. V~tomto režimu časovač čítá a~při
+vzestupné hraně na pinu \textit{\gls{ICP}} velice rychle (hardwarově, bez generace
 přerušení) zkopíruje hodnotu čítače časovače do registru procesoru. Poté je
 vyvoláno přerušení, ve kterém je obsloužena naměřená hodnota. Konkrétně je od
 této hodnoty odečten čas předchozího pulzu\footnote{Resp. hodnota čítače
-odpovídající okamžiku předchozí vzestupné hrany na pinu ICP.} a~tím pádem je
+odpovídající okamžiku předchozí vzestupné hrany na pinu \gls{ICP}.} a~tím pádem je
 určena perioda vstupního signálu. Perioda je uložena k~budoucímu odeslání do
 počítače.
 
@@ -573,8 +573,8 @@ Tabulka \ref{tab:wsm-params} shrnuje klíčové parametry měřicího vozu.
 		Parametr & Hodnota & Jednotka \\
 		\midrule
 		Rozměry vozu\footnote & 98 $\times$ 25 & mm \\
-		Spotřeba vozu při nespárovaném BT & 55 & mA \\
-		Spotřeba vozu při spárovaném BT & 33 & mA \\
+		Spotřeba vozu při nespárovaném \gls{BT} & 55 & mA \\
+		Spotřeba vozu při spárovaném \gls{BT} & 33 & mA \\
 		Kapacita baterie & 500 & mAh \\
 		Výdrž baterie & 14 & h \\
 		Pracovní napětí baterie & 3,5--4,2 & V \\
@@ -680,7 +680,7 @@ rychlost díky odstředivé síle zmenšila. Komentovaný jev je pro proces kali
 parazitický, autor se jeho vlivu obával už při prvních teoretických návrzích
 vozu. Později se však ukázalo, že při kalibrování na oválu o~dostatečně velkých
 poloměrech oblouků je změna rychlosti vlivem průjezdu obloukem minimální, resp.
-BEMF (viz \ref{sec:det-static}) ji okamžitě vykompenzuje. Pokud by uživatel
+\gls{BEMF} (viz \ref{sec:det-static}) ji okamžitě vykompenzuje. Pokud by uživatel
 přeci jenom chtěl kalibrovat na obloucích o~malých poloměrech, nabízí se
 možnost výběru používaných a~nepoužívaných měřicích úseků na kalibračním
 okruhu. Stručně řečeno se bude měřit rychlost jen ve vybraných úsecích (typicky
@@ -719,7 +719,7 @@ Všimněte si, že rozsah na ose $y$ je asi $4 \times$ menší než rozsah v~gra
 
 Osilace tedy není způsobena chybou v~konstrukci měřicího vozu.
 
-\item Oscilace je způsobena BEMF regulátorem v~dekodéru.
+\item Oscilace je způsobena \gls{BEMF} regulátorem v~dekodéru.
 
 Jak bylo zmíněno v~kapitole \ref{sec:det-static}, každý dekodér v~sobě má PID
 regulátor, který zajišťuje udržování rychlosti hnacího vozidla při rozdílném
