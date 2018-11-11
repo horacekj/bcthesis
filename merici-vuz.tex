@@ -9,13 +9,13 @@ na řešení (kapitola \ref{chap:pozadavky}).
 \label{sec:wsm-senzor-umisteni}
 
 Prozkoumejme nejprve kam je a~kam není možno detektor umístit. Určitě platí, že
-detektor není možné umístit do lokomotivy. Lokomotiva je totiž komerční produkt,
-který umožňuje úpravy její elektroniky nejvýše na úrovní výměny digitálního
-dekodéru \gls{DCC}. Lokomotiva obvykle bývá vybavena deskou plošných spojů, která
-propojuje jednotlivé součásti lokomotivy (motor, koleje, dekodér, osvětlení,
-...). Tato deska je specifická pro konkrétní model a~dodává ji výrobce hnacího
-vozidla. Zasahovat do elektroniky lokomotivy je tedy vysoce nepraktické
-a~mnohdy i~nemožné.
+detektor není možné umístit do lokomotivy. Lokomotiva je totiž komerční
+produkt, který umožňuje úpravy její elektroniky nejvýše na úrovní výměny
+digitálního dekodéru \gls{DCC}. Lokomotiva obvykle bývá vybavena deskou
+plošných spojů, která propojuje jednotlivé součásti lokomotivy (motor, koleje,
+dekodér, osvětlení, ...). Tato deska je specifická pro konkrétní model a~dodává
+ji výrobce hnacího vozidla. Zasahovat do elektroniky lokomotivy je tedy vysoce
+nepraktické a~mnohdy i~nemožné.
 
 Druhou možností je doplnit detektor do lokomotivy bez úpravy její elektroniky.
 To s~sebou ale nese pořád tu nevýhodu, že je třeba mechanicky zasahovat do
@@ -27,9 +27,9 @@ být součástí vagónu připojeného za lokomotivou. Statické detektory jsou
 nevyhovující zejména proto, že neumožňují provádění dokalibrace za skutečného
 provozu.
 
-Jako nejvhodnější řešení se tedy jeví vyrobit vůz, který se připojí ke kalibrované
-lokomotivě jako běžný vagón. Součástí tohoto vozu bude detektor pro měření
-rychlosti. Vůz pak bude možné připojit bez narušení provozu i~za vlak na
+Jako nejvhodnější řešení se tedy jeví vyrobit vůz, který se připojí ke
+kalibrované lokomotivě jako běžný vagón. Součástí tohoto vozu bude detektor pro
+měření rychlosti. Vůz pak bude možné připojit bez narušení provozu i~za vlak na
 \uv{produkčním} kolejišti.
 
 S~uvážením výše uvedených argumentů se autor rozhodl vydat cestou
@@ -39,10 +39,10 @@ S~uvážením výše uvedených argumentů se autor rozhodl vydat cestou
 \label{sec:wsm-senzor}
 
 Důležitou součástí měřicího vozu je rychlostní senzor. Zvolená technologie
-senzoru ovlivňuje formát a~přesnost měření, dále pak me\-cha\-nic\-ko-elek\-t\-ric\-ké
-vlastnosti měřicího vozu, jeho cenu, snadnost výroby, opakovatelnost výroby
-(dostupnost součástek s~výhledem na několik let) a~v~neposlední řadě
-poruchovost a~opravitelnost měřicího vozu.
+senzoru ovlivňuje formát a~přesnost měření, dále pak
+me\-cha\-nic\-ko-elek\-t\-ric\-ké vlastnosti měřicího vozu, jeho cenu, snadnost
+výroby, opakovatelnost výroby (dostupnost součástek s~výhledem na několik let)
+a~v~neposlední řadě poruchovost a~opravitelnost měřicího vozu.
 
 Autor uvážil několik dostupných technologií senzorů.
 
@@ -147,8 +147,8 @@ $6$~mm (pro měřítko TT, 1:120).
 
 Tato technologie sice obsahuje mechanické prvky, ale pořád je jich poměrně
 málo. Při dostatečném počtu paprsků dosahuje dobré přesnosti, je jednoduchá,
-a~tudíž jsou data z~ní snadno zpracovatelná. Optozávora je také levná a~relativně
-snadno dostupná.
+a~tudíž jsou data z~ní snadno zpracovatelná. Optozávora je také levná
+a~relativně snadno dostupná.
 
 Ze všech zvažovaných technologií autor nakonec zvolil právě technologii
 paprskového kola a~optozávory.
@@ -268,13 +268,13 @@ výhodou je vestavěný Bluetooth a~WiFi. Jedná se o~poměrně výkonný proces
 který lze taktovat až na $240$~MHz a~to dokonce na dvou jádrech!
 \cite{esp-32:datasheet}
 
-Autor pořídil \textit{ESP-32} vývojový kit a~začal zkoušet možnosti komunikace. Jako
-primární komunikační kanál byl vybrán Bluetooth, jelikož vyžaduje oproti WiFi
-menší režii spojenou s~ustanovením spojení. Tento problém by šel u~WiFi řešit
-tím, že se měřicí vůz nepřipojuje k~již existující síti, ale sám síť vytváří.
-Negativem tohoto přístupu je však ale to, že typicky není možné na počítači,
-který přijímá signál z~měřícího vozu přes WiFi, být zároveň připojený do sítě
-internet (přes WiFi). A~to je nanejvýš nepraktické.
+Autor pořídil \textit{ESP-32} vývojový kit a~začal zkoušet možnosti komunikace.
+Jako primární komunikační kanál byl vybrán Bluetooth, jelikož vyžaduje oproti
+WiFi menší režii spojenou s~ustanovením spojení. Tento problém by šel u~WiFi
+řešit tím, že se měřicí vůz nepřipojuje k~již existující síti, ale sám síť
+vytváří.  Negativem tohoto přístupu je však ale to, že typicky není možné na
+počítači, který přijímá signál z~měřícího vozu přes WiFi, být zároveň připojený
+do sítě internet (přes WiFi). A~to je nanejvýš nepraktické.
 
 Bluetooth na \textit{ESP-32} fungoval zdárně. Na ESP se podařilo aktivovat
 Bluetooth \gls{SPP} profil \cite{spp:specs}, takže se zařízení poměrně snadno
@@ -395,12 +395,12 @@ Hlavní součástkou na DPS je procesor \textit{ATmega328p}
 \cite{atmega328p:datasheet}.  Tento konkrétní typ byl vybrán, protože je
 poměrně moderní a~je dnes montován do vývojových desek Arduino, tudíž je jeho
 cena díky vysokému počtu produkovaných kusů malá. Procesor se stará o~všechnu
-logiku na desce.  Signál z~optozávory je připojen na pin \textit{\gls{ICP}}, který je
-speciálně určen k~tomu, aby přesně a~rychle měřil periodu vstupního signálu.
-Procesor dále měří napětí na baterii, které je ale nejprve nutné snižit
-napěťovým děličem. Při vývoji hardwaru byla v~jednu chvíli překážkou přesnost
-napěťové reference, nakonec ale bylo zvoleno jako napěťová reference přímo
-napájecí napětí procesoru, které by mělo kolísat nejvýše $\pm 2$ \%
+logiku na desce.  Signál z~optozávory je připojen na pin \textit{\gls{ICP}},
+který je speciálně určen k~tomu, aby přesně a~rychle měřil periodu vstupního
+signálu.  Procesor dále měří napětí na baterii, které je ale nejprve nutné
+snižit napěťovým děličem. Při vývoji hardwaru byla v~jednu chvíli překážkou
+přesnost napěťové reference, nakonec ale bylo zvoleno jako napěťová reference
+přímo napájecí napětí procesoru, které by mělo kolísat nejvýše $\pm 2$ \%
 \cite{ldo:datasheet}.
 
 Součástí schématu je dále nabíjecí obvod \textit{MCP73831}, který byl vybrán
@@ -411,16 +411,16 @@ a~dále zapínací a~vypínací obvod celé elektroniky. Tento obvod je inspirov
 projektem \textit{RB3201} \cite{rb3201} od kolegů z~Robotiky Brno
 \cite{roboticsbrno}.
 
-Napětí pro procesor je vytvářeno obvodem \gls{LDO}\footnote{Low-dropout regulator}
-(obvod \textit{IC3}), procesor pracuje na napětí $3,3$~V. Tato konstrukce
-s~sebou nese zásadní omezení pro vybíjení baterie: napětí na baterii nikdy nesmí
-klesnout pod $3,5$~V\footnote{Protože \textit{drop voltage} použitého
-regulátoru je $0,2$~V. \cite{ldo:datasheet}}. Tato hodnota zahrnuje
-i~korekce vypočítané z~nepřesnosti výstupu \gls{LDO}, jedná se tedy o~\textit{napětí,
-které měří procesor}. Jakmile procesor na baterii změří méně než $3,5$~V, musí
-se odpojit\footnote{Pod touto úrovní napětí přestává fungovat měření napětí
-baterie korektně a~při delším provozování měřicího vozu by mohlo dojít k~jejímu
-podvybití a~zničení.}.
+Napětí pro procesor je vytvářeno obvodem \gls{LDO}\footnote{Low-dropout
+regulator} (obvod \textit{IC3}), procesor pracuje na napětí $3,3$~V. Tato
+konstrukce s~sebou nese zásadní omezení pro vybíjení baterie: napětí na baterii
+nikdy nesmí klesnout pod $3,5$~V\footnote{Protože \textit{drop voltage}
+použitého regulátoru je $0,2$~V. \cite{ldo:datasheet}}. Tato hodnota zahrnuje
+i~korekce vypočítané z~nepřesnosti výstupu \gls{LDO}, jedná se tedy
+o~\textit{napětí, které měří procesor}. Jakmile procesor na baterii změří méně
+než $3,5$~V, musí se odpojit\footnote{Pod touto úrovní napětí přestává fungovat
+měření napětí baterie korektně a~při delším provozování měřicího vozu by mohlo
+dojít k~jejímu podvybití a~zničení.}.
 
 DPS dále obsahuje konektory pro periferie, testovací konektory, testovací
 plošky a~LE diody.
@@ -495,12 +495,12 @@ s = \frac{i \pi d}{h}
 \label{real-dist}
 \end{equation}
 
-kde $i$ je počet pulzů senzoru, $d$ je průměr modelového kola a~$h = 8$ je počet děr
-v~kole.
+kde $i$ je počet pulzů senzoru, $d$ je průměr modelového kola a~$h = 8$ je
+počet děr v~kole.
 
 Pro komunikaci s~počítačem byl navrhnut vlastní binární protokol inspirovaný
-protokolem XpressNET \cite{xpressnet-specs}. Jedná se o~jednoduchý protokol, který
-v~prvním bytu zprávy určí délku zprávy, poslední byte zprávy je pak její
+protokolem XpressNET \cite{xpressnet-specs}. Jedná se o~jednoduchý protokol,
+který v~prvním bytu zprávy určí délku zprávy, poslední byte zprávy je pak její
 kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace o:
 
 \begin{compactenum}
@@ -510,11 +510,12 @@ kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace
 \end{compactenum}
 
 Zajímavým aspektem protokolu je fakt, že používá kódování \textit{7B8B}
-a~nejvýznamnější bit nechává vždy nastavený na $1$. Důvodem pro tuto vskutku podivnou
-vlastnost je fakt, že modul \textit{HC-05} interpretuje hodnoty bytů jako
-ASCII znaky a~některé znaky odmítne přenést (např. \texttt{0x04} \textit{End
-of transmission}). Proto byla použita pouze polovina rozsahu jednoho
-bytu, která neobsahuje kontrolní znaky, konkrétně interval $128$--$255$.
+a~nejvýznamnější bit nechává vždy nastavený na $1$. Důvodem pro tuto vskutku
+podivnou vlastnost je fakt, že modul \textit{HC-05} interpretuje hodnoty bytů
+jako ASCII znaky a~některé znaky odmítne přenést (např. \texttt{0x04}
+\textit{End of transmission}). Proto byla použita pouze polovina rozsahu
+jednoho bytu, která neobsahuje kontrolní znaky, konkrétně interval
+$128$--$255$.
 
 Kompletní specifikace protokolu je k~dispozici online
 \footnote{\url{https://github.com/kmzbrnoI/wsm-fw/blob/master/protocol.md}}.
@@ -545,13 +546,13 @@ Základní činnost procesoru lze shrnout do dvou bodů.
 \item Procesor pomocí přerušení a~využití speciálního pinu \textit{\gls{ICP}}
 měří periodu mezi jednotlivými pulzy senzoru.
 
-\textit{\gls{ICP}} je speciální mód časovače 1. V~tomto režimu časovač čítá a~při
-vzestupné hraně na pinu \textit{\gls{ICP}} velice rychle (hardwarově, bez generace
-přerušení) zkopíruje hodnotu čítače časovače do registru procesoru. Poté je
-vyvoláno přerušení, ve kterém je obsloužena naměřená hodnota. Konkrétně je od
-této hodnoty odečten čas předchozího pulzu\footnote{Resp. hodnota čítače
-odpovídající okamžiku předchozí vzestupné hrany na pinu \gls{ICP}.} a~tím pádem je
-určena perioda vstupního signálu. Perioda je uložena k~budoucímu odeslání do
+\textit{\gls{ICP}} je speciální mód časovače 1. V~tomto režimu časovač čítá
+a~při vzestupné hraně na pinu \textit{\gls{ICP}} velice rychle (hardwarově, bez
+generace přerušení) zkopíruje hodnotu čítače časovače do registru procesoru.
+Poté je vyvoláno přerušení, ve kterém je obsloužena naměřená hodnota. Konkrétně
+je od této hodnoty odečten čas předchozího pulzu\footnote{Resp. hodnota čítače
+odpovídající okamžiku předchozí vzestupné hrany na pinu \gls{ICP}.} a~tím pádem
+je určena perioda vstupního signálu. Perioda je uložena k~budoucímu odeslání do
 počítače.
 
 Více o~dalším zpracování dat lze nalézt v~sekci

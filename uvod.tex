@@ -28,21 +28,20 @@ nutné pochopit kontext této práce, o~kterém pojednává tato kapitola.
 \section{Modelová kolejiště}
 \label{sec:mod-kol}
 
-Modelové kolejiště je model železniční tratě, typicky zmenšený
-v~některém ze standardních měřítek, např. v~měřítku \uv{TT} (1:120) či \uv{H0}
-(1:87). Vedle typického \uv{hobby} využití kolejiště často slouží jako dopravní
-trenažéry pro výuku zabezpečovacích zařízení železnice či dalších aspektů
-využívaných na skutečné železnici. Nejen v~těchto případech vzniká potřeba
-kolejiště ovládat \textit{zabezpečovacím zařízením}. Typickým příkladem
-současného zabezpečovacího zařízení na skutečné železnici je
-\textit{elektronické stavědlo} spolu s~grafickou nadstavbou
-\textit{\gls{JOP}} (\textit{Jednotné obslužné pracoviště}), která umožňuje řízení
-stavědla přes počítač.
+Modelové kolejiště je model železniční tratě, typicky zmenšený v~některém ze
+standardních měřítek, např. v~měřítku \uv{TT} (1:120) či \uv{H0} (1:87). Vedle
+typického \uv{hobby} využití kolejiště často slouží jako dopravní trenažéry pro
+výuku zabezpečovacích zařízení železnice či dalších aspektů využívaných na
+skutečné železnici. Nejen v~těchto případech vzniká potřeba kolejiště ovládat
+\textit{zabezpečovacím zařízením}. Typickým příkladem současného
+zabezpečovacího zařízení na skutečné železnici je \textit{elektronické
+stavědlo} spolu s~grafickou nadstavbou \textit{\gls{JOP}} (\textit{Jednotné
+obslužné pracoviště}), která umožňuje řízení stavědla přes počítač.
 
 Obdobný systém je využíván také v~\textit{Klubu modelářů železnic Brno I}.
 V~tomto klubu je nasazen systém řízení kolejišť zvaný \textit{hJOP}
-\cite{hjop:web}, který je klonem \gls{JOP} upraveným pro potřeby řízení modelu. Jeho
-primárním cílem je řídit jízdu vlaku a~omezením lidského faktoru předejít
+\cite{hjop:web}, který je klonem \gls{JOP} upraveným pro potřeby řízení modelu.
+Jeho primárním cílem je řídit jízdu vlaku a~omezením lidského faktoru předejít
 možným kolizím.
 
 \section{Současné trendy v~řízení kolejiště}
@@ -54,13 +53,13 @@ K~řízení modelových kolejišť je v~současné době napříč zeměmi využ
 nebo český SW \textit{modelJOP} \cite{modeljop:web}.
 
 Výše zmíněné aplikace potřebují komunikovat s~hardwarovými prvky kolejiště.
-Nejdůležitějším z~těchto prvků je digitální centrála \gls{DCC}. Digitální centrála je
-obecný pojem, konkrétními instancemi od jednotlivých výrobců jsou pak např.
-\textit{Z21} \cite{z21:web}, \textit{NanoX} \cite{nanox:web} nebo třeba
-\textit{Intellibox} \cite{intellibox:web}. Centrála nejčastěji komunikuje
+Nejdůležitějším z~těchto prvků je digitální centrála \gls{DCC}. Digitální
+centrála je obecný pojem, konkrétními instancemi od jednotlivých výrobců jsou
+pak např.  \textit{Z21} \cite{z21:web}, \textit{NanoX} \cite{nanox:web} nebo
+třeba \textit{Intellibox} \cite{intellibox:web}. Centrála nejčastěji komunikuje
 s~počítačem pomocí sběrnice \textit{RS232 over USB}. Jejím hlavním úkolem je
-vytvářet \textit{digitální signál \gls{DCC}} \cite{nmra:dcc:ele}, který moduluje do
-kolejí.
+vytvářet \textit{digitální signál \gls{DCC}} \cite{nmra:dcc:ele}, který
+moduluje do kolejí.
 
 Lokomotiva stojící na kolejích tento signál dekóduje pomocí spe\-ciál\-ní
 součástky -- tzv. \textit{dekodéru \gls{DCC}} -- a~podle přijatých dat poveluje
@@ -71,16 +70,17 @@ periferie, včetně výkonově nejnáročnější periferie -- motoru. Dekodér
 v~podstatě obsahuje jen jednoduchý mikrokontrolér a~několik výkonových prvků.
 Jeho typická velikost je v~řádu malých jednotek cm$^2$, takže je skutečně malý.
 
-Každý dekodér má svoji adresu v~rozsahu $1$--$9999$. Počítač pak může vydat příkaz
-pro řízení lokomotivy, např.: \textit{\uv{lokomotivo s~adresou 562, jeď směrem
-vpřed rychlostí 15!}}
+Každý dekodér má svoji adresu v~rozsahu $1$--$9999$. Počítač pak může vydat
+příkaz pro řízení lokomotivy, např.: \textit{\uv{lokomotivo s~adresou 562, jeď
+směrem vpřed rychlostí 15!}}
 
 Každý dekodér si ukládá svá konfigurační data do volatilní paměti formou tzv.
-\textit{\gls{CV}} (\textit{Configuration Value}). \textit{\gls{CV}} je jedna konfigurační
-jednotka s~rozsahem hodnot 1~byte ($0$--$255$). Každé \textit{\gls{CV}} má svoje číslo
-(typicky $1$--$1023$). Výrobce dekodéru (potažmo standardizační organizace) pak
-definuje význam jednotlivých \gls{CV}. Například \gls{CV} $\#17$ a~$\#18$ jsou vyhrazeny
-k~uložení adresy dekodéru \cite{zimo:cvs}.
+\textit{\gls{CV}} (\textit{Configuration Value}). \textit{\gls{CV}} je jedna
+konfigurační jednotka s~rozsahem hodnot 1~byte ($0$--$255$). Každé
+\textit{\gls{CV}} má svoje číslo (typicky $1$--$1023$). Výrobce dekodéru
+(potažmo standardizační organizace) pak definuje význam jednotlivých \gls{CV}.
+Například \gls{CV} $\#17$ a~$\#18$ jsou vyhrazeny k~uložení adresy dekodéru
+\cite{zimo:cvs}.
 
 \section{Synchronizace rychlosti vozidel}
 \label{sec:sync-rych}
@@ -173,15 +173,15 @@ Cílem této práce je tento proces automatizovat.
 
 Možná ještě fundamentálnějším problémem, než synchronizace rychlostí, je
 synchronizace délky dojezdu z~určité fixní rychlosti napříč různými vozidly.
-Lokomotivní dekodér má pro tento účel vyhrazeno \gls{CV} $\#4$ \cite{zimo:cvs}, které
-definuje dobu brzdění. Při nenulové hodnotě tohoto \gls{CV} tak dekodér po obdržení
-příkazu \uv{stůj} nezastaví ihned, ale postupně zpomaluje.
+Lokomotivní dekodér má pro tento účel vyhrazeno \gls{CV} $\#4$ \cite{zimo:cvs},
+které definuje dobu brzdění. Při nenulové hodnotě tohoto \gls{CV} tak dekodér
+po obdržení příkazu \uv{stůj} nezastaví ihned, ale postupně zpomaluje.
 
-Tento parametr je naprosto klíčový, ovládací SW totiž typicky vyžaduje, aby dané
-vozidlo zastavilo na konkrétní pozici (před návěstidlem, u~nástupiště, ...).
-Současné ovládací aplikace problém synchronizace dojezdů řeší typicky tak, že si
-dojezd změří a~dále s~ním kalkulují v~dalších výpočtech. Například program
-\textit{TrainController} \cite{traincontroller:web} dokonce při brzdění
+Tento parametr je naprosto klíčový, ovládací SW totiž typicky vyžaduje, aby
+dané vozidlo zastavilo na konkrétní pozici (před návěstidlem, u~nástupiště,
+...).  Současné ovládací aplikace problém synchronizace dojezdů řeší typicky
+tak, že si dojezd změří a~dále s~ním kalkulují v~dalších výpočtech. Například
+program \textit{TrainController} \cite{traincontroller:web} dokonce při brzdění
 posílá dekodéru postupně povely \uv{jeď stupněm 12}, \uv{jeď stupněm 10},
 \uv{jeď stupněm 5}, ..., takže se efekt brzdné křivky prakticky eliminuje.
 
@@ -196,12 +196,12 @@ Autor této práce považuje toto řešení za nešťastné, neboť
 
 Proto byl při tvorbě SW hJOP zvolen alternativní přístup. Je striktně
 definováno, že \textit{každá lokomotiva musí z~rychlosti $40$~km/h zastavit na
-vzdálenosti $30$\mbox{--}$35$~cm}.\footnote{Tato hodnota se liší pro jednotlivá měřítka,
-$30$\mbox{--}$35$~cm je standard pro měřítko TT 1:120.} Do této vzdálenosti od
-kýženého bodu zastavení jsou do kolejiště fyzicky montovány senzory. Po
-projetí vozidla senzorem pošle hJOP povel \uv{lokomotivo s~adresou 1254, stůj!},
-lokomotiva začne plynule brzdit a~do přesně dané vzdálenosti zastaví. A~to vše
-modelově plynule.
+vzdálenosti $30$\mbox{--}$35$~cm}.\footnote{Tato hodnota se liší pro jednotlivá
+měřítka, $30$\mbox{--}$35$~cm je standard pro měřítko TT 1:120.} Do této
+vzdálenosti od kýženého bodu zastavení jsou do kolejiště fyzicky montovány
+senzory. Po projetí vozidla senzorem pošle hJOP povel \uv{lokomotivo s~adresou
+1254, stůj!}, lokomotiva začne plynule brzdit a~do přesně dané vzdálenosti
+zastaví. A~to vše modelově plynule.
 
 Kalibrace dojezdů zajišťuje to, že hnací vozidlo nikdy nepřejede návěstidlo nebo
 nenajede do špatně postavené výměny. Je proto ještě důležitější než kalibrace

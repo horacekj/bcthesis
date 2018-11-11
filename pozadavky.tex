@@ -8,12 +8,12 @@ nejdůležitějšího jsou:
 	\item maximalizace automatizace a~minimalizace nutné spolupráce s~uživatelem,
 	\item urychlení procesu kalibrace,
 	\item možnost provést dokalibrování za skutečného provozu,
-	\item přehledné verzování projektu, čistý a~přehledný kód, využití otevřených
-	technologií.
+	\item přehledné verzování projektu, čistý a~přehledný kód, využití
+	otevřených technologií.
 \end{compactenum}
 
-První bod vyplývá z~faktu, že proces kalibrace bude často spouštěn laickou obsluhou
-kolejiště. Proto bude kladen důraz na očekávatelné chování grafického
+První bod vyplývá z~faktu, že proces kalibrace bude často spouštěn laickou
+obsluhou kolejiště. Proto bude kladen důraz na očekávatelné chování grafického
 rozhraní a~jednoduchost práce se samotným měřicím hardwarem. Řešení bude také
 navrženo tak, aby využívalo běžně dostupné technologie, se kterými jsou
 uživatelé zvyklí pracovat.
@@ -22,19 +22,18 @@ Stejně jako jinde ve světě, tak i~v~brněnském Klubu je provozováno více
 modelových měřítek, autor se vynasnaží navrhnout řešení tak, aby bylo nezávislé
 na měřítku.
 
-Za okomentování dále stojí bod (5). Po zakoupení nového vozidla se
-typicky provádí jeho kalibrace, vozidlo je následně začleněno do provozu, kde
-jezdí i~několik let. Fyzikální realita světa je bohužel neúprosná --
-ve vozidle dochází k~mechanickému opotřebení prvků, zaběhnutí pohyblivých
-částí po určité době provozu a~ke změně mechanických parametrů vozidla
-v~závislosti na teplotě. Důsledkem těchto skutečností je, že kalibrace vozidla
-po určité době ztrácí přesnost. Vychýlení typicky není zásadní, ale mnohdy
-znatelné.
+Za okomentování dále stojí bod (5). Po zakoupení nového vozidla se typicky
+provádí jeho kalibrace, vozidlo je následně začleněno do provozu, kde jezdí
+i~několik let. Fyzikální realita světa je bohužel neúprosná -- ve vozidle
+dochází k~mechanickému opotřebení prvků, zaběhnutí pohyblivých částí po určité
+době provozu a~ke změně mechanických parametrů vozidla v~závislosti na teplotě.
+Důsledkem těchto skutečností je, že kalibrace vozidla po určité době ztrácí
+přesnost. Vychýlení typicky není zásadní, ale mnohdy znatelné.
 
 Proto je vhodné navrhnout kalibrační hardware tak, aby jej bylo možné použít
 i~v~ostrém provozu na kolejišti. Vozidlo, které by mělo nedokonalou kalibraci,
-by bylo dispečerem označeno a~ovládací SW kolejiště by se postaral o~to, aby byla
-kalibrace obnovena. Tato práce si sice neklade za cíl automatické
+by bylo dispečerem označeno a~ovládací SW kolejiště by se postaral o~to, aby
+byla kalibrace obnovena. Tato práce si sice neklade za cíl automatické
 dokalibrovávání implementovat -- protože pro tento úkol bude nutná netriviální
 součinnost s~řídícím SW kolejiště -- bylo by ale nanejvýš vhodné, aby na tento
 proces bylo hardwarové řešení připraveno.
