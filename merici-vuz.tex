@@ -11,7 +11,7 @@ na řešení (kapitola \ref{chap:pozadavky}).
 Prozkoumejme nejprve kam je a~kam není možno detektor umístit. Určitě platí, že
 detektor není možné umístit do lokomotivy. Lokomotiva je totiž komerční produkt,
 který umožňuje úpravy její elektroniky nejvýše na úrovní výměny digitálního
-dekodéru DCC. Lokomotiva obvykle bývá vybavena deskou plošných spojů, která
+dekodéru \gls{DCC}. Lokomotiva obvykle bývá vybavena deskou plošných spojů, která
 propojuje jednotlivé součásti lokomotivy (motor, koleje, dekodér, osvětlení,
 ...). Tato deska je specifická pro konkrétní model a~dodává ji výrobce hnacího
 vozidla. Zasahovat do elektroniky lokomotivy je tedy vysoce nepraktické
@@ -105,11 +105,11 @@ Tento senzor byl mezi mnohými podobnými zvolen proto, že (1) má výstup sér
 linkou a~(2) zvládá měřit vysoké rychlosti (vagón se typicky pohybuje o~něco
 rychleji než myš).
 
-Autor zakoupil senzory, osadil je na desku plošných spojů a~začal testovat
-přesnost měření pomocí jednoduchého zapojení s~vývojovým kitem Arduino. Nemalou
-výzvou bylo sehnat čočku, která autorovi umožní zaměřit pražce a~zároveň
-ponechat senzor na ploše vagónu. Díky spolupráci s~Ústavem přístrojové techniky
-AV ČR se však povedlo dostatečně malou čočku obstarat.
+Autor osadil senzory na desku plošných spojů a~začal testovat přesnost měření
+pomocí jednoduchého zapojení s~vývojovým kitem Arduino. Nemalou výzvou bylo
+sehnat čočku, která autorovi umožní zaměřit pražce a~zároveň ponechat senzor na
+ploše vagónu. Díky spolupráci s~Ústavem přístrojové techniky AV ČR se však
+povedlo dostatečně malou čočku obstarat.
 
 První měření ukázala, že pro dobrou funkci senzoru je třeba poměrně kontrastní
 snímaná plocha a~poměrně intenzivní červené světlo (na to je CCD čip v~senzoru
@@ -197,19 +197,22 @@ kontaktem a~kolem bude tak vysoké, že kolo bude na kolejnici prokluzovat. A~to
 je v~kontextu faktu, že na nápravě probíhá měření rychlosti, naprosto
 nemyslitelné. Zátěž byla napájena cca $50 \%$ času a~to i~přes veškerou snahu
 o~přídavné kondenzátory a~případnou přídavnou hmotnost pro zlepšení kontaktu
-vozu s~kolejemi.
+vozu s~kolejemi. Zajištění kvalitního sbírání by s~sebou tedy neslo nutnost --
+podobně, jako u~lokomotiv, kde sbírání funguje i~přes odběry motorů kolem
+$400$~mA -- vůz zatížit, případně zvýšit počet náprav a~zajistit jejich
+kyvnost. A~to by se neobešlo bez náročných mechanických úprav měřicího vozu.
 
-Na základě těchto měření i~autorových předchozích zkušeností se sbíráním
+Na základě provedených měření i~autorových předchozích zkušeností se sbíráním
 u~vagónů bylo rozhodnuto zkonstruovat vůz bez sbírání. Později byla zvažována
 řešení zahrnující baterie i~sbírání dohromady -- tedy baterie dobíjené z~kolejí
 --, tato řešení se ale ukázala jako příliš komplikovaná.
 
 Poslední alternativou tedy zůstala baterie. Výzvou při použití baterie je
 vměstnat co největší baterii do malého prostoru vozu. Minimální doba kalibrace
-na jedno nabití byla stanovena na 3 hodiny. Jednou z~výhod baterie je to, že
-vůz není nutné upravovat (instalovat sběrací kontakty) a~že vůz lze za jeho
-plné funkčnosti bez problému sejmout z~kolejí a~například tak vyzkoušet
-funkčnost senzoru.
+na jedno nabití byla stanovena na 3~hodiny. Hlavní výhodou baterie je to, že
+vůz není nutné mechanicky upravovat (instalovat sběrací kontakty). Vůz lze také
+za jeho plné funkčnosti bez problému sejmout z~kolejí a~například tak vyzkoušet
+funkčnost senzoru. Tím se výrazně zjednodušuje proces vývoje a~testování.
 
 Za technologii baterií byla zvolena LiPol.
 
@@ -220,17 +223,28 @@ vskutku malá (viz další kapitolu).
 \label{sec:wsm-prenos-pc}
 
 Dle požadavků na měřicí technologii (viz kapitolu \ref{chap:pozadavky}) je
-nutné zajistit bezdrátový přenos dat ze senzoru. Primární technologií na straně
-příjemce je pro účely této práce počítač, pokud se však podaří vybrat takovou
+nutné zajistit přenos dat ze senzoru. Primární technologií na straně
+příjemce je pro účely této práce počítač.
+
+Přirozeným komunikačním prostředkem jsou koleje. Protokol \gls{DCC}
+\cite{nmra:dcc:proto} však umožňuje pouze jednosměrnou komunikaci (z~centrály
+do lokomotivy) \cite{nmra:dcc:proto}. Existují sice proprietární řešení
+umožňující obousměrnou komunikaci (například \textit{RailCom} \cite{railcom}),
+avšak tato řešení vyžadují úpravy napájecí soustavy kolejiště a~podporu
+v~\gls{DCC} centrále. To je zejména při požadavku na provoz na reálném
+kolejišti nemyslitelné. Navíc je samozřejmě nutné zabezpečit sbírání vozu,
+které již bylo diskutováno v~kapitole \ref{sec:wsm-napajeni}.
+
+Druhou možností je bezdrátový přenos dat. Pokud se podaří vybrat takovou
 technologii, aby data mohla být přenášena například i~na mobilní telefon či
 tablet, bude to pro měřicí vůz jen výhodou. Autor se proto rozhodl vyhnout se
 proprietárním řešením pro bezdrátový přenos dat a~cílit na technologie, které
 jsou běžně dostupné, ideálně přímo zabudované v~dnešních počítačích.
 V~neposlední řadě je třeba zmínit, že nutnost pořizovat či stavět přijímač by
-zvyšovala náročnost celého projektu, a to jak po stránce finanční, tak po
+zvyšovala náročnost celého projektu, a~to jak po stránce finanční, tak po
 stránce výrobní.
 
-S~tímto vědomím přicházejí v~úvahu 2 technologie:
+S~tímto vědomím přicházejí v~úvahu 2~technologie:
 
 \begin{compactenum}
 \item Wi-Fi,
@@ -242,8 +256,8 @@ S~tímto vědomím přicházejí v~úvahu 2 technologie:
 
 Na základě požadavků vyplynuvších z~předchozích kapitol (senzor, přenos dat)
 je nutné vybrat hardware, který bude umístěn do měřicího vozu. Hardware
-musí zajistit (1) zpracování signálu ze senzoru, (2) komunikaci s~nadřazeným
-zařízením, (3) ochranu proti podvybití baterie a (4) možnost zařízení vypnout
+musí zajistit (1)~zpracování signálu ze senzoru, (2)~komunikaci s~nadřazeným
+zařízením, (3)~ochranu proti podvybití baterie a~(4)~možnost zařízení vypnout
 a~zapnout.
 
 \subsection{ESP-32}
@@ -740,18 +754,18 @@ modelu.
 \label{fig:speed-presny}
 \end{figure}
 
-Zde se pouštíme už na poměrně tenký led. Z~grafu \ref{fig:speed-presny} je
-patrné, že měření frekvence oscilace je za hranou možností měřicího
-vozu. Počet děr v~perforovaném kolu je na přesné měření frekvence totiž příliš
-malý.
+Poslední hypotézou tedy zůstává to, že oscilace, která je patrná v~grafu
+\ref{fig:speed-presny}, je přímým důsledkem postupné aktivace pólů motoru,
+případně důsledkem nedokonalých převodů lokomotivy a~šíření vibrací přes koleje
+až do vozu.
 
-Poslední hypotézou tedy zůstává to, že oscilace, která je patrná v~grafu,
-je přímým důsledkem postupné aktivace pólů motoru, střídy signálu do motoru,
-případně důsledkem nedokonalých převodů lokomotivy a~šíření vibrací přes
-koleje až do vozu.
+Z~grafu \ref{fig:speed-presny} je patrné, že měření frekvence oscilace je za
+hranou možností měřicího vozu. Počet děr v~perforovaném kolu je totiž na přesné
+měření frekvence příliš malý. Pravdivost poslední hypotézy tedy autor nebude
+detailně posuzovat.
 
-Fakt, že amplituda oscilace je při nižších rychlostech vyšší lze vysvětlit tím,
-že vozidlo má při nižších rychlostech menší setrvačnost a~tudíž se pulzní
+Fakt, že amplituda oscilace je při nižších rychlostech vyšší, lze vysvětlit
+tím, že vozidlo má při nižších rychlostech menší setrvačnost a~tudíž se pulzní
 charakter regulace a~nepřesnosti v~převodech více projevuje.
 
 Jako drobnou poznámku autor uvádí, že z~naměřených dat nejspíš (!) plyne,
@@ -784,7 +798,7 @@ kalibračního vozu, princip její činnosti je následující:
 Tato metoda je poměrně známá, zajímavou věcí na implementaci v~měřicím vozu
 jsou výše uvedené konstanty. Sto milisekund proto, aby data v~počítači byla
 vidět v~rozumně \textit{reálném čase} a~naopak příliš nezahlcovala komunikační
-kanál, Jedna sekunda proto, že se jedná o~latenci, kterou je uživatel ještě
+kanál. Jedna sekunda proto, že se jedná o~latenci, kterou je uživatel ještě
 schopen tolerovat, navíc za tento čas obvykle nastane alespoň jedna perioda
 rušivé oscilace signálu (viz naměřená data v~grafech výše).
 
