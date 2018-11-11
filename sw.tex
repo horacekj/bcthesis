@@ -1,5 +1,5 @@
 Pro potřeby této práce byly vytvořeny 2 aplikace a~2 knihovny. První aplikace
-je demonstrační aplikací k~měřicímu vozu a pouze zobrazuje naměřená data. Druhá
+je demonstrační aplikací k~měřicímu vozu a~pouze zobrazuje naměřená data. Druhá
 aplikace je o~mnoho komplexnější a~řeší přímo problém automatické kalibrace.
 
 \section{Volba nástrojů}
@@ -57,7 +57,7 @@ aplikace bude psána v~programovacím jazyce \texttt{C++} (konkrétně
 \label{sec:sw-wsm-speed-reader}
 
 První aplikací je \textit{\gls{WSM} Speed Reader}\footnote{\gls{WSM} je obchodní název
-vyvinutého měřicího vozu: \textit{\gls{WSM}: A Wireless Speedometer}.} -- jednoduchý
+vyvinutého měřicího vozu: \textit{\gls{WSM}: A~Wireless Speedometer}.} -- jednoduchý
 zobrazovač vyčtených dat. Aplikace se skládá z~jednoho okna a~je především typu
 \textit{proof of concept}. GUI aplikace je zachyceno na obrázku
 \ref{fig:wsm-speed-reader-gui}.
@@ -135,9 +135,9 @@ se řídí rychlost lokomotivy.
 \item \textit{Otáčky přiřazené konkrétnímu jízdnímu stupni}
 
 Otáčky motoru přiřazené konkrétnímu jízdnímu stupni se ukládají do \gls{CV} (viz
-\ref{sec:trendy}) dekodéru a mají mají rozsah $0$--$255$. Pro každý jízdní
+\ref{sec:trendy}) dekodéru a~mají mají rozsah $0$--$255$. Pro každý jízdní
 stupeň je právě jedno \gls{CV}. Nastavení těchto \gls{CV} lze měnit jedině programováním
-dekodéru a neočekává se, že se při ostrém provozu bude do tohoto nastavení
+dekodéru a~neočekává se, že se při ostrém provozu bude do tohoto nastavení
 zasahovat. Více jízdních stupňů může mít přiřazeno stejné otáčky.
 
 \item \textit{Rychlost}
@@ -151,8 +151,8 @@ stejné otáčky (a tudíž stejnou rychlost).
 Veškeré programování dekodéru v~lokomotivě probíhá v~režimu \textit{\gls{POM}}
 (\textit{Programming on Main}), který umožňuje -- ačkoliv se nepředpokládá, že
 se tato možnost využije -- programování za plného provozu
-kolejiště.\footnote{\gls{DCC} centrála umí programovat dekodér ve dvou režimech: (1)
-programování na programovací koleji, (2) \textit{Programming on Main -- \gls{POM}}.
+kolejiště.\footnote{\gls{DCC} centrála umí programovat dekodér ve dvou režimech:
+(1)~programování na programovací koleji, (2)~\textit{Programming on Main -- \gls{POM}}.
 Jedině na programovací koleji lze vyčítat \gls{CV}, při zvolení režimu \textit{\gls{POM}}
 není možné přenášet data z~lokomotivy zpět do centrály, \gls{CV} lze tedy pouze
 nastavovat. Lokomotiva ani nemůže potvrdit správné přijetí dat. Centrála ale
@@ -210,7 +210,7 @@ souboru.
 Před kalibrací navíc uživatel zadá \textit{maximální kalibrovanou rychlost}.
 Tato rychlost je vlastností konkrétního hnacího vozidla, proto je možné ji
 ovlivnit před každou jednotlivou kalibrací. Maximální rychlost spolu
-s~akcelerací a~decelerací a oběma mapami jsou ukládány do \texttt{xml} souboru
+s~akcelerací a~decelerací a~oběma mapami jsou ukládány do \texttt{xml} souboru
 definice hnacího vozidla. Formát tohoto souboru byl záměrně převzat ze SW JMRI
 \cite{jmri:web}, aby bylo možné soubory mezi programy přenášet.
 
@@ -229,7 +229,7 @@ z~měřicího vozu (první probíhá již přímo ve vozu). Ano, je to tak. Ovš
 průměrování na úrovní SW není pouze eliminovat oscilace rychlosti, výstupem
 je totiž kromě průměrné rychlosti také rozdíl $v_{max} - v_{min}$ v~měřeném
 intervalu. Tento \uv{pseudorozptyl} umožňuje kalibračnímu SW rozhodnout, kdy
-je a kdy není měření relevantní. A~přesně to kalibrační SW dělá.
+je a~kdy není měření relevantní. A~přesně to kalibrační SW dělá.
 
 Průměrování typicky probíhá pro $30$ naměřených rychlostí, tedy po dobu $3$~s.
 

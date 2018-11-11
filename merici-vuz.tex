@@ -101,8 +101,8 @@ porovnávání obrazů by tak mohlo být přesné (srovnejte s~pohybem optické
 myši po takřka uniformním povrchu stolu nebo podložky pod myš).
 
 Pro kalibrační vůz byl vybrán senzor \textit{ADNS-3050} \cite{adns-3050}.
-Tento senzor byl mezi mnohými podobnými zvolen proto, že (1) má výstup sériovou
-linkou a~(2) zvládá měřit vysoké rychlosti (vagón se typicky pohybuje o~něco
+Tento senzor byl mezi mnohými podobnými zvolen proto, že (1)~má výstup sériovou
+linkou a~(2)~zvládá měřit vysoké rychlosti (vagón se typicky pohybuje o~něco
 rychleji než myš).
 
 Autor osadil senzory na desku plošných spojů a~začal testovat přesnost měření
@@ -159,7 +159,7 @@ paprsků kolo vyrobit dírkované. Jako vhodný kompromis bylo stanoveno
 8 dírek na kolo. Při výrobě se podařilo dosáhnout přesnosti umístění jedné
 dírky $\pm 0,05$~mm. To jsou poměrně dobré výsledky.
 
-Výkres kola je zobrazen v příloze \ref{fig:final-wheel}.
+Výkres kola je zobrazen v~příloze \ref{fig:final-wheel}.
 
 Drobným problémem pak bylo sehnat dostatečně malou optozávoru. Běžné optozávory
 dostupné v~českých obchodech dosahují rozměrů cca $15\times6\times10$~mm
@@ -419,8 +419,8 @@ regulátoru je $0,2$~V. \cite{ldo:datasheet}}. Tato hodnota zahrnuje
 i~korekce vypočítané z~nepřesnosti výstupu \gls{LDO}, jedná se tedy o~\textit{napětí,
 které měří procesor}. Jakmile procesor na baterii změří méně než $3,5$~V, musí
 se odpojit\footnote{Pod touto úrovní napětí přestává fungovat měření napětí
-baterie korektně a při delším provozování měřicího vozu by mohlo dojít k~jejímu
-podvybití a zničení.}.
+baterie korektně a~při delším provozování měřicího vozu by mohlo dojít k~jejímu
+podvybití a~zničení.}.
 
 DPS dále obsahuje konektory pro periferie, testovací konektory, testovací
 plošky a~LE diody.
@@ -433,7 +433,7 @@ Kompletní materiály k~elektronice jsou k~dispozici pod licencí \textit{CC BY-
 
 První pohled na měření rychlosti vozidla by mohl vycházet z~analogie
 s~tachometrem na kole: stačí měřit kolik pulzů za sekundu se na senzoru vytvoří
-a podle toho počítat rychlost. Ukazuje se však, že tato metoda měření nedosahuje
+a~podle toho počítat rychlost. Ukazuje se však, že tato metoda měření nedosahuje
 zejména při malých rychlostech dostatečné přesnosti.
 
 Mnohem přesnějším způsobem měření je měřit periodu mezi jednotlivými pulzy ze
@@ -561,7 +561,7 @@ Více o~dalším zpracování dat lze nalézt v~sekci
 operace (primární smyčka totiž může být kdykoliv přerušena). Ve
 smyčce se každých $100$~ms odesílá aktuální rychlost (tj. perioda, viz bod (1))
 do počítače, dále se každých $500$~ms odesílá informace o~ujeté vzdálenosti
-a~každých $5$~s se měří napětí na baterii.
+a~každých $5$~s~se měří napětí na baterii.
 
 \end{enumerate}
 
@@ -584,15 +584,15 @@ Tabulka \ref{tab:wsm-params} shrnuje klíčové parametry měřicího vozu.
 \begin{table}[h!]
 	\begin{tabularx}{\textwidth}{lrl}
 		\toprule
-		Parametr & Hodnota & Jednotka \\
+		Parametr & Hodnota & Jednotka\\
 		\midrule
-		Rozměry vozu\footnote & 98 $\times$ 25 & mm \\
-		Spotřeba vozu při nespárovaném \gls{BT} & 55 & mA \\
-		Spotřeba vozu při spárovaném \gls{BT} & 33 & mA \\
-		Kapacita baterie & 500 & mAh \\
-		Výdrž baterie & 14 & h \\
-		Pracovní napětí baterie & 3,5--4,2 & V \\
-		Využitá kapacita baterie & > 90 & \% \\
+		Rozměry vozu\footnote & 98 $\times$ 25 & mm\\
+		Spotřeba vozu při nespárovaném \gls{BT} & 55 & mA\\
+		Spotřeba vozu při spárovaném \gls{BT} & 33 & mA\\
+		Kapacita baterie & 500 & mAh\\
+		Výdrž baterie & 14 & h\\
+		Pracovní napětí baterie & 3,5--4,2 & V\\
+		Využitá kapacita baterie & > 90 & \%\\
 		Minimální měřitelná rychlost & 4 & modelový km/h\\
 		Maximální měřitelná rychlost\footnote & 300 & modelový km/h\\
 		Odhadovaná cena elektroniky & 500 & Kč\\
@@ -644,7 +644,7 @@ vyhodnocovat surová data.
 Při bližším pohledu na pohybující se vůz si šlo všimnout, že vůz ve spřáhlu
 s~lokomotivou poměrně intenzivně pruží. To je dáno jak mechanickou konstrukcí
 spřáhla, tak tím, že vůz i~lokomotiva obsahují kinematiku\footnote{Kinematika
-je mechanismus uchycení spřáhla v~lokomotivách a vagónech, ve kterém je spřáhlo
+je mechanismus uchycení spřáhla v~lokomotivách a~vagónech, ve kterém je spřáhlo
 k~rámu vozidla připevněno přes pružiny, které zaručují natočení spřáhla při
 průjezdu obloukem.}.
 Autor tedy přistoupil k~nahrazení spřáhla pružného za spřáhlo pevné. Tento krok
