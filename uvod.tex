@@ -11,13 +11,13 @@ modelového železničního vozidla přispět právě ke zvýšení bezpečnosti
 a~spolehlivosti provozu.
 
 Autor rozebere možnosti řešení problému automatické kalibrace, uká\-že, proč
-jsou současná řešení nevhodná a~nakonec navrhne (1)~hardware, (2)~firmware
+jsou současná řešení nevhodná, a~nakonec navrhne (1)~hardware, (2)~firmware
 a~(3)~software, kterými uvedený problém řeší. Autor popíše výstupy této práce
 a~ukáže její reálný přínos.
 
-Tuto práci je tematicky možné zařadit jednak do kategorie \textit{proof of
-concept}, druhak však i~do kategorie práce \textit{aplikační}. Jejím primárním
-cílem totiž je vytvořit reálné řešení reálného problému v~oblasti automatizace,
+Tuto práci je tematicky možné zařadit jak do kategorie \textit{proof of
+concept}, tak i~do kategorie práce \textit{aplikační}. Jejím primárním
+cílem je totiž vytvořit reálné řešení reálného problému v~oblasti automatizace,
 který doteď ještě nikdo neřešil. Konkrétně se práce zaměřuje na automatizaci
 řízení dopravy na modelovém kolejišti. Cílem této práce je navrhnout kvalitní
 řešení od hardwaru, přes firmware až po software.
@@ -30,8 +30,8 @@ nutné pochopit kontext této práce, o~kterém pojednává tato kapitola.
 
 Modelové kolejiště je model železniční tratě, typicky zmenšený v~některém ze
 standardních měřítek, např. v~měřítku \uv{TT} (1:120) či \uv{H0} (1:87). Vedle
-typického \uv{hobby} využití kolejiště často slouží jako dopravní trenažéry pro
-výuku zabezpečovacích zařízení železnice či dalších aspektů využívaných na
+typického \textit{hobby} využití kolejiště často slouží jako dopravní trenažéry
+pro výuku zabezpečovacích zařízení železnice či dalších aspektů využívaných na
 skutečné železnici. Nejen v~těchto případech vzniká potřeba kolejiště ovládat
 \textit{zabezpečovacím zařízením}. Typickým příkladem současného
 zabezpečovacího zařízení na skutečné železnici je \textit{elektronické
@@ -63,7 +63,7 @@ moduluje do kolejí.
 
 Lokomotiva stojící na kolejích tento signál dekóduje pomocí spe\-ciál\-ní
 součástky -- tzv. \textit{dekodéru \gls{DCC}} -- a~podle přijatých dat poveluje
-periferie lokomotivy: motor, světla, nebo třeba zvuk vydávaný vestavěným
+periferie lokomotivy: motor, světla nebo třeba zvuk vydávaný vestavěným
 reproduktorem. Modulovaný výkonový signál v~kolejích je zároveň využíván jako
 (1)~nosič informace pro dekodéry a~(2)~po usměrnění jako napájecí napětí pro
 periferie, včetně výkonově nejnáročnější periferie -- motoru. Dekodér
@@ -71,7 +71,7 @@ v~podstatě obsahuje jen jednoduchý mikrokontrolér a~několik výkonových prv
 Jeho typická velikost je v~řádu malých jednotek cm$^2$, takže je skutečně malý.
 
 Každý dekodér má svoji adresu v~rozsahu $1$--$9999$. Počítač pak může vydat
-příkaz pro řízení lokomotivy, např.: \textit{\uv{lokomotivo s~adresou 562, jeď
+příkaz pro řízení lokomotivy, např. \textit{\uv{lokomotivo s~adresou 562, jeď
 směrem vpřed rychlostí 15!}}
 
 Každý dekodér si ukládá svá konfigurační data do volatilní paměti formou tzv.
@@ -79,7 +79,7 @@ Každý dekodér si ukládá svá konfigurační data do volatilní paměti form
 konfigurační jednotka s~rozsahem hodnot 1~byte ($0$--$255$). Každé
 \textit{\gls{CV}} má svoje číslo (typicky $1$--$1023$). Výrobce dekodéru
 (potažmo standardizační organizace) pak definuje význam jednotlivých \gls{CV}.
-Například \gls{CV} $\#17$ a~$\#18$ jsou vyhrazeny k~uložení adresy dekodéru
+Například \gls{CV} $\#17$ a~$\#18$ jsou vyhrazena k~uložení adresy dekodéru
 \cite{zimo:cvs}.
 
 \section{Synchronizace rychlosti vozidel}
@@ -92,7 +92,7 @@ Protože každá lokomotiva obsahuje jiné mechanické prvky (převody, motor),
 odpovídá stejnému jízdnímu stupni u~dvou různých nezkalibrovaných hnacích
 vozidel různá rychlost. Ukazuje se, že při řízení kolejiště je vhodné, aby
 (1)~stejnému jízdnímu stupni u~všech hnacích vozidel na kolejišti odpovídala
-stejná rychlost a~aby (2)~byl jízdní stupeň pevně spárovaný s~reálnou rychlosti
+stejná rychlost a~aby (2)~byl jízdní stupeň pevně spárovaný s~reálnou rychlostí
 vozidla přepočtenou dle měřítka.
 
 Synchronizací rychlosti vozidel myslíme právě splnění těchto dvou vlastností
@@ -110,6 +110,7 @@ obsluhu. Obsluha má často k~dispozici ovladač pro řízení rychlosti jízdy
 vozidla v~ručním režimu. Autor této práce považuje za velice užitečné, aby
 platilo, že otočení trimru ovladače o~daný úhel způsobí u~všech vozidel pohyb
 stejnou rychlostí (úhel otočení trimru ovladače odpovídá jízdnímu stupni).
+Obsluha kolejiště je pak rychlejší a~efektivnější.
 
 Třetím důvodem k~synchronizaci rychlostí vozidel je umožnění přípřeží a~postrků
 -- tj.  situací, kdy v~jednom vlaku jede více lokomotiv. Tyto lokomotivy se
@@ -171,7 +172,7 @@ Cílem této práce je tento proces automatizovat.
 \section{Synchronizace brzdných křivek vozidel}
 \label{sec:sync-krivky}
 
-Možná ještě fundamentálnějším problémem, než synchronizace rychlostí, je
+Možná ještě fundamentálnějším problémem než synchronizace rychlostí je
 synchronizace délky dojezdu z~určité fixní rychlosti napříč různými vozidly.
 Lokomotivní dekodér má pro tento účel vyhrazeno \gls{CV} $\#4$ \cite{zimo:cvs},
 které definuje dobu brzdění. Při nenulové hodnotě tohoto \gls{CV} tak dekodér

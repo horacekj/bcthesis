@@ -10,7 +10,7 @@ speciální senzory pro měření dráhy nebudou uvažovány.
 \label{sec:det-static}
 
 Jednou z~nejjednodušších technologií pro detekci rychlosti pohybujícího se
-objektu jsou dva senzory detekující průchod bodem a~stopky. V~naší aplikaci na
+objektu jsou stopky a~dva senzory detekující průchod bodem. V~naší aplikaci na
 modelovém kolejišti si lze představit dva (např. optické) senzory umístěné
 v~určité vzdálenosti od sebe, skutečnou rychlost pohybujícího se objektu lze
 pak vypočíst jednoduchým vydělením vzdálenosti senzorů a~času, po který se
@@ -39,16 +39,16 @@ nesrovnatelně vyšší než u~senzoru, který by byl schopen odečítat rychlos
 průběžně, nezávisle na poloze vozidla.
 
 Uvědomme si ale na závěr, že jedna z~klíčových nevýhod tohoto senzoru je
-v~určitém slova smyslu i~jeho výhodou. Totiž fakt, že měření probíhá jen na pevně
-definovaném úseku koleje s~sebou nese tu výhodu, že vozidlo měříme vždy ve
-stejných podmínkách. Nemusíme tedy například řešit, jestli vozidlo zrovna jede
-v~oblouku a~je zpomalováno odstředivou silou, protože senzor prostě umístíme
-na rovný úsek trati.
+v~určitém slova smyslu i~jeho výhodou. Totiž fakt, že měření probíhá jen na
+pevně definovaném úseku koleje, s~sebou nese tu výhodu, že vozidlo měříme vždy
+ve stejných podmínkách. Nemusíme tedy například řešit, jestli vozidlo zrovna
+jede v~oblouku a~je zpomalováno odstředivou silou, protože senzor prostě
+umístíme na rovný úsek trati.
 
 \section{Statické úsekové detektory}
 \label{sec:det-usek}
 
-Podobný přístup, jako u~statických bodových detektorů, nabízejí statické
+Podobný přístup jako u~statických bodových detektorů nabízejí statické
 úsekové detektory. Rozdíl oproti metodě popsané v~předchozí kapitole je
 ve způsobu měření: senzor neměří projetí vozidla daným bodem, ale přítomnost
 vozidla na úseku tratě určité délky.
@@ -56,10 +56,10 @@ vozidla na úseku tratě určité délky.
 Typickým zástupcem této technologie je proudový detektor obsazení, konkrétně
 například \textit{BD20} \cite{bd20}.
 
-Proudové detektory obsazení jsou hojně využívány na modelových kolejištích k~detekci
-volnosti úseků a~tudíž k~umožnění bezkolizního pohybu vozidla po trati.
-Obdobné systémy se využívají na skutečné železnici, avšak tam jsou známy pod
-názvem \textit{kolejové obvody}.
+Proudové detektory obsazení jsou hojně využívány na modelových kolejištích
+k~detekci volnosti úseků, a~tudíž k~umožnění bezkolizního pohybu vozidla po
+trati.  Obdobné systémy se využívají na skutečné železnici, avšak tam jsou
+známy pod názvem \textit{kolejové obvody}.
 
 Konkrétní způsob měření přehledně popisují například tvůrci SW \textit{JMRI}
 \cite{jmri:speedometer} (\textit{A~Java Model Railroad Interface}).
@@ -88,13 +88,13 @@ modelové měřítko, nezávislost na pozici vozidla na trati a~v~neposlední ř
 zmizení nutnosti pořizovat kalibrační okruh. Celý proces kalibrace tak může
 probíhat na velice malém prostoru.
 
-Je rozhodně nutné uznat, že toto řešení je svým důvtipem minimálně oceněníhodné,
-avšak pro potřeby této práce skrývá jednu zásadní nevýhodu. Totiž nemožnost
+Je rozhodně nutné uznat, že toto řešení je svým důvtipem minimálně oceněníhodné.
+Avšak pro potřeby této práce skrývá jednu zásadní nevýhodu -- totiž nemožnost
 dokalibrovávat vozidlo za reálného provozu bez nutnosti uvolnění vozidla
 z~reálného provozu na trati.
 
 Stojí za to také poznamenat, že řešení, které by umožňovalo měřit rychlost
-vozidla na kolejišti za provozu by s~sebou neslo tu výhodu, že jej lze použít
+vozidla na kolejišti za provozu, by s~sebou neslo tu výhodu, že jej lze použít
 k~měření celkové ujeté vzdálenosti hnacího vozidla za delší dobu, což je údaj
 využitelný například k~výpočtu míry opotřebení lokomotivy.
 
@@ -107,10 +107,10 @@ kalibrace automaticky -- bez zásahu uživatele. V~tomto hledisku autor bohužel
 nemůže nabídnout výčet existujících řešení, protože taková řešení
 prakticky neexistují. Je to z~toho důvodu, že většina dostupných SW pro řízení
 modelového kolejiště využívá odlišného principu, než na kterém je založen SW
-hJOP \cite{hjop:web}, pro který je automatická kalibrace řešena.
+hJOP \cite{hjop:web}, pro nějž je automatická kalibrace řešena.
 
 Většina obslužných programů totiž počítá s~tím, že hnací vozidla na kolejišti
-jsou různá a~nesnaží se je jednotně kalibrovat. Místo toho si tyto SW před
+jsou různá, a~nesnaží se je jednotně kalibrovat. Místo toho si tyto SW před
 prvním použitím lokomotivy nechají zadat její parametry nebo si je změří jednou
 z~technologií popsaných výše a~u~lokomotivy si tzv. \textit{kalibrační tabulku}
 dlouhodobě udržují. Tyto programy tak kompenzují rozdílné vlastnosti vozidel přímo
