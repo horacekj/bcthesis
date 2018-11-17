@@ -7,14 +7,14 @@ aplikace je o~mnoho komplexnější a~řeší přímo problém automatické kali
 
 Zásadní otázkou, kterou je třeba zodpovědět před vytvářením programu, je,
 jaký programovací jazyk a~případně framework zvolit. Zde měl autor poměrně
-jasný požadavek na programovací jazyk: jazyk musí mít poměrně silný typový
+jasný požadavek na programovací jazyk: musí mít poměrně silný typový
 systém tak, aby netriviální množství kontrol proběhlo již během překladu.
 Důvodem pro tento argument je fakt, že autor vyrábí aplikaci, které je tzv.
 \textit{kritická}. V~kontextu této práce to znamená, že vlivem chyby
 v~aplikaci může dojít k~materiálním škodám na kalibrovaném modelu (ceny
 vybraných malosériových modelů se pohybují až v~desítkách tisíc Kč).
 
-Dalším přirozeným požadavkem bylo, aby programovací jazyk měl rozumnou podporu
+Dalším logickým požadavkem bylo, aby programovací jazyk měl rozumnou podporu
 pro komunikaci se sériovým portem, neboť toto rozhraní bude použito jak pro
 komunikaci s~měřicím vozem, tak pro komunikaci s~digitální centrálou \gls{DCC}.
 
@@ -28,7 +28,7 @@ přehledně aktuální průběh kalibrace a~neboť jsou běžní uživatelé na 
 aplikace zvyklí.
 
 Zásadní je pak otázka typu aplikace. Autor uvažoval aplikace desktopové,
-mobilní, webové a~dokonce i~embedded! Embedded aplikace s~sebou nesou tu
+mobilní, webové a~dokonce i~embedded. Embedded aplikace s~sebou nesou tu
 nevýhodu, že obsluha s~aplikací typicky nemůže příliš interagovat, u~mobilních
 aplikací je v~kontextu této práce omezující zejména zobrazovací plocha
 zařízení, na kterou se jednoduše nevejde tolik dat, kolik by aplikace chtěla
@@ -38,7 +38,7 @@ přináší nějakou režii navíc.
 Výhodou webové aplikace by byla snadná přenositelnost na jiné počítače,
 aplikace by dokonce mohla být přístupná i~z~mobilního zařízení. Bohužel, proti
 tomuto formátu aplikace hovoří fakt, že autor práce nemá s~webovými aplikacemi
-dostatečné zkušenosti a~už vůbec si netroufá v~nich psát kritický kód.
+dostatečné zkušenosti, a~už vůbec si netroufá v~nich psát kritický kód.
 Oproti desktopovým aplikacím jsou interaktivní webové aplikace navíc o~něco
 složitější (zejména co se týče předávání signálů z~GUI).
 
@@ -72,12 +72,12 @@ zachyceno na obrázku
 Aplikace se připojuje k~sériovému portu, ze zadaných parametrů vypočítává
 rychlost a~ujetou vzdálenost vozidla a~tyto údaje zobrazuje. Umožňuje ukládání
 vyčtených dat do souboru (především pro vývoj) a~ukládání nastavení aplikace
-do konfiguračního souboru. Aplikace je volně dostupná pod licencí Apache
-License v2.0 \cite{wsm-speed-reader}.
+do konfiguračního souboru. Aplikace je volně dostupná pod opensource licencí
+\textit{Apache License v2.0} \cite{wsm-speed-reader}.
 
 Při programování této aplikace bylo rozhodnuto vyčlenit knihovnu umožňující
 komunikaci s~měřicím vozem \gls{WSM} do samostatného repozitáře. Knihovna se
-skládá hlavičkového souboru \texttt{wsm.h}, který definuje API třídy
+skládá z~hlavičkového souboru \texttt{wsm.h}, který definuje API třídy
 \texttt{Wsm}, implementace této knihovny (v~samostatném \texttt{cpp} souboru)
 a~pomocných souborů. Knihovna je k~dispozici
 online\footnote{\url{https://github.com/kmzbrnoI/wsm-lib-cpp-qt}}, bylo k~ní
@@ -85,7 +85,7 @@ vytvořeno srozumitelné README a~dodány všechny náležitosti samostatně sto
 projektu.
 
 I~přes původní snahy je nutné pro užití knihovny v~projektu využít frameworku
-\texttt{Qt} a~to zejména kvůli implementaci sériového portu.
+\texttt{Qt}, a~to zejména kvůli implementaci sériového portu.
 
 
 \newpage
@@ -93,7 +93,7 @@ I~přes původní snahy je nutné pro užití knihovny v~projektu využít frame
 \label{sec:sw-wsm-auto-calib}
 
 Program \textit{Automatic Calibration} umožňuje automaticky provést proces
-kalibrace. V~souladu s~požadavky kladenými na výsledné sofwarové řešení
+kalibrace. V~souladu s~požadavky kladenými na výsledné softwarové řešení
 umožňuje
 
 \begin{compactitem}
@@ -184,11 +184,11 @@ aplikaci. Projekt je navržen tak, aby pouze červené třídy byly propojené
 s~GUI, zbylé třídy mezi sebou komunikují pomocí volání funkcí a~Qt signálů.
 
 Třída \texttt{SpeedMap} udržuje mapu \textit{jízdní stupeň: žádaná rychlost},
-třída \texttt{Power\-Map} pak udržuje mapu \textit{otáčky motoru: naměřená
+třída \texttt{Po\-wer\-Map} pak udržuje mapu \textit{otáčky motoru: naměřená
 rychlost}.
 
 O~kalibraci rychlostních křivek se stará třída \texttt{CalibMan}. Kalibrace
-je rozdělena do čtyřech fází.
+je rozdělena do čtyř fází.
 
 \begin{compactenum}
 \item Zapsání základních \gls{CV}.
@@ -204,7 +204,7 @@ přeskočeny.
 
 Před začátkem kalibrace je nutné mít v~SW načtenou mapu \textit{jízdní
 stupeň: žádaná rychlost} (viz přílohu \ref{fig:step-to-speed}). Tato mapa je
-načítána z~\texttt{csv} souboru a~je možné definovat v~ní všechny, či pouze
+načítána z~\texttt{csv} souboru a~je možné definovat v~ní všechny či pouze
 vybrané jízdní stupně. Zbylé jízdní stupně se interpolují ze sousedních
 nakalibrovaných hodnot nebo je nastaví uživatel manuálně. Tato mapa je
 dohodnutou vlastností kolejiště a~typicky se nemění, proto se načítá z~jediného
@@ -227,13 +227,13 @@ konfiguračního souboru formátu \texttt{ini}.
 Měření rychlosti v~průběhu kalibrace probíhá ve speciálním režimu
 \textit{\gls{LT} -- Long Term Measure}. Tento speciální režim je implementován
 v~knihov\-ně pro komunikaci s~měřicím vozem a~umožňuje průměrování více
-naměřených rychlostí. Bystrý čtenář si jistě všimne, že autor právě představuje
+naměřených rychlostí. Lze si všimnout, že autor právě představuje
 druhou vrstvu průměrování dat z~měřicího vozu (první probíhá již přímo ve
-vozu). Ano, je to tak. Ovšem cílem průměrování na úrovní SW není pouze
-eliminovat oscilace rychlosti, výstupem je totiž kromě průměrné rychlosti také
-rozdíl $v_{max} - v_{min}$ v~měřeném intervalu. Tento \uv{pseudorozptyl}
-umožňuje kalibračnímu SW rozhodnout, kdy je a~kdy není měření relevantní.
-A~přesně to kalibrační SW dělá.
+vozu). Ovšem cílem průměrování na úrovni SW není pouze eliminovat oscilace
+rychlosti, výstupem je totiž kromě průměrné rychlosti také rozdíl $v_{max} -
+v_{min}$ v~měřeném intervalu. Tento \uv{pseudorozptyl} umožňuje kalibračnímu SW
+rozhodnout, kdy je a~kdy není měření relevantní.  A~přesně to kalibrační SW
+dělá.
 
 Průměrování typicky probíhá pro $30$ naměřených rychlostí, tedy po dobu $3$~s.
 
@@ -268,10 +268,10 @@ proběhne měření rychlosti. Dokud je rychlost lokomotivy neměřitelná (př�
 malá), otáčky jsou postupně zdvojnásobovány a~do mapy \textit{otáčky: rychlost}
 jsou přidávány nové záznamy. Jakmile se lokomotiva rozjede na rychlost $>
 V_{min}$, program má informaci o~tom, která hodnota otáček motoru odpovídá
-minimální rychlosti lokomotivy a~přechází do další fáze.
+minimální rychlosti lokomotivy, a~přechází do další fáze.
 
 V~další fázi zkouší program otáčky v~intervalu $64$--$255$, dokud nenaměří
-rychlost vyšší než je uživatelem zadaná maximální rychlost.
+rychlost vyšší, než je uživatelem zadaná maximální rychlost.
 
 Nyní má program představu o~tom, které hodnotě otáček motoru odpovídá minimální
 rychlost a~kterému maximální rychlost. Všechna měření rychlosti lokomotivy
@@ -284,7 +284,7 @@ vozidla, které už jednou bylo kalibrováno, je tedy rychlejší.
 \subsubsection{Kalibrace jízdních stupňů}
 
 Třída \texttt{CalibStep} umožňuje zkalibrovat jeden jízdní stupeň. Třída
-\texttt{CalibMan} pak postupně volá třídu \texttt{CalibStep} dokud nejsou
+\texttt{CalibMan} pak postupně volá třídu \texttt{CalibStep}, dokud nejsou
 zkalibrovány všechny jízdní stupně, které si uživatel přál zkalibrovat.
 
 Kalibrace jednoho stupně probíhá následovně.
@@ -319,7 +319,7 @@ Po této fázi zůstává typicky nezkalibrována minimální rychlost\footnote{
 vůz neumí dobře měřit hodně malé rychlosti.}, pro kterou v~\textit{Klubu
 modelářů železnic Brno I} platí úzus, že je to taková nejnižší rychlost, při
 které se hnací vozidlo již začne plynule pohybovat. Po dokončení kalibrace tedy
-uživatel ručně vybere jízdní stupeň $1$ a~nastaví mu požadované otáčky za
+uživatel ručně vybere jízdní stupeň jedna a~nastaví mu požadované otáčky za
 současného pozorování pohybu vozidla.
 
 Program se pak postará o~to, aby byly stupně do nejbližšího již zkalibrovaného
@@ -328,12 +328,12 @@ stupně interpolovány.
 \subsection{Kalibrace dojezdů}
 
 Po zkalibrování rychlosti následuje kalibrace dojezdů. Zde se autor nakonec
-rozhodl pro poloautomatickou kalibraci a~to zejména z~toho důvodu, že kalibrace
+rozhodl pro poloautomatickou kalibraci, a~to zejména z~toho důvodu, že kalibrace
 dojezdů je již velmi rychlá.
 
 Program uživateli umožní zadat hodnotu decelerace (\gls{CV} \#4) a~pak pomocí
 kliku na jediné tlačítko změřit dojezd z~rychlosti $40$~km/h. Program tedy
-vozidlo rozjede, chvíli počká na ustálení rychlost, pak vozidlu nastaví jízdní
+vozidlo rozjede, chvíli počká na ustálení rychlosti, pak vozidlu nastaví jízdní
 stupeň $0$ a~pomocí měřicího vozu měří dráhu do zastavení. Vzdálenost pak
 vypíše uživateli, který na základě ní může upravit hodnotu decelerace.
 
@@ -346,7 +346,7 @@ na uživateli).
 Fundamentálním nástrojem pro fungování aplikace \textit{Automatic Calibration}
 je knihovna, která umožňuje komunikaci s~centrálou XpressNET. Přestože je tento
 protokol ve střední Evropě hojně rozšířen, pro jazyk C++ autor nenašel žádnou
-rozumnou knihovnu, která by umožňovala s~XpressNET centrálou komunikovat.
+použitelnou knihovnu, která by umožňovala s~XpressNET centrálou komunikovat.
 
 Autor tedy implementoval vlastní opensource a~robustní XpressNET knihovnu
 s~potvrzováním příkazů z~centrály a~vyčlenil ji do samostatného
