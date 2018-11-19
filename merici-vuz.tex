@@ -177,12 +177,12 @@ Arduino pod označením \textit{KY-010} \cite{ky-010}.
 \label{sec:wsm-napajeni}
 
 Jedním z~klíčových faktorů, který určoval výslednou podobu měřicího vozu, bylo
-napájení. Pro napájení elektroniky jsou tři možnosti.
+napájení. Pro napájení elektroniky jsou tři možnosti:
 
 \begin{compactenum}
-\item Napájení z~kolejí.
-\item Napájení z~baterie.
-\item Kombinace předchozích dvou (místo baterie lze případně použít kondenzátory).
+\item napájení z~kolejí,
+\item napájení z~baterie,
+\item kombinace předchozích dvou (místo baterie lze případně použít kondenzátory).
 \end{compactenum}
 
 Výhody a~nevýhody jsou poměrně jasné: baterie má omezenou výdrž, napájení
@@ -335,14 +335,14 @@ s~Bluetooth modulem \textit{HC-05}.
 \section{Mechanika}
 \label{sec:wsm-mech}
 
-Vůz se bude po mechanické stránce skládat z~několika základních částí.
+Vůz se bude po mechanické stránce skládat z~několika základních částí:
 
 \begin{compactenum}
-\item Perforované kolo připevněné na nápravě.
-\item Optozávora připevněná k~vozu snímající perforované kolo.
-\item Baterie.
-\item Deska plošných spojů s~hlavní elektronikou.
-\item Komunikační modul \textit{HC-05}.
+\item perforované kolo připevněné na nápravě,
+\item optozávora připevněná k~vozu snímající perforované kolo,
+\item baterie,
+\item deska plošných spojů s~hlavní elektronikou,
+\item komunikační modul \textit{HC-05}.
 \end{compactenum}
 
 Jako vůz byl použit běžně dostupný vůz měřítka TT typu \textit{Nd}
@@ -374,13 +374,13 @@ To je velice uspokojivý výsledek.
 Základní požadavky na elektroniku měřicího vozu jsou:
 
 \begin{compactenum}
-\item Umět rychle a~přesně vyhodnocovat data z~optického senzoru.
-\item Umět komunikovat s~modulem \textit{HC-05}.
-\item Umožnit uživateli zařízení zapnout a~vypnout.
-\item Umět měřit napětí na baterii.
-\item Umět automaticky vypnout zařízení v~případě vybití baterie.
-\item Zobrazovat stav vozu LE diodami.
-\item Umožnit nabíjet baterii.
+\item umět rychle a~přesně vyhodnocovat data z~optického senzoru,
+\item umět komunikovat s~modulem \textit{HC-05},
+\item umožnit uživateli zařízení zapnout a~vypnout,
+\item umět měřit napětí na baterii,
+\item umět automaticky vypnout zařízení v~případě vybití baterie,
+\item zobrazovat stav vozu LE diodami,
+\item umožnit nabíjet baterii.
 \end{compactenum}
 
 Tyto požadavky na elektroniku jsou víceméně intuitivní, jen u~posledního
@@ -506,7 +506,7 @@ kontrolní součet (\textit{XOR}). Protokol umí ve verzi 1.0 zasílat informace
 
 \begin{compactenum}
 \item aktuální rychlosti,
-\item ujeté vzdálenosti a
+\item ujeté vzdálenosti,
 \item napětí na baterii.
 \end{compactenum}
 
@@ -792,9 +792,9 @@ metody \textit{kluzné okno}. Tato metoda je implementována v~produkční verzi
 kalibračního vozu, princip její činnosti je následující:
 
 \begin{compactenum}
-\item Měř periody ticků ve $100$ms rámcích.
-\item Každých $100$~ms přepni na nový rámec.
-\item Data do počítače průměruj z~posledních $10$ rámců, tedy celkem z~$1$~s.
+\item měř periody ticků ve $100$ms rámcích,
+\item každých $100$~ms přepni na nový rámec,
+\item data do počítače průměruj z~posledních $10$ rámců, tedy celkem z~$1$~s.
 \end{compactenum}
 
 Tato metoda je poměrně známá, zajímavou věcí na implementaci v~měřicím vozu
