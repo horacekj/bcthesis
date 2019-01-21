@@ -61,16 +61,81 @@ Digital Command Control (DCC):
 \begin{itemize}
 \item Každá lokomotiva obsahuje miniaturní počítač, tzv. \uv{dekodér}.
 \item DCC centrála generuje data pro lokomotivy.
-\item Lokomotiva data přijímá a na základě nich koná akce.
+\item Lokomotiva data přijímá a na základě nich koná akce.
 \item Každá lokomotiva má svou číselnou adresu, kterou je identifikována (typicky
 $1$--$9999$).
 \item Centrála generuje DCC signál na základě povelů z~ovladačů.
 \begin{itemize}
 \item ruční ovladač, počítač, ...
 \end{itemize}
+\item Dekodér je možno konfigurovat: ukládat do něj číselné hodnoty do jednotlivých
+konfiguračních slotů (tzv. \textit{CV}).
 \end{itemize}
 
 TODO obrázek topologie kolejiště
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Kontext: řízení kolejiště počítačem}
+\begin{itemize}
+\item Jízdu vlaku řídí počítač, obsluha vydává povely typu: \uv{Vlaku 8013, jeď
+na třetí kolej do vedlejší stanice!}.
+\item Správce systému volí, jak rychle se mají kde vlaky pohybovat (km/h).
+\item Rychlost lokomotivy z pohledu dekodéru = číslo $0$--$28$ a směr $0$/$1$.
+\end{itemize}
+$\Rightarrow$ Nutnost spárovat skutečnou rychlost a jízdní stupeň.
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Kalibrace}
+\begin{block}{Kalibrace}
+\begin{enumerate}
+\item Nakonfigurování dekodéru tak, aby konkrétnímu jízdnímu stupni odpovídala
+konkrétní skutečná rychlost.
+\item Nakonfigurování dekodéru tak, aby z rychlosti $40$~km/h mělo brzdnou dráhu
+$30$--$35$~cm.
+\end{enumerate}
+\end{block}
+
+\pause
+
+\begin{block}{Vybrané přínosy}
+\begin{itemize}
+\item Zastavení vlaku na správném místě.
+\item Očekávatelné prostředí pro obsluhu.
+\item Přípřeže, postrky.
+\end{itemize}
+\end{block}
+
+Současná kalibrace je ruční $\Rightarrow$ automatizovat.
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Automatická kalibrace}
+\begin{enumerate}
+\item Nástroj pro měření rychlosti: měřicí vůz.
+\item Počítačový program.
+\end{enumerate}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Měřicí vůz}
+TODO Fotka + nákres
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Software}
+TODO WSM Speed Reader + Automatic Calibration
 \end{frame}
 
 %------------------------------------------------
