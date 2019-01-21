@@ -1,9 +1,10 @@
 PRES=defense
 AUXFILES=*.aux *.log *.nav *.out *.snm *.toc *.vrb
+DATA=$(wildcard data/*)
 
 all: $(PRES).pdf clean
 
-%.pdf: %.tex Makefile
+%.pdf: %.tex Makefile $(DATA)
 	rubber --pdf -o $@ $<
 
 clean:
